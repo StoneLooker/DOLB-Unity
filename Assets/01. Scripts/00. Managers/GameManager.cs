@@ -23,6 +23,9 @@ public class GameManager : MonoBehaviour
 
         Instance = this;
         DontDestroyOnLoad(gameObject);
+
+        _input = new InputManager();
+        _stone = new StoneManager();
     }
 
     private void Start()
@@ -35,3 +38,4 @@ public class GameManager : MonoBehaviour
         _input.OnUpdate();
     }
 }
+    
