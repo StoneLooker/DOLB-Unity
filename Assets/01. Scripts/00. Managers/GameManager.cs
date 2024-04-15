@@ -30,7 +30,7 @@ public class GameManager : MonoBehaviour
 
     private void Start()
     {
-        _stone.OnStart();   
+        //_stone.OnStart();   
     }
 
     void Update()
