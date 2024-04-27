@@ -1,14 +1,22 @@
 using System.Collections;
 using System.Collections.Generic;
+using Unity.VisualScripting;
 using UnityEngine;
+using UnityEngine.XR;
 
-public class StoneManager
+public class StoneManager : MonoBehaviour
 {
-    public Stone[] StoneGroup { get; private set; }
+    public Dictionary<StateType, StoneState> stateInfo = new();
+    public List<Sprite> spriteInfo = new();
+    public Dictionary<string, Stone> stoneInfo = new();
 
     public void OnStart()
     {
-        StoneGroup[0] = new Stone("test", 0, new Normal());
+        stateInfo.Clear();
+        stateInfo.Add(StateType.Normal, new Normal());
+
+        stoneInfo.Clear();
+        stoneInfo.Add("LimeStone", new LimeStone("LimeStone", "Original", 0, stateInfo[StateType.Normal], spriteInfo[0]));
     }
 
     public void OnUpdate()
@@ -18,23 +26,55 @@ public class StoneManager
 }
 
 /// <summary>
-/// 'class Stone' have all information about stone
+/// Factory Desing Pattern..
 /// </summary>
 
-public class Stone
+public abstract class Stone
 {
-    string name;
     int id;
-    StoneState state;
-
+    string scientificName;
+    string nickName;
+    public StoneState state;
     Sprite sprite;
 
-    public Stone(string name, int id, Normal state)
+    public Stone(string scientificName, string nickName, int id, StoneState state, Sprite sprite)
     {
-        this.name = name;
+        this.scientificName = scientificName;
+        this.nickName = nickName;
         this.id = id;
         this.state = state;
+        this.sprite = sprite;
     }
+
+    public void ChangeState(StateType stateType)
+    {
+        this.state.ExitState();
+        //this.state = _state;
+
+        this.state.EnterState();
+    }
+
+    public void Drag()
+    {
+
+    }
+
+    public void Touch()
+    {
+
+    }
+}
+
+public class LimeStone : Stone
+{
+    public LimeStone(string scientificName, string nickName, int id, StoneState state, Sprite sprite) : base(scientificName, nickName, id, state, sprite)
+    {
+    }
+}
+
+public enum StateType
+{
+    Normal
 }
 
 public interface StoneState
