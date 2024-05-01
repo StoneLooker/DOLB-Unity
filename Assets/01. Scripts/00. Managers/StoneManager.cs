@@ -4,10 +4,9 @@ using Unity.VisualScripting;
 using UnityEngine;
 using UnityEngine.XR;
 
-public class StoneManager : MonoBehaviour
+public class StoneManager
 {
     public Dictionary<StateType, StoneState> stateInfo = new();
-    public List<Sprite> spriteInfo = new();
     public Dictionary<string, Stone> stoneInfo = new();
 
     public void OnStart()
@@ -16,7 +15,7 @@ public class StoneManager : MonoBehaviour
         stateInfo.Add(StateType.Normal, new Normal());
 
         stoneInfo.Clear();
-        stoneInfo.Add("LimeStone", new LimeStone("LimeStone", "Original", 0, stateInfo[StateType.Normal], spriteInfo[0]));
+        stoneInfo.Add("LimeStone", new LimeStone("LimeStone", "Original", 0, stateInfo[StateType.Normal]));
     }
 
     public void OnUpdate()
@@ -35,15 +34,13 @@ public abstract class Stone
     string scientificName;
     string nickName;
     public StoneState state;
-    Sprite sprite;
 
-    public Stone(string scientificName, string nickName, int id, StoneState state, Sprite sprite)
+    public Stone(string scientificName, string nickName, int id, StoneState state)
     {
         this.scientificName = scientificName;
         this.nickName = nickName;
         this.id = id;
         this.state = state;
-        this.sprite = sprite;
     }
 
     public void ChangeState(StateType stateType)
@@ -62,13 +59,6 @@ public abstract class Stone
     public void Touch()
     {
 
-    }
-}
-
-public class LimeStone : Stone
-{
-    public LimeStone(string scientificName, string nickName, int id, StoneState state, Sprite sprite) : base(scientificName, nickName, id, state, sprite)
-    {
     }
 }
 

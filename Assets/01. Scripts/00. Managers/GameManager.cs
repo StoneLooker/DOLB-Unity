@@ -10,11 +10,13 @@ public class GameManager : MonoBehaviour
 
     private InputManager _input;
     private StoneManager _stone;
-    private SceneManager _scene;    
+    [SerializeField] private CameraManager _camera;
+    [SerializeField] private ButtonManager _button;
 
     public static InputManager Input { get { return Instance._input; } }
-    public static StoneManager Stone { get { return Instance._stone; } }
-    public static SceneManager Scene { get { return Instance._scene; } }
+    public static StoneManager Stone { get { return Instance._stone; } }    
+    public static CameraManager Camera { get { return Instance._camera; } }    
+    public static ButtonManager Button { get { return Instance._button; } }
 
     void Awake()
     {
@@ -29,7 +31,6 @@ public class GameManager : MonoBehaviour
 
         _input = new InputManager();
         _stone = new StoneManager();
-        _scene = new SceneManager();
     }
 
     public class BoolCondition
