@@ -1,11 +1,12 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.SceneManagement;
 
 public class InteractionZone : MonoBehaviour
 {
     private SpriteRenderer spriteRenderer;
-    public GameObject map;
+    public string mapName;
     public GameObject stone; //나중에 Stone 싱글톤으로 만들면 수정할 예정
 
     private void Start()
@@ -16,7 +17,7 @@ public class InteractionZone : MonoBehaviour
     public void OpenMap()
     {
         transform.parent.gameObject.SetActive(false);
-        map.SetActive(true);
+        SceneManager.LoadScene(mapName);
         stone.SetActive(false);
     }
 
