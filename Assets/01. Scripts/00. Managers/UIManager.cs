@@ -11,8 +11,7 @@ public class UIManager : MonoBehaviour
     {
         main.SetActive(true);
         collectingBook.SetActive(false);
-    }
-    
+    }    
 
     public void EnableUI(GameObject ui)
     {
