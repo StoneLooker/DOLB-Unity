@@ -12,7 +12,7 @@ public class StoneController : MonoBehaviour
     private Vector3 lastPosition;
     private Rigidbody2D rb;
 
-    void Start()
+    public void Start()
     {
         originPosition = transform.position;
         lastPosition = transform.position;
@@ -21,7 +21,7 @@ public class StoneController : MonoBehaviour
         //GameManager.Input.keyAction += Draged;
     }
 
-    void Update()
+    public void Update()
     {
     }
 
@@ -43,13 +43,13 @@ public class StoneController : MonoBehaviour
     //     }
     // }
 
-    void OnMouseDown()
+    public void OnMouseDown()
     {
         lastPosition = transform.position;
         isDrop = false;
     }
 
-    void OnMouseDrag()
+    public void OnMouseDrag()
     {
         if(!speedDrop)
         {
@@ -75,12 +75,12 @@ public class StoneController : MonoBehaviour
         }
     }
 
-    void OnMouseUp()
+    public void OnMouseUp()
     {
         isDrop = true;
     }
 
-    private void OnTriggerStay2D(Collider2D other) 
+    public void OnTriggerStay2D(Collider2D other) 
     {
         if(other.CompareTag("InteractionZone"))
         {
@@ -95,7 +95,7 @@ public class StoneController : MonoBehaviour
         }
     }
 
-    IEnumerator Delay()
+    public IEnumerator Delay()
     {
         yield return new WaitForSeconds(2f);
         speedDrop = false;
