@@ -3,7 +3,9 @@ using System.Collections;
 using System.Collections.Generic;
 using Unity.VisualScripting;
 using UnityEngine;
+using UnityEngine.Events;
 using UnityEngine.SceneManagement;
+using UnityEngine.XR;
 
 public class GameManager : MonoBehaviour
 {
@@ -24,7 +26,7 @@ public class GameManager : MonoBehaviour
     public static StoneManager Stone { get { return Instance._stone; } }
     public static ItemManager Item { get { return Instance._item; } }
 
-    public Game G { get; private set; }
+    public Game g { get; private set; }
 
     void Awake()
     {
@@ -37,49 +39,77 @@ public class GameManager : MonoBehaviour
         Instance = this;
         DontDestroyOnLoad(gameObject);
 
-        G = new();
+        g = new();
         _input = new InputManager();
         _stone = new StoneManager();
 
     #endregion
         _stone.OnAwake();
+        g.OnAwake();
     }
 
-    private void Start()
+    void Start()
     {
         _ui.OnStart();
-        _button.enableSetting.onClick.AddListener(() => _ui.SwitchUI(_ui.main));
-        _button.enableCollectingBook.onClick.AddListener(() => _ui.SwitchUI(_ui.collectingBook));
-        _button.moveToSauna.onClick.AddListener(() => _camera.MoveMainCamera(new Vector3(0, 0, -10)));
-        _button.moveToBulgama.onClick.AddListener(() => _camera.MoveMainCamera(new Vector3(-20, 0, -10)));
+
+        g.stateEvent.Bulgama.AddListener(() => _camera.MoveMainCamera(g.variable.bulgamaLocation));
+        g.stateEvent.Sauna.AddListener(() => _camera.MoveMainCamera(g.variable.saunaLocation));
+        g.stateEvent.CollectingBook.AddListener(() => _ui.SwitchUI(_ui.collectingBook));
+
+        _button.enableCollectingBook.onClick.AddListener(() => g.ChangeState(Game.GameStateType.CollectingBook));
+        _button.moveToSauna.onClick.AddListener(() => g.ChangeState(Game.GameStateType.Sauna));
+        _button.moveToBulgama.onClick.AddListener(() => g.ChangeState(Game.GameStateType.Bulgama));
     }
 
     void Update()
     {
         _input.OnUpdate();
-    }
-
-    
+    }    
 }
 
 public class Game
 {
-    public IGameState State {  get; private set; }
-    public StateEvent Event {  get; private set; }
-    public BoolCondition Condition { get; private set; }
-
-    public void ChangeState(IGameState _state)
+    public Dictionary<GameStateType, IGameState> stateInfo;
+    public IGameState nowState {  get; private set; }
+    public Variable variable { get; private set; }
+    public StateEvent stateEvent {  get; private set; }
+    public BoolCondition boolCondition { get; private set; }
+    
+    public void OnAwake()
     {
-        this.State.ExitState();
-        this.State = _state;
-        this.State.EnterState();
+        stateInfo = new();
+        stateInfo.Clear();
+        stateInfo.Add(GameStateType.Sauna, new Sauna());
+        stateInfo.Add(GameStateType.Bulgama, new Bulgama());
+        stateInfo.Add(GameStateType.CollectingBook, new CollectingBook());
+
+        nowState = stateInfo[GameStateType.Sauna];
+
+        variable = new Variable();
+        stateEvent = new StateEvent();
+        boolCondition = new BoolCondition();
+    }
+
+    public void ChangeState(GameStateType _state)
+    {
+        this.nowState.ExitState();
+        this.nowState = stateInfo[_state];
+        this.nowState.EnterState();
+    }
+
+    #region container
+    public class Variable
+    {
+        public Vector3 saunaLocation = new Vector3(0, 0, -10);
+        public Vector3 bulgamaLocation = new Vector3(-20, 0, -10);
     }
 
     public class StateEvent
     {
-        public Action Playing;
-        public Action Stopped;
-        public Action Bulgama;
+        public UnityEvent Sauna = new();
+        public UnityEvent Stopped = new();
+        public UnityEvent Bulgama = new();
+        public UnityEvent CollectingBook = new();
     }
 
     public class BoolCondition
@@ -89,25 +119,25 @@ public class Game
 
     public enum GameStateType
     {
-        Playing, Stopped, TimeSpeed, Setting, Bulgama, CollectingBook
+        Sauna, Stopped, TimeSpeed, Setting, Bulgama, CollectingBook
     }
 
     public interface IGameState
-    {
-        public abstract void EnterState();
-        public abstract void ExitState();
+    { 
+        public abstract void EnterState(); // Do setting in event
+        public abstract void ExitState(); // Do reset in same event
     }
 
-    public class Playing : IGameState
+    public class Sauna : IGameState
     {
         public void EnterState()
         {
-          
+            GameManager.Instance.g.stateEvent.Sauna?.Invoke();
         }
 
         public void ExitState()
         {
-            throw new System.NotImplementedException();
+            GameManager.Instance.g.stateEvent.Sauna?.Invoke();
         }
     }
 
@@ -115,14 +145,28 @@ public class Game
     {
         public void EnterState()
         {
-            throw new System.NotImplementedException();
+            GameManager.Instance.g.stateEvent.Bulgama?.Invoke();
         }
 
         public void ExitState()
         {
-            throw new System.NotImplementedException();
+            GameManager.Instance.g.stateEvent.Bulgama?.Invoke();
         }
     }
+
+    public class CollectingBook : IGameState
+    {
+        public void EnterState()
+        {
+            GameManager.Instance.g.stateEvent.CollectingBook?.Invoke();
+        }
+
+        public void ExitState()
+        {
+            GameManager.Instance.g.stateEvent.CollectingBook?.Invoke();
+        }
+    }
+    #endregion
 }
 
 
