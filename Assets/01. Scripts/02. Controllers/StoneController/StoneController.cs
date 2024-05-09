@@ -20,8 +20,6 @@ public class StoneController : MonoBehaviour
         originPosition = transform.position;
         lastPosition = transform.position;
         rb = GetComponent<Rigidbody2D>();
-        //GameManager.Input.keyAction -= Draged;
-        //GameManager.Input.keyAction += Draged;
     }
 
     public void Update()
@@ -36,8 +34,8 @@ public class StoneController : MonoBehaviour
 
     public void OnMouseDown()
     {
-        dragStartPosition = transform.position; // 드래그 시작 위치 저장
-        startTime = Time.time; // 드래그 시작 시간 저장
+        dragStartPosition = transform.position;
+        startTime = Time.time;
         rb.isKinematic = true;
         isDrop = false;
     }
@@ -46,12 +44,9 @@ public class StoneController : MonoBehaviour
     {
         if(!speedDrop)
         {
-            // float distance = GameManager.Input.mousePosUnity.z;
-            // Vector3 mousePosition = new Vector3(GameManager.Input.mousePosDevice.x, GameManager.Input.mousePosDevice.y, distance);
             Vector3 objPosition = GameManager.Input.mousePosUnity;
 
             float speed = (objPosition - lastPosition).magnitude / Time.deltaTime;
-            //rb.velocity.magnitude
             if (rb.velocity.magnitude < 0.5f){
                 transform.position = objPosition;
             }
