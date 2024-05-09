@@ -1,49 +1,92 @@
 using System.Collections;
 using System.Collections.Generic;
+using Unity.VisualScripting;
 using UnityEngine;
+using UnityEngine.XR;
 
 public class StoneManager
 {
-    public Stone[] StoneGroup { get; private set; }
+    public Dictionary<StateType, IStoneState> stateInfo = new();
+    public Dictionary<string, Stone> stoneInfo = new();
 
-    public void OnStart()
+    public List<Stone> allStoneHaveGrown = new();
+    public Stone growingStone;
+
+    public void OnAwake()
     {
-        StoneGroup[0] = new Stone("test", 0, new Normal());
+        stateInfo.Clear();
+        stateInfo.Add(StateType.Normal, new Normal());
+
+        stoneInfo.Clear();
+        stoneInfo.Add("LimeStone", new LimeStone("LimeStone", "Information", 0, stateInfo[StateType.Normal]));
+
+        allStoneHaveGrown.Clear();
     }
 
     public void OnUpdate()
     {
 
     }
-}
 
-/// <summary>
-/// 'class Stone' have all information about stone
-/// </summary>
-
-public class Stone
-{
-    string name;
-    int id;
-    StoneState state;
-
-    Sprite sprite;
-
-    public Stone(string name, int id, Normal state)
+    public void WhenPlayerDecideGrowingNewStoneInBulgama(Stone stone)
     {
-        this.name = name;
-        this.id = id;
-        this.state = state;
+        growingStone = stone;
+    }
+
+    public void GrowingFinished(Stone stone)
+    {
+        allStoneHaveGrown.Add(stone);
+    }
+
+    public void StoneDie(Stone stone)
+    {
+        growingStone = null;
     }
 }
 
-public interface StoneState
+public abstract class Stone
+{
+    int id;
+    float loveGage;
+    string scientificName;
+    string nickName;
+    public IStoneState state;
+    Transform transform;
+
+    public Stone(string scientificName, string nickName, int id, IStoneState state)
+    {
+        this.scientificName = scientificName;
+        this.nickName = nickName;
+        this.loveGage = 0F;
+        this.id = id;
+        this.state = state;
+    }
+
+    public void ChangeState(IStoneState _state)
+    {
+        this.state.ExitState();
+        this.state = _state;
+        this.state.EnterState();
+    }
+
+    public void SetLoveGage(float loveGage)
+    {
+        this.loveGage += loveGage;
+    } 
+}
+
+public enum StateType
+{
+    Normal
+}
+
+public interface IStoneState
 {
     public abstract void EnterState();
     public abstract void ExitState();
 }
 
-public class Normal: StoneState
+public class Normal: IStoneState
 {
     public void EnterState()
     {

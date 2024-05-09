@@ -15,7 +15,7 @@ public class StoneController : MonoBehaviour
     private float startTime;
     private Rigidbody2D rb;
 
-    void Start()
+    public void Start()
     {
         originPosition = transform.position;
         lastPosition = transform.position;
@@ -24,7 +24,7 @@ public class StoneController : MonoBehaviour
         //GameManager.Input.keyAction += Draged;
     }
 
-    void Update()
+    public void Update()
     {
         if(isShoot){
             transform.Rotate(0, 0, Time.deltaTime * 200);
@@ -34,7 +34,7 @@ public class StoneController : MonoBehaviour
         }
     }
 
-    void OnMouseDown()
+    public void OnMouseDown()
     {
         dragStartPosition = transform.position; // 드래그 시작 위치 저장
         startTime = Time.time; // 드래그 시작 시간 저장
@@ -42,7 +42,7 @@ public class StoneController : MonoBehaviour
         isDrop = false;
     }
 
-    void OnMouseDrag()
+    public void OnMouseDrag()
     {
         if(!speedDrop)
         {
@@ -65,7 +65,7 @@ public class StoneController : MonoBehaviour
         }
     }
 
-    void OnMouseUp()
+    public void OnMouseUp()
     {
         rb.isKinematic = false;
         float duration = Time.time - startTime;
@@ -77,14 +77,7 @@ public class StoneController : MonoBehaviour
         isShoot = true;
     }
 
-    // IEnumerator StopMovementAfterTime(float delay)
-    // {
-    //     yield return new WaitForSeconds(delay);
-    //     rb.velocity = Vector2.zero;
-    //     isShoot = false;
-    // }
-
-    private void OnTriggerStay2D(Collider2D other) 
+    public void OnTriggerStay2D(Collider2D other) 
     {
         if(other.CompareTag("InteractionZone"))
         {
@@ -99,7 +92,7 @@ public class StoneController : MonoBehaviour
         }
     }
 
-    IEnumerator Delay()
+    public IEnumerator Delay()
     {
         yield return new WaitForSeconds(2f);
         speedDrop = false;
