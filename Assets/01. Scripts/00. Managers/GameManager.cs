@@ -26,7 +26,9 @@ public class GameManager : MonoBehaviour
     public static StoneManager Stone { get { return Instance._stone; } }
     public static ItemManager Item { get { return Instance._item; } }
 
-    public Game g { get; private set; }
+    private Game _g;
+    public static Game g { get { return Instance._g; } }
+
 
     void Awake()
     {
@@ -39,7 +41,7 @@ public class GameManager : MonoBehaviour
         Instance = this;
         DontDestroyOnLoad(gameObject);
 
-        g = new();
+        _g = new();
         _input = new InputManager();
         _stone = new StoneManager();
 
@@ -132,12 +134,12 @@ public class Game
     {
         public void EnterState()
         {
-            GameManager.Instance.g.stateEvent.Sauna?.Invoke();
+            GameManager.g.stateEvent.Sauna?.Invoke();
         }
 
         public void ExitState()
-        {
-            GameManager.Instance.g.stateEvent.Sauna?.Invoke();
+        {   
+            GameManager.g.stateEvent.Sauna?.Invoke();
         }
     }
 
@@ -145,12 +147,12 @@ public class Game
     {
         public void EnterState()
         {
-            GameManager.Instance.g.stateEvent.Bulgama?.Invoke();
+            GameManager.g.stateEvent.Bulgama?.Invoke();
         }
 
         public void ExitState()
         {
-            GameManager.Instance.g.stateEvent.Bulgama?.Invoke();
+            GameManager.g.stateEvent.Bulgama?.Invoke();
         }
     }
 
@@ -158,12 +160,12 @@ public class Game
     {
         public void EnterState()
         {
-            GameManager.Instance.g.stateEvent.CollectingBook?.Invoke();
+            GameManager.g.stateEvent.CollectingBook?.Invoke();
         }
 
         public void ExitState()
         {
-            GameManager.Instance.g.stateEvent.CollectingBook?.Invoke();
+            GameManager.g.stateEvent.CollectingBook?.Invoke();
         }
     }
     #endregion
