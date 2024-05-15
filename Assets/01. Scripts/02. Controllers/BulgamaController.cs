@@ -5,12 +5,9 @@ using UnityEngine;
 
 public class BulgamaController : MonoBehaviour
 {
-    private Boolean isActive = false;
-
     // Start is called before the first frame update
     void Start()
     {
-        GameManager.Instance.g.stateEvent.Bulgama.AddListener(StateEvent);
     }
 
     // Update is called once per frame
@@ -18,12 +15,4 @@ public class BulgamaController : MonoBehaviour
     {
         
     }
-
-    public void StateEvent()
-    {
-        if (isActive)
-        {
-
-        }
-    }
-}
+}   

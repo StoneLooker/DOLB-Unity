@@ -9,21 +9,35 @@ public class StoneManager
     public Dictionary<StateType, IStoneState> stateInfo = new();
     public Dictionary<string, Stone> stoneInfo = new();
 
+    public List<Stone> stones = new(); 
     public List<Stone> allStoneHaveGrown = new();
     public Stone growingStone;
+
+    public int stoneNum = 0;
 
     public void OnAwake()
     {
         stateInfo.Clear();
+        stateInfo.Add(StateType.NotPet, new NotPet());
         stateInfo.Add(StateType.Normal, new Normal());
 
         stoneInfo.Clear();
-        stoneInfo.Add("LimeStone", new LimeStone("LimeStone", "Information", 0, stateInfo[StateType.Normal]));
+        stoneInfo.Add("LimeStone", new LimeStone("LimeStone", "Information", stateInfo[StateType.NotPet]));
 
         allStoneHaveGrown.Clear();
     }
 
     public void OnUpdate()
+    {
+
+    }
+
+    public void AddStone(Stone stone)
+    {
+        stones.Add(stone);
+    }
+
+    public void DeleteStone()
     {
 
     }
@@ -46,19 +60,16 @@ public class StoneManager
 
 public abstract class Stone
 {
-    int id;
-    float loveGage;
+    int id = GameManager.Stone.stoneNum++;
     string scientificName;
     string nickName;
     public IStoneState state;
     Transform transform;
 
-    public Stone(string scientificName, string nickName, int id, IStoneState state)
+    public Stone(string scientificName, string nickName, IStoneState state)
     {
         this.scientificName = scientificName;
         this.nickName = nickName;
-        this.loveGage = 0F;
-        this.id = id;
         this.state = state;
     }
 
@@ -68,22 +79,30 @@ public abstract class Stone
         this.state = _state;
         this.state.EnterState();
     }
-
-    public void SetLoveGage(float loveGage)
-    {
-        this.loveGage += loveGage;
-    } 
 }
 
 public enum StateType
 {
-    Normal
+    NotPet, Normal, Dead, Forgotten
 }
 
 public interface IStoneState
 {
     public abstract void EnterState();
     public abstract void ExitState();
+}
+
+public class NotPet : IStoneState
+{
+    public void EnterState()
+    {
+
+    }
+
+    public void ExitState()
+    {
+
+    }
 }
 
 public class Normal: IStoneState

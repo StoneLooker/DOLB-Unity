@@ -2,16 +2,21 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class UIManager : MonoBehaviour
+public class UIController : MonoBehaviour
 {
+    [Header("Scene-Sauna")]
     [SerializeField] public GameObject main;
     [SerializeField] public GameObject collectingBook;
 
-    public void OnStart()
+    private void Awake()
+    {
+    }
+
+    void Start()
     {
         main.SetActive(true);
         collectingBook.SetActive(false);
-    }    
+    }
 
     public void EnableUI(GameObject ui)
     {
