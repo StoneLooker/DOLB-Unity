@@ -40,22 +40,27 @@ public class LimeStone : Stone
     public float loveGage = 0F;
     public float nextEvolutionPercentage = 100F;
 
-    public void UpdateHP(float HP)
+    public override void Washing()
+    {
+        Debug.Log("Washed");
+    }
+
+    public override void UpdateHP(float HP)
     {
         this.HP += HP;
         this.nextEvolutionPercentage -= HP;
-        CheckEvloution();
+        CheckEvolution();
     }
 
-    public void UpdateLoveGage(float loveGage)
+    public override void UpdateLoveGage(float loveGage)
     {
         this.loveGage += loveGage;
         this.nextEvolutionPercentage -= loveGage;
         Debug.Log(this.nextEvolutionPercentage);
-        CheckEvloution();
+        CheckEvolution();
     }
 
-    public void CheckEvloution()
+    public override void CheckEvolution()
     {
         if(nextEvolutionPercentage <= 0F)
         {

@@ -11,6 +11,8 @@ public class ButtonController : MonoBehaviour
     public Button enableCollectingBook;
     public Button moveToSauna;
     public Button moveToBulgama;
+    [Header("Scene-Tub")]
+    public Button PickBrush;
 
     // Start is called before the first frame update
     private void Awake()

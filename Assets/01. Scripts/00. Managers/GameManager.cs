@@ -53,7 +53,6 @@ public class GameManager : MonoBehaviour
     public void ChangeScene(String sceneName)
     {
         this.sceneName = sceneName;
-        _controller = null;
         SceneManager.LoadScene(sceneName);
     }
 }

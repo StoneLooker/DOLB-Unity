@@ -79,6 +79,11 @@ public abstract class Stone
         this.state = _state;
         this.state.EnterState();
     }
+
+    public abstract void Washing();
+    public abstract void UpdateHP(float HP);
+    public abstract void UpdateLoveGage(float Gage);
+    public abstract void CheckEvolution();
 }
 
 public enum StateType

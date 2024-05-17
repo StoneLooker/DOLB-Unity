@@ -14,8 +14,6 @@ public class UIController : MonoBehaviour
 
     void Start()
     {
-        main.SetActive(true);
-        collectingBook.SetActive(false);
     }
 
     public void EnableUI(GameObject ui)
