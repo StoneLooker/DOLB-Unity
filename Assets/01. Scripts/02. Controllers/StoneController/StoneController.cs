@@ -56,7 +56,7 @@ public class StoneController : MonoBehaviour
                 StartCoroutine(Delay());
             }
             lastPosition = transform.position;
-            Debug.Log(rb.velocity.magnitude);
+            //Debug.Log(rb.velocity.magnitude);
         }
     }
 
