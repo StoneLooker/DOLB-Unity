@@ -17,11 +17,16 @@ public class Brush : MonoBehaviour
         transform.position = GameManager.Input.mousePosUnity;
     }
 
-    void PutDownBrush()
+    public void PutDownBrush()
     {
         if(Input.GetMouseButtonDown(1)) 
         { 
             gameObject.SetActive(false);
         }
+    }
+
+    void Wash()
+    {
+        GameManager.Stone.growingStone.UpdateLoveGage(10F);
     }
 }
