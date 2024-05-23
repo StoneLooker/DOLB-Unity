@@ -13,13 +13,13 @@ public class LimeStoneController : StoneController
         this.AddComponent<SpriteRenderer>();
         this.GetComponent<SpriteRenderer>().sprite = stone.stoneStat.Image;
         base.Start();
-        stone = (LimeStone)GameManager.Stone.stoneInfo["LimeStone"];
-        Debug.Log("hi");;
     }
 
     public void Set(string nN)
     {
-        stone = new LimeStone("LimeStone", nN, GameManager.Stone.stateInfo[StateType.Normal]);
+        stone.SetNickName(nN);
+        GameManager.Stone.nowStoneController = this;
+        GameManager.Stone.growingStone = stone;
     }
 
     new void OnMouseDown()
@@ -74,5 +74,8 @@ public class LimeStone : Stone
 
     public LimeStone(string scientificName, string nickName, IStoneState state) : base(scientificName, nickName, state)
     {
+        HP = 100F;
+        loveGage = 0F;
+        nextEvolutionPercentage = 100F;
     }
 }

@@ -11,6 +11,7 @@ public class ControllerManager : MonoBehaviour
 
     void Start()
     {
+        GameManager.Instance._controller = null;
         GameManager.Instance._controller = this;
         SetController(GameManager.Instance.sceneName);
     }
@@ -22,6 +23,8 @@ public class ControllerManager : MonoBehaviour
 
     public void SetController(string sceneName)
     {
+        _button.BackToSauna.onClick.RemoveAllListeners();
+        _button.BackToSauna.onClick.AddListener(() => GameManager.Instance.ChangeScene("Sauna"));
         if (sceneName.Equals("Sauna"))
         {
             _ui.main.SetActive(true);

@@ -1,5 +1,6 @@
 using System.Collections;
 using System.Collections.Generic;
+using Unity.VisualScripting;
 using UnityEngine;
 
 public class Brush : MonoBehaviour
@@ -8,19 +9,21 @@ public class Brush : MonoBehaviour
 
     public void Start()
     {
+        this.AddComponent<SpriteRenderer>();
         this.GetComponent<SpriteRenderer>().sprite = brushStat.Image;
+        GameManager.Input.keyAction += PutDownBrush;
     }
 
     private void OnEnable()
     {
-        if(GameManager.Input.keyAction != null) GameManager.Input.keyAction -= PutDownBrush;
+        GameManager.Input.keyAction -= PutDownBrush;
         GameManager.Input.keyAction += PutDownBrush;
     }
 
     // Update is called once per frame
     void Update()
     {
-        Debug.Log(GameManager.Input.mousePosUnity);
+        //Debug.Log(GameManager.Input.mousePosUnity);
         transform.position = GameManager.Input.mousePosUnity;
     }
 
