@@ -7,7 +7,6 @@ public class InteractionZone : MonoBehaviour
 {
     private SpriteRenderer spriteRenderer;
     public string mapName;
-    public GameObject stone; //나중에 Stone 싱글톤으로 만들면 수정할 예정
 
     private void Start()
     {
@@ -18,7 +17,6 @@ public class InteractionZone : MonoBehaviour
     {
         transform.parent.gameObject.SetActive(false);
         GameManager.Instance.ChangeScene(mapName);
-        stone.SetActive(false);
     }
 
     private void OnTriggerEnter2D(Collider2D other) 
