@@ -9,14 +9,18 @@ public class MinigameStoneController : MonoBehaviour
     private SpriteRenderer spriteRender;
     private bool isGrounded = true;
 
-    public int life = 3;
+    public int life;
 
     void Start()
     {
         rigid = this.GetComponent<Rigidbody2D>();
-        rigid.mass = 1.5f;
-        rigid.gravityScale = 2.0f;
+        // rigid.mass = 1.5f;
+        // rigid.gravityScale = 2.0f;
         spriteRender = GetComponent<SpriteRenderer>();
+        if(GameManager.Stone.growingStone.GetScientificName() == "LimeStone")
+            life = 3;
+        else if(GameManager.Stone.growingStone.GetScientificName() == "Granite")
+            life = 5;
     }
 
     void Update()

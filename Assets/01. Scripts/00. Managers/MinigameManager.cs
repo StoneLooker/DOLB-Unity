@@ -13,9 +13,10 @@ public class MinigameManager : MonoBehaviour
 
     public RawImage stoneLifeImage;
     private RawImage[] stoneLifeImages;
+    public GameObject lifeTransform;
     private int oldLife;
 
-    public bool isGameOver;
+    private bool isGameOver;
     public GameObject endPanel;
     private float timer;
 
@@ -24,6 +25,8 @@ public class MinigameManager : MonoBehaviour
         objectPool = this.GetComponent<ObjectPool>();
         GameManager.Instance._minigame = this.GetComponent<MinigameManager>();
         stone = this.GetComponent<MinigameStoneController>();
+        
+        setData();
     }
 
     void Update()
@@ -55,10 +58,15 @@ public class MinigameManager : MonoBehaviour
 
     private void setData()
     {
+        if(GameManager.Stone.growingStone.GetScientificName() == "LimeStone")
+            stone.life = 3;
+        else if(GameManager.Stone.growingStone.GetScientificName() == "Granite")
+            stone.life = 5;
+        
         stoneLifeImages = new RawImage[stone.life];
         for(int i = 0; i < stone.life; i++) {
             stoneLifeImages[i] = Instantiate(stoneLifeImage);
-            //stoneLifeImages[i].transform.SetParent(canvas.transform);
+            stoneLifeImages[i].transform.SetParent(lifeTransform.transform);
             stoneLifeImages[i].rectTransform.localPosition = new Vector3(-500 + (50 * i), -870, 0);
         }
 
@@ -67,6 +75,6 @@ public class MinigameManager : MonoBehaviour
 
     public void restartBtn()
     {
-        stone.life = 3;
+
     }
 }
