@@ -17,7 +17,7 @@ public class InteractionZone : MonoBehaviour
     public void OpenMap()
     {
         transform.parent.gameObject.SetActive(false);
-        SceneManager.LoadScene(mapName);
+        GameManager.Instance.ChangeScene(mapName);
         stone.SetActive(false);
     }
 

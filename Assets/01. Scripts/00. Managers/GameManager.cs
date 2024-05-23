@@ -16,9 +16,11 @@ public class GameManager : MonoBehaviour
 
     private InputManager _input;
     private StoneManager _stone;
+    private ItemManager _item;
 
     public static InputManager Input { get { return Instance._input; } }
     public static StoneManager Stone { get { return Instance._stone; } }
+    public static ItemManager Item { get { return Instance._item; } }
 
     public String sceneName { get; private set; }
 
@@ -35,8 +37,9 @@ public class GameManager : MonoBehaviour
 
         _input = new InputManager();
         _stone = new StoneManager();
+        _item = new ItemManager();
 
-    #endregion
+        #endregion
         _stone.OnAwake();
         sceneName = "Sauna";
     }

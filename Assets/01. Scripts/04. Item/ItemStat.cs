@@ -10,7 +10,7 @@ public enum ItemType
 }
 
 [CreateAssetMenu(fileName = "Item", menuName = "Add Item/Item")]
-public class Item : ScriptableObject 
+public class ItemStat : ScriptableObject 
 {
     [Header("고유한 아이템의 ID(중복불가)")]
     [SerializeField] private int mItemID;

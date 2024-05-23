@@ -8,7 +8,12 @@ public class ItemController : MonoBehaviour
 
     public void PickBrush()
     {
-        brush.SetActive(true);
+        if (GameManager.Item.GetItemNum(ITEM_TYPE.Brush) > 0)
+        {
+            brush.SetActive(true);
+            GameManager.Item.ConsumeItem(ITEM_TYPE.Brush);
+        }
+        else Debug.Log("No Brush");
     }
     // Start is called before the first frame update
     void Start()
