@@ -1,3 +1,4 @@
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using Unity.VisualScripting;
@@ -5,13 +6,15 @@ using UnityEngine;
 
 public class LimeStoneController : StoneController
 {
-    LimeStone stone;
+    public LimeStone stone;
 
     new void Start()
     {
+        this.AddComponent<SpriteRenderer>();
+        this.GetComponent<SpriteRenderer>().sprite = stone.stoneStat.Image;
         base.Start();
         stone = (LimeStone)GameManager.Stone.stoneInfo["LimeStone"];
-        Debug.Log("hi");
+        Debug.Log("hi");;
     }
 
     public void Set(string nN)
@@ -34,6 +37,7 @@ public class LimeStoneController : StoneController
     }
 }
 
+[Serializable]
 public class LimeStone : Stone
 {
     public float HP = 100F;

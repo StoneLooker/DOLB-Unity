@@ -1,3 +1,4 @@
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using Unity.VisualScripting;
@@ -58,9 +59,11 @@ public class StoneManager
     }
 }
 
+[Serializable]
 public abstract class Stone
 {
     int id = GameManager.Stone.stoneNum++;
+    public StoneStat stoneStat;
     string scientificName;
     string nickName;
     public IStoneState state;
