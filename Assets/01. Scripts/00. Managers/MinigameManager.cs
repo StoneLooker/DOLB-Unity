@@ -1,5 +1,6 @@
 using System.Collections;
 using System.Collections.Generic;
+using UnityEngine.UI;
 using UnityEngine;
 
 public class MinigameManager : MonoBehaviour
@@ -22,7 +23,7 @@ public class MinigameManager : MonoBehaviour
     {
         objectPool = this.GetComponent<ObjectPool>();
         GameManager.Instance._minigame = this.GetComponent<MinigameManager>();
-        stone.this.GetComponent<MinigameStoneController>();
+        stone = this.GetComponent<MinigameStoneController>();
     }
 
     void Update()
@@ -57,7 +58,7 @@ public class MinigameManager : MonoBehaviour
         stoneLifeImages = new RawImage[stone.life];
         for(int i = 0; i < stone.life; i++) {
             stoneLifeImages[i] = Instantiate(stoneLifeImage);
-            stoneLifeImages[i].transform.SetParent(canvas.transform);
+            //stoneLifeImages[i].transform.SetParent(canvas.transform);
             stoneLifeImages[i].rectTransform.localPosition = new Vector3(-500 + (50 * i), -870, 0);
         }
 
