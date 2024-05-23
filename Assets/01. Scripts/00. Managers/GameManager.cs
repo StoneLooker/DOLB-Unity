@@ -13,6 +13,7 @@ public class GameManager : MonoBehaviour
     public static GameManager Instance { get; private set; }
 
     public ControllerManager _controller;
+    public MinigameManager _minigame;
 
     private InputManager _input;
     private StoneManager _stone;

@@ -6,14 +6,26 @@ using UnityEngine.UI;
 
 public class Fade : MonoBehaviour
 {
-    public GameObject panel;
+    public GameObject fadePanel;
+    public GameObject logInPanel;
+    public GameObject infoPanel;
     Image image;
 
     public void SceneLoad()
     {
-        panel.SetActive(true);
-        image = panel.GetComponent<Image>();
+        fadePanel.SetActive(true);
+        image = fadePanel.GetComponent<Image>();
         StartCoroutine(StartFadeCoroutine());
+    }
+
+    public void LogInPanelOpen()
+    {
+        logInPanel.SetActive(true);
+    }
+
+    public void closeInfoPanel()
+    {
+        infoPanel.SetActive(false);
     }
 
     IEnumerator StartFadeCoroutine()
