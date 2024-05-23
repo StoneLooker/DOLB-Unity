@@ -6,6 +6,8 @@ TagManager:
   tags:
   - InteractionZone
   - Stone
+  - Obstacle
+  - Ground
   layers:
   - Default
   - TransparentFX
