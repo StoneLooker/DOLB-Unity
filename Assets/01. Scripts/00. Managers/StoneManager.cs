@@ -13,6 +13,7 @@ public class StoneManager
     public List<Stone> stones = new(); 
     public List<Stone> allStoneHaveGrown = new();
     public Stone growingStone;
+    public StoneController nowStoneController;
 
     public int stoneNum = 0;
 
@@ -76,11 +77,21 @@ public abstract class Stone
         this.state = state;
     }
 
+    public void SetNickName(String nickName)
+    {
+        this.nickName = nickName;   
+    }
+
     public void ChangeState(IStoneState _state)
     {
         this.state.ExitState();
         this.state = _state;
         this.state.EnterState();
+    }
+
+    public string GetScientificName()
+    {
+        return this.scientificName;
     }
 
     public abstract void Washing();
