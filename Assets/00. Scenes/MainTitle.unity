@@ -893,6 +893,11 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   BackToSauna: {fileID: 0}
+  signUp: {fileID: 897243587}
+  logIn: {fileID: 1536728964}
+  logOut: {fileID: 748751881}
+  gameStart: {fileID: 1868423442}
+  quit: {fileID: 1731345381}
   enableSetting: {fileID: 0}
   enableCollectingBook: {fileID: 0}
   moveToSauna: {fileID: 0}
@@ -4153,7 +4158,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_text: Log In
+  m_text: Log Out
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: 1e781d91526254783afe155a5fcdd91e, type: 2}
   m_sharedMaterial: {fileID: 1945647541354446504, guid: 1e781d91526254783afe155a5fcdd91e, type: 2}
@@ -5662,9 +5667,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: d40309768c764dc429c6793973ab5ca1, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _controller: {fileID: 0}
+  _controller: {fileID: 399682735}
   _minigame: {fileID: 0}
-  stone: {fileID: 0}
+  _logIn: {fileID: 1985663870}
+  _stone: {fileID: 0}
 --- !u!4 &1985663869
 Transform:
   m_ObjectHideFlags: 0
@@ -5694,8 +5700,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   idInput: {fileID: 184692652}
   passwordInput: {fileID: 183724544}
-  InfoText: {fileID: 739178554}
-  startBtn: {fileID: 1868423442}
+  infoScreen: {fileID: 739178554}
+  logInScreen: {fileID: 586564661}
   logInBtn: {fileID: 1505761071}
   logOutBtn: {fileID: 748751877}
 --- !u!1 &2018761049

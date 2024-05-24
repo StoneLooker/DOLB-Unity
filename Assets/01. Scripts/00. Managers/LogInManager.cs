@@ -14,17 +14,14 @@ public class LogInManager : MonoBehaviour
 
     public TMP_InputField idInput;
     public TMP_InputField passwordInput;
-    public GameObject InfoText;
 
-    public Button startBtn;
+    public GameObject infoScreen;
+    public GameObject logInScreen;
+
     public GameObject logInBtn;
     public GameObject logOutBtn;
-    private bool isLoggedIn = false;
 
-    void Start()
-    {
-        startBtn.onClick.AddListener(() => UpdateInfoText("login!"));
-    }
+    private bool isLoggedIn = false;
 
     public void SignUp()
     {
@@ -65,10 +62,11 @@ public class LogInManager : MonoBehaviour
                 break;
             case UnityWebRequest.Result.ProtocolError:
                 Debug.Log("HTTP Error: " + www.error + " Response: " + www.downloadHandler.text);
+                if(www.downloadHandler.text == "Save fail")
+                    UpdateInfoText("ID is already exists.");
                 break;
             case UnityWebRequest.Result.Success:
-                Debug.Log("Member sent successfully");
-                startBtn.onClick.AddListener(() => UpdateInfoText("LogIn successfully!"));
+                UpdateInfoText("Sign Up Successful.");
                 break;
         }
     }
@@ -95,13 +93,15 @@ public class LogInManager : MonoBehaviour
                 break;
             case UnityWebRequest.Result.ProtocolError:
                 Debug.Log("HTTP Error: " + www.error + " Response: " + www.downloadHandler.text);
+                if(www.downloadHandler.text == "Load fail")
+                    UpdateInfoText("User ID or Password incorrect.");
                 break;
             case UnityWebRequest.Result.Success:
-                Debug.Log("Member sent successfully");
                 isLoggedIn = true;
                 UpdateButtonListener();
                 logInBtn.SetActive(false);
                 logOutBtn.SetActive(true);
+                logInScreen.SetActive(false);
                 break;
         }
     }
@@ -123,30 +123,28 @@ public class LogInManager : MonoBehaviour
                 Debug.Log("HTTP Error: " + www.error);
                 break;
             case UnityWebRequest.Result.Success:
-                Debug.Log("Member sent successfully");
                 isLoggedIn = false;
                 UpdateButtonListener();
                 logInBtn.SetActive(true);
                 logOutBtn.SetActive(false);
+                UpdateInfoText("Log Out successful.");
                 break;
         }
     }
 
-    void UpdateButtonListener()
+    public void UpdateButtonListener()
     {
-        startBtn.onClick.RemoveAllListeners();
+        GameManager.Instance._controller._button.gameStart.onClick.RemoveAllListeners();
         if (isLoggedIn)
-            startBtn.onClick.AddListener(startBtn.GetComponent<Fade>().LoadingSceneLoad);
+            GameManager.Instance._controller._button.gameStart.onClick.AddListener(GameManager.Instance._controller._button.gameStart.GetComponent<Fade>().LoadingSceneLoad);
         else
-        {
-            startBtn.onClick.AddListener(() => UpdateInfoText("login!"));
-        }
+            GameManager.Instance._controller._button.gameStart.onClick.AddListener(() => UpdateInfoText("Log In is required."));
     }
 
-    void UpdateInfoText(string str)
+    private void UpdateInfoText(string str)
     {
-        InfoText.SetActive(true);
-        InfoText.transform.GetChild(0).GetComponent<TMP_Text>().text = str;
+        infoScreen.SetActive(true);
+        infoScreen.transform.GetChild(0).GetComponent<TMP_Text>().text = str;
     }
 
     private Member getMemberFromFields()

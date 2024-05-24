@@ -43,7 +43,7 @@ public class GameManager : MonoBehaviour
 
         #endregion
         /*_stone.OnAwake();*/
-        nowMap = MAP_TYPE.Sauna;
+        nowMap = MAP_TYPE.MainTitle;
     }
 
     void Start()

@@ -29,9 +29,19 @@ public class ControllerManager : MonoBehaviour
             _button.BackToSauna.onClick.AddListener(() => GameManager.Instance.ChangeMap(MAP_TYPE.Sauna));
         }
 
-        else if (map.Equals(MAP_TYPE.MainTitle))
+        if (map.Equals(MAP_TYPE.MainTitle))
         {
-            
+            _button.signUp.onClick.RemoveAllListeners();
+            _button.logIn.onClick.RemoveAllListeners();
+            _button.logOut.onClick.RemoveAllListeners();
+            _button.gameStart.onClick.RemoveAllListeners();
+            _button.quit.onClick.RemoveAllListeners();
+
+            _button.signUp.onClick.AddListener(GameManager.Instance._logIn.SignUp);
+            _button.logIn.onClick.AddListener(GameManager.Instance._logIn.LogIn);
+            _button.logOut.onClick.AddListener(GameManager.Instance._logIn.LogOut);
+            _button.gameStart.onClick.AddListener(GameManager.Instance._logIn.UpdateButtonListener);
+            _button.quit.onClick.AddListener(GameManager.Instance.GameQuit);
         }
         else if (map.Equals(MAP_TYPE.Sauna))
         {
