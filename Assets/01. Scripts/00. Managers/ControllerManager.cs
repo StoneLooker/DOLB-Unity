@@ -13,7 +13,7 @@ public class ControllerManager : MonoBehaviour
     {
         GameManager.Instance._controller = null;
         GameManager.Instance._controller = this;
-        SetController(GameManager.Instance.sceneName);
+        SetController(GameManager.Instance.nowMap);
     }
 
     void Update()
@@ -21,11 +21,14 @@ public class ControllerManager : MonoBehaviour
 
     }
 
-    public void SetController(string sceneName)
+    public void SetController(MAP_TYPE map)
     {
-        _button.BackToSauna.onClick.RemoveAllListeners();
-        _button.BackToSauna.onClick.AddListener(() => GameManager.Instance.ChangeScene("Sauna"));
-        if (sceneName.Equals("Sauna"))
+        if (_button.BackToSauna != null)
+        {
+            _button.BackToSauna.onClick.RemoveAllListeners();
+            _button.BackToSauna.onClick.AddListener(() => GameManager.Instance.ChangeMap(MAP_TYPE.Sauna));
+        }
+        if (map.Equals(MAP_TYPE.Sauna))
         {
             _ui.main.SetActive(true);
             _ui.collectingBook.SetActive(false);
@@ -35,10 +38,10 @@ public class ControllerManager : MonoBehaviour
             _button.enableCollectingBook.onClick.RemoveAllListeners();
 
             _button.moveToSauna.onClick.AddListener(() => _camera.MoveMainCamera(new Vector3(0F, 0F, -10F)));
-            _button.moveToBulgama.onClick.AddListener(() => _camera.MoveMainCamera(new Vector3(-20F, 0F, -10F)));
+            _button.moveToBulgama.onClick.AddListener(() => GameManager.Instance.ChangeMap(MAP_TYPE.Bulgama));
             _button.enableCollectingBook.onClick.AddListener(() => _ui.SwitchUI(_ui.collectingBook));
         }
-        if (sceneName.Equals("Tub"))
+        if (map.Equals(MAP_TYPE.Tub))
         {
             _button.PickBrush.onClick.RemoveAllListeners();
 

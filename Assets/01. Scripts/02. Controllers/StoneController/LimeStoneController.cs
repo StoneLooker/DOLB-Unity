@@ -15,7 +15,7 @@ public class LimeStoneController : StoneController
         base.Start();
     }
 
-    public void Set(string nN)
+    new void Set(string nN)
     {
         stone.SetNickName(nN);
         GameManager.Stone.nowStoneController = this;
@@ -28,11 +28,22 @@ public class LimeStoneController : StoneController
         stone.UpdateLoveGage(20F);
     }
 
-    public void OnCollisionStay(Collision collision)
+    new void OnCollisionStay(Collision collision)
     {
         if(collision.collider.CompareTag("Danger"))
         {
             stone.UpdateHP(-10F);
+        }
+    }
+
+    new void OnMouseUp()
+    {
+        base.OnMouseUp();
+        if(GameManager.Instance.nowMap.Equals(MAP_TYPE.Bulgama))
+        {
+            this.Set("ss?");
+            GameManager.Instance.stone = this.gameObject;
+            Debug.Log("Choose Stone!");
         }
     }
 }
