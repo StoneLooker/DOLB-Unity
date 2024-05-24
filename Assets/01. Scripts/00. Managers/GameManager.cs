@@ -14,6 +14,7 @@ public class GameManager : MonoBehaviour
 
     public ControllerManager _controller;
     public MinigameManager _minigame;
+    public LogInManager _logIn;
 
     private InputManager _input;
     private ItemManager _item;
@@ -74,6 +75,15 @@ public class GameManager : MonoBehaviour
         {
             SceneManager.LoadScene("Bulgama");
         }
+    }
+
+    public void GameQuit()
+    {
+        #if UNITY_EDITOR
+        UnityEditor.EditorApplication.isPlaying = false;
+        #else
+        Application.Quit();
+        #endif
     }
 }
 
