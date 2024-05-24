@@ -5,20 +5,34 @@ using UnityEngine;
 
 public class GrowingStone : MonoBehaviour
 {
+    [Serialize]
     StoneController controller;
 
     // Start is called before the first frame update
     void Start()
     {
-        if(GameManager.Stone.growingStone.GetScientificName().Equals("LimeStone"))
+        if(GameManager.Stone.growingStone == null)
         {
-            controller = new LimeStoneController();
+            Debug.Log("No Stone Choosed");
+            this.gameObject.SetActive(false);
+        }
+        if(GameManager.Stone.growingStone != null)
+        {
+            Debug.Log(GameManager.Stone.growingStone.GetScientificName());
+            if (GameManager.Stone.growingStone.GetScientificName().Equals("LimeStone"))
+            {
+                this.AddComponent<LimeStoneController>();
+                controller = this.GetComponent<LimeStoneController>();
+                controller.stone = GameManager.Stone.growingStone;
+            }
+            else
+            {
+            }
+            controller.Start();
         }
         else
         {
-            controller = new();
         }
-        controller.Start();
     }
 
     // Update is called once per frame

@@ -6,19 +6,24 @@ using UnityEngine;
 
 public class LimeStoneController : StoneController
 {
-    public LimeStone stone;
+    public new LimeStone stone;
 
+    public LimeStoneController(Stone stone)
+    {
+        this.stone = (LimeStone)stone;
+    }
+    
     new void Start()
     {
-        this.AddComponent<SpriteRenderer>();
-        this.GetComponent<SpriteRenderer>().sprite = stone.stoneStat.Image;
+        if(this.GetComponent<SpriteRenderer>() == null) this.AddComponent<SpriteRenderer>();
+        this.GetComponent<SpriteRenderer>().sprite = GameManager.Stone.limeStoneData.stoneStat.Image;
+        stone = (LimeStone)GameManager.Stone.MakeStone(STONE_TYPE.LimeStone);
         base.Start();
     }
 
     new void Set(string nN)
     {
         stone.SetNickName(nN);
-        GameManager.Stone.nowStoneController = this;
         GameManager.Stone.growingStone = stone;
     }
 
@@ -42,7 +47,6 @@ public class LimeStoneController : StoneController
         if(GameManager.Instance.nowMap.Equals(MAP_TYPE.Bulgama))
         {
             this.Set("ss?");
-            GameManager.Instance.stone = this.gameObject;
             Debug.Log("Choose Stone!");
         }
     }
@@ -83,7 +87,7 @@ public class LimeStone : Stone
         }
     }
 
-    public LimeStone(string scientificName, string nickName, IStoneState state) : base(scientificName, nickName, state)
+    public LimeStone(string scientificName, string nickName) : base(scientificName, nickName)
     {
         HP = 100F;
         loveGage = 0F;

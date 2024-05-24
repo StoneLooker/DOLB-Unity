@@ -5,28 +5,39 @@ using Unity.VisualScripting;
 using UnityEngine;
 using UnityEngine.XR;
 
-public class StoneManager
+public class StoneManager : MonoBehaviour 
 {
     public Dictionary<StateType, IStoneState> stateInfo = new();
     public Dictionary<string, Stone> stoneInfo = new();
+    [SerializeField] public LimeStone limeStoneData;
 
     public List<Stone> stones = new(); 
-    public List<Stone> allStoneHaveGrown = new();
+    public List<Stone> collectingBook = new();
     public Stone growingStone;
-    public StoneController nowStoneController;
 
     public int stoneNum = 0;
 
-    public void OnAwake()
+    public Stone MakeStone(STONE_TYPE stoneType)
     {
+        if(stoneType.Equals(STONE_TYPE.LimeStone))
+        {
+            return new LimeStone(limeStoneData.GetScientificName(), "Empty");
+        }
+        return null;
+    }
+
+    public void Awake()
+    {
+        growingStone = null;
+
         stateInfo.Clear();
         stateInfo.Add(StateType.NotPet, new NotPet());
         stateInfo.Add(StateType.Normal, new Normal());
 
         stoneInfo.Clear();
-        stoneInfo.Add("LimeStone", new LimeStone("LimeStone", "Information", stateInfo[StateType.NotPet]));
+        stoneInfo.Add("LimeStone", new LimeStone("LimeStone", "Information"));
 
-        allStoneHaveGrown.Clear();
+        collectingBook.Clear();
     }
 
     public void OnUpdate()
@@ -51,7 +62,7 @@ public class StoneManager
 
     public void GrowingFinished(Stone stone)
     {
-        allStoneHaveGrown.Add(stone);
+        collectingBook.Add(stone);
     }
 
     public void StoneDie(Stone stone)
@@ -60,21 +71,23 @@ public class StoneManager
     }
 }
 
+public enum STONE_TYPE
+{
+    LimeStone, Granite
+}
 [Serializable]
 public abstract class Stone
 {
-    int id = GameManager.Stone.stoneNum++;
+    int id;
     public StoneStat stoneStat;
-    string scientificName;
-    string nickName;
+    public string scientificName;
+    public string nickName;
     public IStoneState state;
-    Transform transform;
 
-    public Stone(string scientificName, string nickName, IStoneState state)
+    public Stone(string scientificName, string nickName)
     {
         this.scientificName = scientificName;
         this.nickName = nickName;
-        this.state = state;
     }
 
     public void SetNickName(String nickName)

@@ -6,6 +6,7 @@ using UnityEngine.EventSystems;
 
 public class StoneController : MonoBehaviour
 {
+    public Stone stone;
     public bool isInZone;
     private bool isDrop;
     private bool isShoot;
@@ -22,6 +23,11 @@ public class StoneController : MonoBehaviour
         originPosition = transform.position;
         lastPosition = transform.position;
         rb = GetComponent<Rigidbody2D>();
+    }
+
+    public void SetStone(Stone stone)
+    {
+        this.stone = stone;
     }
 
     public void Update()
