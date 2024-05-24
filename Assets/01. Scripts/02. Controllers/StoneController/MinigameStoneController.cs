@@ -5,6 +5,7 @@ using UnityEngine;
 public class MinigameStoneController : MonoBehaviour
 {
     private float rotateSpeed = 300f;
+    private float jumpForce = 5f;
     private Rigidbody2D rigid;
     private SpriteRenderer spriteRender;
     private bool isGrounded = true;
@@ -36,8 +37,8 @@ public class MinigameStoneController : MonoBehaviour
     {
         if(isGrounded)
         {
-            rigid.AddForce(Vector3.up * 300.0f);
-            isGrounded = false;
+            rigid.velocity = new Vector2(rigid.velocity.x, 0);
+            rigid.AddForce(Vector3.up * jumpForce, ForceMode2D.Impulse);
         }
     }
 
@@ -51,6 +52,12 @@ public class MinigameStoneController : MonoBehaviour
         }else if(collision.gameObject.CompareTag("Ground")){
             isGrounded = true;
         }
+    }
+
+    private void OnTriggerStay2D(Collider2D collision)
+    {
+        if(collision.gameObject.CompareTag("Ground"))
+            isGrounded = true;
     }
 
     private void OnTriggerExit2D(Collider2D collision)

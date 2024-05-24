@@ -780,7 +780,19 @@ MonoBehaviour:
   m_TargetGraphic: {fileID: 318484461}
   m_OnClick:
     m_PersistentCalls:
-      m_Calls: []
+      m_Calls:
+      - m_Target: {fileID: 739178554}
+        m_TargetAssemblyTypeName: UnityEngine.GameObject, UnityEngine
+        m_MethodName: SetActive
+        m_Mode: 6
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
 --- !u!114 &318484461
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -2259,7 +2271,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   idInput: {fileID: 184692652}
   passwordInput: {fileID: 183724544}
-  InfoText: {fileID: 906406963}
+  InfoText: {fileID: 739178554}
   startBtn: {fileID: 1868423442}
   logInBtn: {fileID: 1505761071}
   logOutBtn: {fileID: 748751877}
@@ -4347,7 +4359,7 @@ MonoBehaviour:
   m_OnClick:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 586564661}
+      - m_Target: {fileID: 489003811}
         m_TargetAssemblyTypeName: UnityEngine.GameObject, UnityEngine
         m_MethodName: SetActive
         m_Mode: 6
@@ -5339,9 +5351,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 55e6c194dabde4d4cbb567e562342443, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  fadePanel: {fileID: 0}
-  logInPanel: {fileID: 0}
-  infoPanel: {fileID: 0}
+  fadePanel: {fileID: 2115605202}
+  logInPanel: {fileID: 586564661}
+  infoPanel: {fileID: 739178554}
 --- !u!1 &1928268280
 GameObject:
   m_ObjectHideFlags: 0
