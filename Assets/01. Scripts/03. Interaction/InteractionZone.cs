@@ -6,7 +6,8 @@ using UnityEngine.SceneManagement;
 public class InteractionZone : MonoBehaviour
 {
     private SpriteRenderer spriteRenderer;
-    public string mapName;
+    [SerializeField]
+    public MAP_TYPE map;
 
     private void Start()
     {
@@ -16,7 +17,7 @@ public class InteractionZone : MonoBehaviour
     public void OpenMap()
     {
         transform.parent.gameObject.SetActive(false);
-        GameManager.Instance.ChangeScene(mapName);
+        GameManager.Instance.ChangeMap(map);
     }
 
     private void OnTriggerEnter2D(Collider2D other) 
