@@ -7,6 +7,11 @@ public class ButtonController : MonoBehaviour
 {
     public Button BackToSauna;
     [Header("Scene-MainTitle")]
+    public Button signUp;
+    public Button logIn;
+    public Button logOut;
+    public Button gameStart;
+    public Button quit;
 
     [Header("Scene-Sauna")]
     public Button enableSetting;
