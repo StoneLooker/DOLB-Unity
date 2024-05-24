@@ -43,7 +43,12 @@ public class GameManager : MonoBehaviour
 
         #endregion
         /*_stone.OnAwake();*/
-        nowMap = MAP_TYPE.MainTitle;
+        if(SceneManager.GetActiveScene().name.Equals("MainTitle")) nowMap = MAP_TYPE.MainTitle;
+        else if (SceneManager.GetActiveScene().name.Equals("Sauna")) nowMap = MAP_TYPE.Sauna;
+        else if (SceneManager.GetActiveScene().name.Equals("Tub")) nowMap = MAP_TYPE.Tub;
+        else if (SceneManager.GetActiveScene().name.Equals("Bulgama")) nowMap = MAP_TYPE.Bulgama;
+        else if (SceneManager.GetActiveScene().name.Equals("MiniGame")) nowMap = MAP_TYPE.MiniGame;
+        else if (SceneManager.GetActiveScene().name.Equals("CollectingBook")) nowMap = MAP_TYPE.CollectingBook;
     }
 
     void Start()
@@ -79,6 +84,10 @@ public class GameManager : MonoBehaviour
         {
             SceneManager.LoadScene("MiniGame");
         }
+        else if (nowMap.Equals(MAP_TYPE.CollectingBook))
+        {
+            SceneManager.LoadScene("CollectingBook");
+        }
     }
 
     public void GameQuit()
@@ -93,7 +102,7 @@ public class GameManager : MonoBehaviour
 
 public enum MAP_TYPE
 {
-    MainTitle, Sauna, Bulgama, Tub, MiniGame
+    MainTitle, Sauna, Bulgama, Tub, MiniGame, CollectingBook
 }
 
 public enum STATE_TYPE
