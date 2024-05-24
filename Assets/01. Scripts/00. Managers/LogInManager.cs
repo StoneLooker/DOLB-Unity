@@ -136,7 +136,7 @@ public class LogInManager : MonoBehaviour
     {
         startBtn.onClick.RemoveAllListeners();
         if (isLoggedIn)
-            startBtn.onClick.AddListener(startBtn.GetComponent<Fade>().SceneLoad);
+            startBtn.onClick.AddListener(startBtn.GetComponent<Fade>().LoadingSceneLoad);
         else
         {
             startBtn.onClick.AddListener(() => UpdateInfoText("login!"));
