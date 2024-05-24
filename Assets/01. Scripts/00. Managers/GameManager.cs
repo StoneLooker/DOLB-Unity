@@ -75,6 +75,10 @@ public class GameManager : MonoBehaviour
         {
             SceneManager.LoadScene("Bulgama");
         }
+        else if (nowMap.Equals(MAP_TYPE.MiniGame))
+        {
+            SceneManager.LoadScene("MiniGame");
+        }
     }
 
     public void GameQuit()
@@ -89,7 +93,7 @@ public class GameManager : MonoBehaviour
 
 public enum MAP_TYPE
 {
-    MainTitle, Sauna, Bulgama, Tub
+    MainTitle, Sauna, Bulgama, Tub, MiniGame
 }
 
 public enum STATE_TYPE

@@ -17,7 +17,7 @@ public class InteractionZone : MonoBehaviour
     public void OpenMap()
     {
         transform.parent.gameObject.SetActive(false);
-        SceneManager.LoadScene("Minigame");
+        GameManager.Instance.ChangeMap(map);
     }
 
     private void OnTriggerEnter2D(Collider2D other) 

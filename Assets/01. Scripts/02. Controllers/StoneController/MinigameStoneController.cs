@@ -21,10 +21,10 @@ public class MinigameStoneController : MonoBehaviour
 
         spriteRender = GetComponent<SpriteRenderer>();
 
-        GameManager.Stone.WhenPlayerDecideGrowingNewStoneInBulgama(GameManager.Stone.stoneInfo["LimeStone"]);
-        if(GameManager.Stone.growingStone.GetScientificName() == "LimeStone")
+       /* GameManager.Stone.WhenPlayerDecideGrowingNewStoneInBulgama(GameManager.Stone.stoneInfo["LimeStone"]);*/
+        if(GameManager.Stone.growingStone.stoneStat.Equals(STONE_TYPE.LimeStone))
             life = 3;
-        else if(GameManager.Stone.growingStone.GetScientificName() == "Granite")
+        else if(GameManager.Stone.growingStone.stoneStat.Equals(STONE_TYPE.Granite))
             life = 5;
     }
 
