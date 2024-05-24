@@ -1,5 +1,6 @@
 using System.Collections;
 using System.Collections.Generic;
+using Unity.VisualScripting;
 using UnityEngine;
 using UnityEngine.EventSystems;
 
@@ -15,6 +16,7 @@ public class StoneController : MonoBehaviour
     private float startTime;
     private Rigidbody2D rb;
 
+
     public void Start()
     {
         originPosition = transform.position;
@@ -24,10 +26,11 @@ public class StoneController : MonoBehaviour
 
     public void Update()
     {
-        if(isShoot){
+        if (isShoot)
+        {
             transform.Rotate(0, 0, Time.deltaTime * 200);
             rb.velocity *= Mathf.Pow(0.15f, Time.deltaTime);
-            if(rb.velocity.magnitude < 0.01f)
+            if (rb.velocity.magnitude < 0.01f)
                 isShoot = false;
         }
     }
@@ -42,12 +45,13 @@ public class StoneController : MonoBehaviour
 
     public void OnMouseDrag()
     {
-        if(!speedDrop)
+        if (!speedDrop)
         {
             Vector3 objPosition = GameManager.Input.mousePosUnity;
 
             float speed = (objPosition - lastPosition).magnitude / Time.deltaTime;
-            if (rb.velocity.magnitude < 0.5f){
+            if (rb.velocity.magnitude < 0.5f)
+            {
                 transform.position = objPosition;
             }
             else
@@ -72,11 +76,11 @@ public class StoneController : MonoBehaviour
         isShoot = true;
     }
 
-    public void OnTriggerStay2D(Collider2D other) 
+    public void OnTriggerStay2D(Collider2D other)
     {
-        if(other.CompareTag("InteractionZone"))
+        if (other.CompareTag("InteractionZone"))
         {
-            if(isInZone && isDrop)
+            if (isInZone && isDrop)
             {
                 other.GetComponent<InteractionZone>().OpenMap();
                 isInZone = false;
@@ -91,5 +95,11 @@ public class StoneController : MonoBehaviour
     {
         yield return new WaitForSeconds(2f);
         speedDrop = false;
+    }
+    public void OnCollisionStay(Collision collision)
+    {
+    }
+    public void Set(string nN)
+    {
     }
 }

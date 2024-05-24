@@ -23,7 +23,8 @@ public class GameManager : MonoBehaviour
     public static StoneManager Stone { get { return Instance._stone; } }
     public static ItemManager Item { get { return Instance._item; } }
 
-    public String sceneName { get; private set; }
+    public MAP_TYPE nowMap { get; private set; }
+    public GameObject stone;
 
     void Awake()
     {
@@ -42,11 +43,12 @@ public class GameManager : MonoBehaviour
 
         #endregion
         _stone.OnAwake();
-        sceneName = "Sauna";
+        nowMap = MAP_TYPE.Sauna;
     }
 
     void Start()
     {
+        _item.OnStart();
     }
 
     void Update()
@@ -54,16 +56,32 @@ public class GameManager : MonoBehaviour
         _input.OnUpdate();
     }
 
-    public void ChangeScene(String sceneName)
+    public void ChangeMap(MAP_TYPE map)
     {
-        this.sceneName = sceneName;
-        SceneManager.LoadScene(sceneName);
+        this.nowMap = map;
+        if (nowMap.Equals(MAP_TYPE.MainTitle))
+        {
+            SceneManager.LoadScene("MainTitle");
+        }
+        else if (nowMap.Equals(MAP_TYPE.Sauna))
+        {
+            SceneManager.LoadScene("Sauna");
+            Instantiate(stone);
+        }
+        else if (nowMap.Equals(MAP_TYPE.Tub))
+        {
+            SceneManager.LoadScene("Tub");
+        }
+        else if(nowMap.Equals(MAP_TYPE.Bulgama))
+        {
+            SceneManager.LoadScene("Bulgama");
+        }
     }
 }
 
 public enum MAP_TYPE
 {
-    MainTitle, Sauna, Bulgama
+    MainTitle, Sauna, Bulgama, Tub
 }
 
 public enum STATE_TYPE
