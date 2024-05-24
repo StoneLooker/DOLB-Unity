@@ -16,15 +16,15 @@ public class GameManager : MonoBehaviour
     public MinigameManager _minigame;
 
     private InputManager _input;
-    private StoneManager _stone;
     private ItemManager _item;
+    [SerializeField]
+    private StoneManager _stone;
 
     public static InputManager Input { get { return Instance._input; } }
     public static StoneManager Stone { get { return Instance._stone; } }
     public static ItemManager Item { get { return Instance._item; } }
 
     public MAP_TYPE nowMap { get; private set; }
-    public GameObject stone;
 
     void Awake()
     {
@@ -38,11 +38,10 @@ public class GameManager : MonoBehaviour
         DontDestroyOnLoad(gameObject);
 
         _input = new InputManager();
-        _stone = new StoneManager();
         _item = new ItemManager();
 
         #endregion
-        _stone.OnAwake();
+        /*_stone.OnAwake();*/
         nowMap = MAP_TYPE.Sauna;
     }
 
@@ -66,7 +65,6 @@ public class GameManager : MonoBehaviour
         else if (nowMap.Equals(MAP_TYPE.Sauna))
         {
             SceneManager.LoadScene("Sauna");
-            Instantiate(stone);
         }
         else if (nowMap.Equals(MAP_TYPE.Tub))
         {
