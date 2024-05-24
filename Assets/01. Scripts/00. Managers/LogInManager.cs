@@ -23,7 +23,7 @@ public class LogInManager : MonoBehaviour
 
     void Start()
     {
-        startBtn.onClick.AddListener(() => UpdateInfoText("login"));
+        startBtn.onClick.AddListener(() => UpdateInfoText("login!"));
     }
 
     public void SignUp()
@@ -68,6 +68,7 @@ public class LogInManager : MonoBehaviour
                 break;
             case UnityWebRequest.Result.Success:
                 Debug.Log("Member sent successfully");
+                startBtn.onClick.AddListener(() => UpdateInfoText("LogIn successfully!"));
                 break;
         }
     }
@@ -135,17 +136,17 @@ public class LogInManager : MonoBehaviour
     {
         startBtn.onClick.RemoveAllListeners();
         if (isLoggedIn)
-            startBtn.onClick.AddListener(startBtn.GetComponent<Fade>().SceneLoad);
+            startBtn.onClick.AddListener(startBtn.GetComponent<Fade>().LoadingSceneLoad);
         else
         {
-            startBtn.onClick.AddListener(() => UpdateInfoText("login"));
+            startBtn.onClick.AddListener(() => UpdateInfoText("login!"));
         }
     }
 
     void UpdateInfoText(string str)
     {
         InfoText.SetActive(true);
-        InfoText.GetComponent<TMP_Text>().text = str;
+        InfoText.transform.GetChild(0).GetComponent<TMP_Text>().text = str;
     }
 
     private Member getMemberFromFields()

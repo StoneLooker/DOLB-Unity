@@ -28,7 +28,12 @@ public class ControllerManager : MonoBehaviour
             _button.BackToSauna.onClick.RemoveAllListeners();
             _button.BackToSauna.onClick.AddListener(() => GameManager.Instance.ChangeMap(MAP_TYPE.Sauna));
         }
-        if (map.Equals(MAP_TYPE.Sauna))
+
+        else if (map.Equals(MAP_TYPE.MainTitle))
+        {
+            
+        }
+        else if (map.Equals(MAP_TYPE.Sauna))
         {
             _ui.main.SetActive(true);
             _ui.collectingBook.SetActive(false);
@@ -41,11 +46,15 @@ public class ControllerManager : MonoBehaviour
             _button.moveToBulgama.onClick.AddListener(() => GameManager.Instance.ChangeMap(MAP_TYPE.Bulgama));
             _button.enableCollectingBook.onClick.AddListener(() => _ui.SwitchUI(_ui.collectingBook));
         }
-        if (map.Equals(MAP_TYPE.Tub))
+        else if (map.Equals(MAP_TYPE.Tub))
         {
             _button.PickBrush.onClick.RemoveAllListeners();
 
             _button.PickBrush.onClick.AddListener(() => _item.PickBrush());
+        }
+        else if (map.Equals(MAP_TYPE.Tub))
+        {
+
         }
     }
 }
