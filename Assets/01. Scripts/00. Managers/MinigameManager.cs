@@ -108,10 +108,10 @@ public class MinigameManager : MonoBehaviour
         Vector2 startPos = new Vector2(0, miniStoneUI.rectTransform.anchoredPosition.y);
         miniStoneUI.rectTransform.anchoredPosition = startPos;
 
-        GameManager.Stone.WhenPlayerDecideGrowingNewStoneInBulgama(GameManager.Stone.stoneInfo["LimeStone"]);
-        if(GameManager.Stone.growingStone.GetScientificName() == "LimeStone")
+        /*GameManager.Stone.WhenPlayerDecideGrowingNewStoneInBulgama(GameManager.Stone.stoneInfo["LimeStone"]);*/
+        if(GameManager.Stone.growingStone.stoneStat.Equals(STONE_TYPE.LimeStone))
             stoneControllerScript.life = 3;
-        else if(GameManager.Stone.growingStone.GetScientificName() == "Granite")
+        else if(GameManager.Stone.growingStone.stoneStat.Equals(STONE_TYPE.Granite))
             stoneControllerScript.life = 5;
 
         stoneLifeImages = new RawImage[stoneControllerScript.life];

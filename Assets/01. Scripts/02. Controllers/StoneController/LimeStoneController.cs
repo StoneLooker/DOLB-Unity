@@ -6,6 +6,7 @@ using UnityEngine;
 
 public class LimeStoneController : StoneController
 {
+    [SerializeField]
     public new LimeStone stone;
 
     public LimeStoneController(Stone stone)
@@ -48,6 +49,8 @@ public class LimeStoneController : StoneController
         {
             this.Set("ss?");
             Debug.Log("Choose Stone!");
+            this.gameObject.SetActive(false);
+            GameManager.Instance.ChangeMap(MAP_TYPE.Sauna);
         }
     }
 }
@@ -87,8 +90,9 @@ public class LimeStone : Stone
         }
     }
 
-    public LimeStone(string scientificName, string nickName) : base(scientificName, nickName)
+    public LimeStone(string nickName) : base(nickName)
     {
+        this.stoneStat = GameManager.Stone.limeStoneData.stoneStat;
         HP = 100F;
         loveGage = 0F;
         nextEvolutionPercentage = 100F;

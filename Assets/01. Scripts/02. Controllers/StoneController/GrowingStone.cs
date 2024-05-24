@@ -18,8 +18,7 @@ public class GrowingStone : MonoBehaviour
         }
         if(GameManager.Stone.growingStone != null)
         {
-            Debug.Log(GameManager.Stone.growingStone.GetScientificName());
-            if (GameManager.Stone.growingStone.GetScientificName().Equals("LimeStone"))
+            if (GameManager.Stone.growingStone.stoneStat.StoneType.Equals(STONE_TYPE.LimeStone))
             {
                 this.AddComponent<LimeStoneController>();
                 controller = this.GetComponent<LimeStoneController>();
@@ -27,6 +26,7 @@ public class GrowingStone : MonoBehaviour
             }
             else
             {
+                Debug.Log(GameManager.Stone.growingStone);
             }
             controller.Start();
         }

@@ -7,13 +7,11 @@ using UnityEngine.XR;
 
 public class StoneManager : MonoBehaviour 
 {
-    public Dictionary<StateType, IStoneState> stateInfo = new();
-    public Dictionary<string, Stone> stoneInfo = new();
     [SerializeField] public LimeStone limeStoneData;
 
-    public List<Stone> stones = new(); 
+    [SerializeField] public Stone growingStone;
+
     public List<Stone> collectingBook = new();
-    public Stone growingStone;
 
     public int stoneNum = 0;
 
@@ -21,21 +19,20 @@ public class StoneManager : MonoBehaviour
     {
         if(stoneType.Equals(STONE_TYPE.LimeStone))
         {
-            return new LimeStone(limeStoneData.GetScientificName(), "Empty");
+            return new LimeStone("Empty");
         }
         return null;
     }
 
     public void Awake()
     {
-        growingStone = null;
 
-        stateInfo.Clear();
+        /*stateInfo.Clear();
         stateInfo.Add(StateType.NotPet, new NotPet());
         stateInfo.Add(StateType.Normal, new Normal());
 
         stoneInfo.Clear();
-        stoneInfo.Add("LimeStone", new LimeStone("LimeStone", "Information"));
+        stoneInfo.Add("LimeStone", new LimeStone("LimeStone", "Information"));*/
 
         collectingBook.Clear();
     }
@@ -45,10 +42,10 @@ public class StoneManager : MonoBehaviour
 
     }
 
-    public void AddStone(Stone stone)
+    /*public void AddStone(Stone stone)
     {
         stones.Add(stone);
-    }
+    }*/
 
     public void DeleteStone()
     {
@@ -80,13 +77,11 @@ public abstract class Stone
 {
     int id;
     public StoneStat stoneStat;
-    public string scientificName;
     public string nickName;
     public IStoneState state;
 
-    public Stone(string scientificName, string nickName)
+    public Stone(string nickName)
     {
-        this.scientificName = scientificName;
         this.nickName = nickName;
     }
 
@@ -102,10 +97,10 @@ public abstract class Stone
         this.state.EnterState();
     }
 
-    public string GetScientificName()
+    /*public string GetScientificName()
     {
         return this.scientificName;
-    }
+    }*/
 
     public abstract void Washing();
     public abstract void UpdateHP(float HP);
