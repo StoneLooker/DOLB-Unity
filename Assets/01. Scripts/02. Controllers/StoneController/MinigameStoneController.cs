@@ -14,9 +14,13 @@ public class MinigameStoneController : MonoBehaviour
     void Start()
     {
         rigid = this.GetComponent<Rigidbody2D>();
-        // rigid.mass = 1.5f;
-        // rigid.gravityScale = 2.0f;
+        
+        GameManager.Input.keyAction -= JumpStone;
+        GameManager.Input.keyAction += JumpStone;
+
         spriteRender = GetComponent<SpriteRenderer>();
+
+        GameManager.Stone.WhenPlayerDecideGrowingNewStoneInBulgama(GameManager.Stone.stoneInfo["LimeStone"]);
         if(GameManager.Stone.growingStone.GetScientificName() == "LimeStone")
             life = 3;
         else if(GameManager.Stone.growingStone.GetScientificName() == "Granite")
@@ -28,24 +32,28 @@ public class MinigameStoneController : MonoBehaviour
         transform.Rotate(0,0, -Time.deltaTime * rotateSpeed);
     }
 
-    void OnMouseDown()
+    void JumpStone()
     {
         if(isGrounded)
         {
-            rigid.AddForce(Vector3.up * 600.0f);
+            rigid.AddForce(Vector3.up * 300.0f);
             isGrounded = false;
         }
     }
 
-    private void OntriggerEnter2D(Collider2D collision)
+    private void OnTriggerEnter2D(Collider2D collision)
     {
-        if(collision.gameObject.CompareTag("Obstacle"))
-            life--;
-        else if(collision.gameObject.CompareTag("Ground"))
+        if(collision.gameObject.CompareTag("Obstacle")){
+            if(life > 0)
+                life--;
+            if(life == 0)
+                GameManager.Instance._minigame.isGameOver = true;
+        }else if(collision.gameObject.CompareTag("Ground")){
             isGrounded = true;
+        }
     }
 
-    private void OntriggerExit2D(Collider2D collision)
+    private void OnTriggerExit2D(Collider2D collision)
     {
         if(collision.gameObject.CompareTag("Ground"))
             isGrounded = false;
