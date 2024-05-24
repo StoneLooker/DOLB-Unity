@@ -7,25 +7,13 @@ using UnityEngine.UI;
 public class Fade : MonoBehaviour
 {
     public GameObject fadePanel;
-    public GameObject logInPanel;
-    public GameObject infoPanel;
     Image image;
 
-    public void SceneLoad()
+    public void LoadingSceneLoad()
     {
         fadePanel.SetActive(true);
         image = fadePanel.GetComponent<Image>();
         StartCoroutine(StartFadeCoroutine());
-    }
-
-    public void LogInPanelOpen()
-    {
-        logInPanel.SetActive(true);
-    }
-
-    public void closeInfoPanel()
-    {
-        infoPanel.SetActive(false);
     }
 
     IEnumerator StartFadeCoroutine()
@@ -37,17 +25,7 @@ public class Fade : MonoBehaviour
             yield return new WaitForSeconds(0.015f);
             image.color = new Color(0,0,0,fadeCount);
         }
-        
-        if(SceneManager.GetActiveScene().name == "Title")
-            SceneManager.LoadScene("Loading");
-    }
 
-    public void GameQuit()
-    {
-        #if UNITY_EDITOR
-        UnityEditor.EditorApplication.isPlaying = false;
-        #else
-        Application.Quit();
-        #endif
+        SceneManager.LoadScene("Loading");
     }
 }

@@ -7,6 +7,7 @@ public class ButtonController : MonoBehaviour
 {
     public Button BackToSauna;
     [Header("Scene-MainTitle")]
+
     [Header("Scene-Sauna")]
     public Button enableSetting;
     public Button enableCollectingBook;
