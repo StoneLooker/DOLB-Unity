@@ -35,6 +35,7 @@ public class MinigameStoneController : MonoBehaviour
 
     void JumpStone()
     {
+        Debug.Log("check");
         if(isGrounded)
         {
             rigid.velocity = new Vector2(rigid.velocity.x, 0);

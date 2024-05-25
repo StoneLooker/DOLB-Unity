@@ -7,13 +7,16 @@ using UnityEngine.EventSystems;
 public class StoneController : MonoBehaviour
 {
     public Stone stone;
+
     public bool isInZone;
     private bool isDrop;
     private bool isShoot;
     public bool speedDrop;
+
     private Vector3 originPosition;
     private Vector3 lastPosition;
     private Vector3 dragStartPosition;
+
     private float startTime;
     private Rigidbody2D rb;
 
@@ -23,6 +26,10 @@ public class StoneController : MonoBehaviour
         originPosition = transform.position;
         lastPosition = transform.position;
         rb = GetComponent<Rigidbody2D>();
+        rb.velocity = Vector2.zero;
+        isDrop = false;
+        isShoot = false;
+        speedDrop = false;
     }
 
     public void SetStone(Stone stone)
@@ -56,6 +63,7 @@ public class StoneController : MonoBehaviour
             Vector3 objPosition = GameManager.Input.mousePosUnity;
 
             float speed = (objPosition - lastPosition).magnitude / Time.deltaTime;
+            
             if (rb.velocity.magnitude < 0.5f)
             {
                 transform.position = objPosition;
@@ -74,9 +82,14 @@ public class StoneController : MonoBehaviour
     {
         rb.isKinematic = false;
         float duration = Time.time - startTime;
+        if(duration == 0) duration = 0.01f;
         Vector3 endPosition = transform.position;
         Vector3 velocity = (endPosition - dragStartPosition) / duration;
-        rb.velocity = velocity;
+        
+        if (float.IsInfinity(velocity.x) || float.IsInfinity(velocity.y) || float.IsNaN(velocity.x) || float.IsNaN(velocity.y))
+            rb.velocity = Vector2.zero;
+        else
+            rb.velocity = velocity;
 
         isDrop = true;
         isShoot = true;
