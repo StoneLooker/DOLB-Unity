@@ -4212,6 +4212,11 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   BackToSauna: {fileID: 0}
+  signUp: {fileID: 0}
+  logIn: {fileID: 0}
+  logOut: {fileID: 0}
+  gameStart: {fileID: 0}
+  quit: {fileID: 0}
   enableSetting: {fileID: 1805097755}
   enableCollectingBook: {fileID: 146039687}
   moveToSauna: {fileID: 1793005062}
@@ -5046,9 +5051,9 @@ CircleCollider2D:
   m_IsTrigger: 0
   m_UsedByEffector: 0
   m_UsedByComposite: 0
-  m_Offset: {x: -1.004424, y: 0}
+  m_Offset: {x: -4.0149765, y: 0}
   serializedVersion: 2
-  m_Radius: 1.5044235
+  m_Radius: 4.514969
 --- !u!50 &1809437918
 Rigidbody2D:
   serializedVersion: 4
