@@ -16,8 +16,8 @@ public class MinigameStoneController : MonoBehaviour
     {
         rigid = this.GetComponent<Rigidbody2D>();
         
-        GameManager.Input.keyAction -= JumpStone;
-        GameManager.Input.keyAction += JumpStone;
+        //GameManager.Input.keyAction -= JumpStone;
+        //GameManager.Input.keyAction += JumpStone;
 
         spriteRender = GetComponent<SpriteRenderer>();
 
@@ -31,11 +31,13 @@ public class MinigameStoneController : MonoBehaviour
     void Update()
     {
         transform.Rotate(0,0, -Time.deltaTime * rotateSpeed);
+
+        if(Input.GetMouseButton(0))
+            JumpStone();
     }
 
     void JumpStone()
     {
-        Debug.Log("check");
         if(isGrounded)
         {
             rigid.velocity = new Vector2(rigid.velocity.x, 0);
