@@ -20,6 +20,7 @@ public class LogInManager : MonoBehaviour
 
     public GameObject logInBtn;
     public GameObject logOutBtn;
+    
 
     private bool isLoggedIn = false;
 
@@ -93,15 +94,19 @@ public class LogInManager : MonoBehaviour
                 break;
             case UnityWebRequest.Result.ProtocolError:
                 Debug.Log("HTTP Error: " + www.error + " Response: " + www.downloadHandler.text);
-                if(www.downloadHandler.text == "Load fail")
-                    UpdateInfoText("User ID or Password incorrect.");
                 break;
             case UnityWebRequest.Result.Success:
-                isLoggedIn = true;
-                UpdateButtonListener();
-                logInBtn.SetActive(false);
-                logOutBtn.SetActive(true);
-                logInScreen.SetActive(false);
+                Debug.Log(www.downloadHandler.text);
+                if(www.downloadHandler.text == "login fail")
+                    UpdateInfoText("User ID or Password incorrect.");
+                else if((www.downloadHandler.text == "login success")){
+                    isLoggedIn = true;
+                    UpdateButtonListener();
+                    logInBtn.SetActive(false);
+                    logOutBtn.SetActive(true);
+                    logInScreen.SetActive(false);
+                    GameManager.Instance.id = m.memberNickName;
+                }
                 break;
         }
     }

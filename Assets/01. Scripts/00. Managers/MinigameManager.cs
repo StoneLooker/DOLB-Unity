@@ -16,20 +16,21 @@ public class MinigameManager : MonoBehaviour
     public GameObject lifeTransform;
     private int oldLife;
 
-    public bool isGameOver;
     public GameObject startPanel;
     public GameObject endPanel;
     public GameObject clearPanel;
     public Button startBtn;
     public Button restartBtn;
     public Button backGameBtn;
-    private float timer;
-    private float timer2;
+
+    public bool isGameOver;
+    public float gameTime = 10f;
+    private float spawntimer;
+    private float gametimer;
 
     public GameObject checkLocation;
     public Image barUI;
-    public Image miniStoneUI;
-    public float gameTime = 10f;
+    public Image locationUI;
 
     void Start()
     {
@@ -55,18 +56,18 @@ public class MinigameManager : MonoBehaviour
 
         if(!isGameOver)
         {
-            timer += Time.deltaTime;
-            timer2 += Time.deltaTime;
+            spawntimer += Time.deltaTime;
+            gametimer += Time.deltaTime;
 
             MoveMiniStone();
 
-            if (timer >= spawnInterval)
+            if (spawntimer >= spawnInterval)
             {
                 SpawnObstacle();
-                timer = 0;
+                spawntimer = 0;
             }
 
-            if (timer2 > gameTime)
+            if (gametimer > gameTime)
             {
                 isGameOver = true;
                 clearPanel.SetActive(true);
@@ -94,9 +95,9 @@ public class MinigameManager : MonoBehaviour
 
     private void MoveMiniStone()
     {
-        float progress = timer2 / gameTime;
+        float progress = gametimer / gameTime;
         float xPosition = Mathf.Lerp(0, 890, progress);
-        miniStoneUI.rectTransform.localPosition = new Vector2(xPosition, miniStoneUI.rectTransform.localPosition.y);
+        locationUI.rectTransform.localPosition = new Vector2(xPosition, locationUI.rectTransform.localPosition.y);
     }
 
     private void SetData()
@@ -105,8 +106,8 @@ public class MinigameManager : MonoBehaviour
 
         checkLocation.SetActive(true);
 
-        Vector2 startPos = new Vector2(0, miniStoneUI.rectTransform.anchoredPosition.y);
-        miniStoneUI.rectTransform.anchoredPosition = startPos;
+        Vector2 startPos = new Vector2(0, locationUI.rectTransform.anchoredPosition.y);
+        locationUI.rectTransform.anchoredPosition = startPos;
 
         /*GameManager.Stone.WhenPlayerDecideGrowingNewStoneInBulgama(GameManager.Stone.stoneInfo["LimeStone"]);*/
         if(GameManager.Stone.growingStone.stoneStat.Equals(STONE_TYPE.LimeStone))
@@ -123,7 +124,7 @@ public class MinigameManager : MonoBehaviour
         }
 
         oldLife = stoneControllerScript.life;
-        timer2 = 0;
+        gametimer = 0;
     }
 
     private void StartGame()
