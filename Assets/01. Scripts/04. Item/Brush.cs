@@ -40,14 +40,16 @@ public class Brush : MonoBehaviour
         GameManager.Stone.growingStone.UpdateLoveGage(10F);
     }
 
-    private void OnCollisionStay(Collision collision)
+    public void OnTriggerStay2D(Collider2D other)
     {
-        if(Input.GetMouseButton(0))
+        Debug.Log("Moss cleand");
+        if (Input.GetMouseButton(0))
         {
-            if (collision.gameObject.tag.Equals("Moss"))
+            if (other.gameObject.tag.Equals("Moss"))
             {
                 this.Wash();
-                collision.gameObject.SetActive(false);
+                Debug.Log("Moss cleand");
+                other.gameObject.SetActive(false);
             }
         }        
     }
