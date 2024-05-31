@@ -15,6 +15,7 @@ public class GameManager : MonoBehaviour
     public ControllerManager _controller;
     public MinigameManager _minigame;
     public LogInManager _logIn;
+    public string id;
 
     private InputManager _input;
     private ItemManager _item;
