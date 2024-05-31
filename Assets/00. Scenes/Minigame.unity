@@ -1097,17 +1097,17 @@ MonoBehaviour:
   - {fileID: 256781381}
   stoneLifeImage: {fileID: 2172646049660987660, guid: d5ce8e1efc43e494681d1a740f949d2a, type: 3}
   lifeTransform: {fileID: 1308024270}
-  isGameOver: 0
   startPanel: {fileID: 1696907491}
   endPanel: {fileID: 1919916223}
   clearPanel: {fileID: 2124305017}
   startBtn: {fileID: 450411127}
   restartBtn: {fileID: 854783492}
   backGameBtn: {fileID: 1393974068}
+  isGameOver: 0
+  gameTime: 20
   checkLocation: {fileID: 718385009}
   barUI: {fileID: 1858164139}
-  miniStoneUI: {fileID: 2083194580}
-  gameTime: 20
+  locationUI: {fileID: 2083194580}
 --- !u!4 &374070241
 Transform:
   m_ObjectHideFlags: 0
