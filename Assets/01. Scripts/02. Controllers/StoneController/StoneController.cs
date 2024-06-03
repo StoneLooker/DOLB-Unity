@@ -52,7 +52,7 @@ public class StoneController : MonoBehaviour
     {
         dragStartPosition = transform.position;
         startTime = Time.time;
-        rb.isKinematic = true;
+        //rb.isKinematic = true;
         isDrop = false;
     }
 
@@ -61,36 +61,36 @@ public class StoneController : MonoBehaviour
         if (!speedDrop)
         {
             Vector3 objPosition = GameManager.Input.mousePosUnity;
-
-            float speed = (objPosition - lastPosition).magnitude / Time.deltaTime;
+            
+            transform.position = objPosition;
+            //float speed = (objPosition - lastPosition).magnitude / Time.deltaTime;
             Debug.Log("check");
-            if (rb.velocity.magnitude < 0.5f)
-            {
-                transform.position = objPosition;
-                Debug.Log(rb.velocity);
-            }
-            else
-            {
-                speedDrop = true;
-                StartCoroutine(Delay());
-            }
-            lastPosition = transform.position;
-            //Debug.Log(rb.velocity.magnitude);
+            // if (rb.velocity.magnitude < 0.5f)
+            // {
+            //     transform.position = objPosition;
+            //     Debug.Log(rb.velocity);
+            // }
+            // else
+            // {
+            //     speedDrop = true;
+            //     StartCoroutine(Delay());
+            // }
+            //lastPosition = transform.position;
         }
     }
 
     public void OnMouseUp()
     {
-        rb.isKinematic = false;
-        float duration = Time.time - startTime;
-        if(duration == 0) duration = 0.01f;
-        Vector3 endPosition = transform.position;
-        Vector3 velocity = (endPosition - dragStartPosition) / duration;
+        //rb.isKinematic = false;
+        // float duration = Time.time - startTime;
+        // if(duration == 0) duration = 0.01f;
+        // Vector3 endPosition = transform.position;
+        // Vector3 velocity = (endPosition - dragStartPosition) / duration;
         
-        if (float.IsInfinity(velocity.x) || float.IsInfinity(velocity.y) || float.IsNaN(velocity.x) || float.IsNaN(velocity.y))
-            rb.velocity = Vector2.zero;
-        else
-            rb.velocity = velocity;
+        // if (float.IsInfinity(velocity.x) || float.IsInfinity(velocity.y) || float.IsNaN(velocity.x) || float.IsNaN(velocity.y))
+        //     rb.velocity = Vector2.zero;
+        // else
+        //     rb.velocity = velocity;
 
         isDrop = true;
         isShoot = true;
