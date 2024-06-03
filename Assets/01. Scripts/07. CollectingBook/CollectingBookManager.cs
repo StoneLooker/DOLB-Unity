@@ -10,6 +10,7 @@ public class CollectingBookManager : MonoBehaviour
 {
     private string addStoneUrl = "http://43.203.76.106:8080/collectingbook/add";
     private string getStoneUrl = "http://43.203.76.106:8080/collectingbook";
+   
 
     public TMP_InputField stoneNameInputField;
     public TMP_InputField stoneNumberInputField;
@@ -29,6 +30,8 @@ public class CollectingBookManager : MonoBehaviour
     {
         StartCoroutine(GetStoneRequest());
     }
+
+  
 
     IEnumerator AddStoneRequest()
     {
@@ -91,4 +94,6 @@ public class CollectingBookManager : MonoBehaviour
                 break;
         }
     }
+
+
 }
