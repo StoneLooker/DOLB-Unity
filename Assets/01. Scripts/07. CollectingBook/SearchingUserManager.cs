@@ -8,7 +8,7 @@ using TMPro;
 
 public class SearchingUserManager : MonoBehaviour
 {
-    private string searchUserUrl = "http://localhost:8080/search";
+    private string searchUserUrl = "http://43.203.76.106:8080/search";
 
     public TMP_InputField searchUserInputField;
 
