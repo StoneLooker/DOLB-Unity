@@ -23,6 +23,11 @@ public class StoneController : MonoBehaviour
 
     public void Start()
     {
+        InitializeStone();
+    }
+
+    public void InitializeStone()
+    {
         originPosition = transform.position;
         lastPosition = transform.position;
         rb = GetComponent<Rigidbody2D>();
@@ -30,6 +35,7 @@ public class StoneController : MonoBehaviour
         isDrop = false;
         isShoot = false;
         speedDrop = false;
+        rb.isKinematic = false;
     }
 
     public void SetStone(Stone stone)
@@ -52,7 +58,7 @@ public class StoneController : MonoBehaviour
     {
         dragStartPosition = transform.position;
         startTime = Time.time;
-        //rb.isKinematic = true;
+        rb.isKinematic = true;
         isDrop = false;
     }
 
@@ -81,12 +87,14 @@ public class StoneController : MonoBehaviour
 
     public void OnMouseUp()
     {
-        //rb.isKinematic = false;
-        // float duration = Time.time - startTime;
-        // if(duration == 0) duration = 0.01f;
-        // Vector3 endPosition = transform.position;
-        // Vector3 velocity = (endPosition - dragStartPosition) / duration;
+        rb.isKinematic = false;
+        float duration = Time.time - startTime;
+        if(duration == 0) duration = 0.01f;
+        Vector3 endPosition = transform.position;
+        Vector3 velocity = (endPosition - dragStartPosition) / duration;
         
+        rb.velocity = velocity;
+
         // if (float.IsInfinity(velocity.x) || float.IsInfinity(velocity.y) || float.IsNaN(velocity.x) || float.IsNaN(velocity.y))
         //     rb.velocity = Vector2.zero;
         // else
