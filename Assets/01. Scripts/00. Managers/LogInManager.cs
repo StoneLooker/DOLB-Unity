@@ -141,7 +141,9 @@ public class LogInManager : MonoBehaviour
     {
         GameManager.Instance._controller._button.gameStart.onClick.RemoveAllListeners();
         if (isLoggedIn)
+        {
             GameManager.Instance._controller._button.gameStart.onClick.AddListener(GameManager.Instance._controller._button.gameStart.GetComponent<Fade>().LoadingSceneLoad);
+        }            
         else
             GameManager.Instance._controller._button.gameStart.onClick.AddListener(() => UpdateInfoText("Log In is required."));
     }

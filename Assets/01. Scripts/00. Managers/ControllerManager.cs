@@ -41,6 +41,7 @@ public class ControllerManager : MonoBehaviour
             _button.logIn.onClick.AddListener(GameManager.Instance._logIn.LogIn);
             _button.logOut.onClick.AddListener(GameManager.Instance._logIn.LogOut);
             _button.gameStart.onClick.AddListener(GameManager.Instance._logIn.UpdateButtonListener);
+            //_button.gameStart.onClick.AddListener(() => GameManager.Instance.ChangeMap(MAP_TYPE.Sauna));
             _button.quit.onClick.AddListener(GameManager.Instance.GameQuit);
         }
         else if (map.Equals(MAP_TYPE.Sauna))
@@ -54,7 +55,7 @@ public class ControllerManager : MonoBehaviour
 
             _button.moveToSauna.onClick.AddListener(() => _camera.MoveMainCamera(new Vector3(0F, 0F, -10F)));
             _button.moveToBulgama.onClick.AddListener(() => GameManager.Instance.ChangeMap(MAP_TYPE.Bulgama));
-            _button.enableCollectingBook.onClick.AddListener(() => _ui.SwitchUI(_ui.collectingBook));
+            _button.enableCollectingBook.onClick.AddListener(() => GameManager.Instance.ChangeMap(MAP_TYPE.CollectingBook));
         }
         else if (map.Equals(MAP_TYPE.Tub))
         {
