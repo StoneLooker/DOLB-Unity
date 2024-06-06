@@ -15,7 +15,7 @@ EditorBuildSettings:
     path: Assets/00. Scenes/Loading.unity
     guid: 95412c075d9604b4bbbb7d2fc37c4347
   - enabled: 1
-    path: Assets/00. Scenes/Sauna_real.unity
+    path: Assets/00. Scenes/Sauna.unity
     guid: 9fc0d4010bbf28b4594072e72b8655ab
   - enabled: 1
     path: Assets/00. Scenes/Tub_Check.unity

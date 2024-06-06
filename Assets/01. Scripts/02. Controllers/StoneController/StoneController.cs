@@ -56,6 +56,11 @@ public class StoneController : MonoBehaviour
 
     public void OnMouseDown()
     {
+        MouseDown();
+    }
+
+    public void MouseDown()
+    {
         dragStartPosition = transform.position;
         startTime = Time.time;
         rb.isKinematic = true;
@@ -63,6 +68,11 @@ public class StoneController : MonoBehaviour
     }
 
     public void OnMouseDrag()
+    {
+        MouseDrag();
+    }
+
+    public void MouseDrag()
     {
         if (!speedDrop)
         {
@@ -87,6 +97,11 @@ public class StoneController : MonoBehaviour
 
     public void OnMouseUp()
     {
+        MouseUp();
+    }
+
+    public void MouseUp()
+    {
         rb.isKinematic = false;
         float duration = Time.time - startTime;
         if(duration == 0) duration = 0.01f;
@@ -104,7 +119,12 @@ public class StoneController : MonoBehaviour
         isShoot = true;
     }
 
-    public void OnTriggerStay2D(Collider2D other)
+    public void OnTriggerStay2D(Collider2D collision)
+    {
+        TriggerStay2D(collision);
+    }
+
+    public void TriggerStay2D(Collider2D other)
     {
         if (other.CompareTag("InteractionZone"))
         {
@@ -123,11 +143,5 @@ public class StoneController : MonoBehaviour
     {
         yield return new WaitForSeconds(2f);
         speedDrop = false;
-    }
-    public void OnCollisionStay(Collision collision)
-    {
-    }
-    public void Set(string nN)
-    {
     }
 }

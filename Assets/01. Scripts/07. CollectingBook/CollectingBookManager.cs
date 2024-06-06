@@ -48,15 +48,16 @@ public class CollectingBookManager : MonoBehaviour
         if(memberNickName == null) memberNickName = GameManager.Instance.id;
         yield return StartCoroutine(GetStoneRequest());
         Debug.Log("1");
+        float yValue = 10;
         foreach (CollectingBook element in books)
         {
             Debug.Log("2");
             if (element.stoneName == "LimeStone")
             {
                 Debug.Log(GameManager.Stone.collectingBook);
-                GameObject st = Instantiate(stoneFrame, new Vector3(0, 10, 0), new Quaternion(0, 0, 0, 0));
+                GameObject st = Instantiate(stoneFrame, new Vector3(0, yValue, 0), new Quaternion(0, 0, 0, 0));
                 st.AddComponent<LimeStoneController>();
-
+                yValue += 1;
             }
         }
     }

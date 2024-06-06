@@ -22,7 +22,7 @@ public class LimeStoneController : StoneController
         base.Start();
     }
 
-    new void Set(string nN)
+    void Set(string nN)
     {
         stone.SetNickName(nN);
         GameManager.Stone.growingStone = stone;
@@ -30,11 +30,11 @@ public class LimeStoneController : StoneController
 
     new void OnMouseDown()
     {
-        base.OnMouseDown();
+        base.MouseDown();
         stone.UpdateLoveGage(20F);
     }
 
-    new void OnCollisionStay(Collision collision)
+    void OnCollisionStay(Collision collision)
     {
         if(collision.collider.CompareTag("Danger"))
         {
@@ -44,7 +44,7 @@ public class LimeStoneController : StoneController
 
     new void OnMouseUp()
     {
-        base.OnMouseUp();
+        base.MouseUp();
         if(GameManager.Instance.nowMap.Equals(MAP_TYPE.Bulgama))
         {
             this.Set("ss?");
@@ -87,7 +87,7 @@ public class LimeStone : Stone
         if(nextEvolutionPercentage <= 0F)
         {
             Debug.Log("Evloution complete");
-            GameManager.Stone.collectingBook.Add(GameManager.Stone.growingStone);
+            GameManager.Stone.GrowingFinished();
             Debug.Log(GameManager.Stone.collectingBook);
         }
     }

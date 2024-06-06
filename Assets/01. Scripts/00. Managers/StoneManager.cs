@@ -57,9 +57,10 @@ public class StoneManager : MonoBehaviour
         growingStone = stone;
     }
 
-    public void GrowingFinished(Stone stone)
+    public void GrowingFinished()
     {
-        collectingBook.Add(stone);
+        collectingBook.Add(growingStone);
+        growingStone = null;
     }
 
     public void StoneDie(Stone stone)
