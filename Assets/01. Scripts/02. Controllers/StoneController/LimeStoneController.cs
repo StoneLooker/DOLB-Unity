@@ -87,6 +87,8 @@ public class LimeStone : Stone
         if(nextEvolutionPercentage <= 0F)
         {
             Debug.Log("Evloution complete");
+            GameManager.Stone.collectingBook.Add(GameManager.Stone.growingStone);
+            Debug.Log(GameManager.Stone.collectingBook);
         }
     }
 

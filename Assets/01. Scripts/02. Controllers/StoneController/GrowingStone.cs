@@ -28,46 +28,9 @@ public class GrowingStone : MonoBehaviour
             {
                 Debug.Log(GameManager.Stone.growingStone);
             }
-            controller.Start();
         }
         else
         {
         }
-    }
-
-    // Update is called once per frame
-    void Update()
-    {
-        controller.Update();
-    }
-
-    private void OnMouseDown()
-    {
-        controller.OnMouseDown();
-    }
-
-    private void OnMouseDrag()
-    {
-        controller.OnMouseDrag();
-    }
-
-    private void OnMouseUp()
-    {
-        controller.OnMouseUp();
-    }
-
-    private void OnTriggerStay2D(Collider2D collision)
-    {
-        controller.OnTriggerStay2D(collision);
-    }
-
-    public void OnCollisionStay(Collision collision)
-    {
-        controller.OnCollisionStay(collision);
-    }
-
-    public void Set(string nN)
-    {
-        controller.Set(nN);
     }
 }

@@ -5,35 +5,81 @@ using UnityEngine.UI;
 using UnityEngine.Networking;
 using System.Text;
 using TMPro;
+using UnityEditor;
 
 public class CollectingBookManager : MonoBehaviour
 {
     private string addStoneUrl = "http://43.203.76.106:8080/collectingbook/add";
     private string getStoneUrl = "http://43.203.76.106:8080/collectingbook";
-   
 
-    public TMP_InputField stoneNameInputField;
-    public TMP_InputField stoneNumberInputField;
+    [SerializeField] GameObject stoneFrame;
+
+    public List<CollectingBook> books { get; private set; }
+
     private string memberNickName;
 
     void Start()
     {
-        memberNickName = GameManager.Instance.id; 
     }
 
-    public void AddStone()
+  /*  public void AddStone()
     {
         StartCoroutine(AddStoneRequest());
-    }
+    }*/
 
     public void GetStone()
     {
         StartCoroutine(GetStoneRequest());
     }
 
-  
+    public void StartSpawnStones()
+    {
+        StartCoroutine(SpawnStones());
+    }
 
-    IEnumerator AddStoneRequest()
+    public void LookOtherUserBook(string nickName)
+    {
+        GameManager.Instance._book.memberNickName = nickName;
+        GameManager.Instance.ChangeMap(MAP_TYPE.CollectingBook);
+    }
+
+    public IEnumerator SpawnStones()
+    {
+        if(memberNickName == null) memberNickName = GameManager.Instance.id;
+        yield return StartCoroutine(GetStoneRequest());
+        Debug.Log("1");
+        foreach (CollectingBook element in books)
+        {
+            Debug.Log("2");
+            if (element.stoneName == "LimeStone")
+            {
+                Debug.Log(GameManager.Stone.collectingBook);
+                GameObject st = Instantiate(stoneFrame, new Vector3(0, 10, 0), new Quaternion(0, 0, 0, 0));
+                st.AddComponent<LimeStoneController>();
+
+            }
+        }
+    }
+
+    public List<CollectingBook> JsonToList(string jsonString)
+    {
+        jsonString = "{\"stones\":" + jsonString + "}";
+
+        CollectingBookList book = JsonUtility.FromJson<CollectingBookList>(jsonString);
+
+        // Convert the array to a list if needed
+        List<CollectingBook> stones = new List<CollectingBook>(book.stones);
+
+        // Now you can use the 'stones' list
+        foreach (var stone in stones)
+        {
+            Debug.Log("Name: " + stone.stoneName + ", Number: " + stone.stoneNumber);
+        }
+
+        return stones;
+    }
+
+    /*IEnumerator AddStoneRequest()
     {
         CollectingBook cb = getStoneFromFields();
         string json = JsonUtility.ToJson(cb);
@@ -72,7 +118,7 @@ public class CollectingBookManager : MonoBehaviour
             stoneNumber = stoneNumber,
             memberNickName = GameManager.Instance.id
         };
-    }
+    }*/
 
     IEnumerator GetStoneRequest()
     {
@@ -91,8 +137,10 @@ public class CollectingBookManager : MonoBehaviour
                 break;
             case UnityWebRequest.Result.Success:
                 Debug.Log("Success: " + www.downloadHandler.text);
+                books = JsonToList(www.downloadHandler.text);
                 break;
         }
+        yield return null;
     }
 
 
