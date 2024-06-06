@@ -16,28 +16,37 @@ public class CollectingBookManager : MonoBehaviour
 
     public List<CollectingBook> books { get; private set; }
 
-    public TMP_InputField stoneNameInputField;
-    public TMP_InputField stoneNumberInputField;
     private string memberNickName;
 
     void Start()
     {
-        memberNickName = GameManager.Instance.id; 
     }
 
-    public void AddStone()
+  /*  public void AddStone()
     {
         StartCoroutine(AddStoneRequest());
-    }
+    }*/
 
     public void GetStone()
     {
         StartCoroutine(GetStoneRequest());
     }
 
-    public void SpawnStones()
+    public void StartSpawnStones()
     {
-        GetStone();
+        StartCoroutine(SpawnStones());
+    }
+
+    public void LookOtherUserBook(string nickName)
+    {
+        GameManager.Instance._book.memberNickName = nickName;
+        GameManager.Instance.ChangeMap(MAP_TYPE.CollectingBook);
+    }
+
+    public IEnumerator SpawnStones()
+    {
+        if(memberNickName == null) memberNickName = GameManager.Instance.id;
+        yield return StartCoroutine(GetStoneRequest());
         Debug.Log("1");
         foreach (CollectingBook element in books)
         {
@@ -70,7 +79,7 @@ public class CollectingBookManager : MonoBehaviour
         return stones;
     }
 
-    IEnumerator AddStoneRequest()
+    /*IEnumerator AddStoneRequest()
     {
         CollectingBook cb = getStoneFromFields();
         string json = JsonUtility.ToJson(cb);
@@ -109,7 +118,7 @@ public class CollectingBookManager : MonoBehaviour
             stoneNumber = stoneNumber,
             memberNickName = GameManager.Instance.id
         };
-    }
+    }*/
 
     IEnumerator GetStoneRequest()
     {
@@ -131,6 +140,7 @@ public class CollectingBookManager : MonoBehaviour
                 books = JsonToList(www.downloadHandler.text);
                 break;
         }
+        yield return null;
     }
 
 
