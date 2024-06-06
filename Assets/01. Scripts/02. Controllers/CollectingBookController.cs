@@ -10,21 +10,6 @@ public class CollectingBookController : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
-        SpawnStone();
-    }
-
-    // Update is called once per frame
-    void Update()
-    {
-        
-    }
-
-    public void SpawnStone()
-    {
-        foreach(Stone element in GameManager.Stone.collectingBook)
-        {
-            Debug.Log(GameManager.Stone.collectingBook);
-            Instantiate(stoneFrame, new Vector3(0, 10, 0), new Quaternion(0, 0, 0, 0) );
-        }
+        GameManager.Instance._book.StartSpawnStones();
     }
 }

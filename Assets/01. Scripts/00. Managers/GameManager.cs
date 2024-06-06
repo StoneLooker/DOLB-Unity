@@ -15,6 +15,7 @@ public class GameManager : MonoBehaviour
     public ControllerManager _controller;
     public MinigameManager _minigame;
     public LogInManager _logIn;
+    public CollectingBookManager _book;
     public string id;
 
     private InputManager _input;
@@ -44,12 +45,12 @@ public class GameManager : MonoBehaviour
 
         #endregion
         /*_stone.OnAwake();*/
-        if(SceneManager.GetActiveScene().name.Equals("MainTitle")) nowMap = MAP_TYPE.MainTitle;
-        else if (SceneManager.GetActiveScene().name.Equals("Sauna")) nowMap = MAP_TYPE.Sauna;
-        else if (SceneManager.GetActiveScene().name.Equals("Tub")) nowMap = MAP_TYPE.Tub;
-        else if (SceneManager.GetActiveScene().name.Equals("Bulgama")) nowMap = MAP_TYPE.Bulgama;
-        else if (SceneManager.GetActiveScene().name.Equals("MiniGame")) nowMap = MAP_TYPE.MiniGame;
-        else if (SceneManager.GetActiveScene().name.Equals("CollectingBook")) nowMap = MAP_TYPE.CollectingBook;
+        if(SceneManager.GetActiveScene().name.Equals("0.MainTitle")) nowMap = MAP_TYPE.MainTitle;
+        else if (SceneManager.GetActiveScene().name.Equals("1.Sauna")) nowMap = MAP_TYPE.Sauna;
+        else if (SceneManager.GetActiveScene().name.Equals("2.Tub")) nowMap = MAP_TYPE.Tub;
+        else if (SceneManager.GetActiveScene().name.Equals("2.Bulgama")) nowMap = MAP_TYPE.Bulgama;
+        else if (SceneManager.GetActiveScene().name.Equals("2.MiniGame")) nowMap = MAP_TYPE.MiniGame;
+        else if (SceneManager.GetActiveScene().name.Equals("2.CollectingBook")) nowMap = MAP_TYPE.CollectingBook;
     }
 
     void Start()
@@ -67,27 +68,27 @@ public class GameManager : MonoBehaviour
         this.nowMap = map;
         if (nowMap.Equals(MAP_TYPE.MainTitle))
         {
-            SceneManager.LoadScene("MainTitle");
+            SceneManager.LoadScene("0.MainTitle");
         }
         else if (nowMap.Equals(MAP_TYPE.Sauna))
         {
-            SceneManager.LoadScene("Sauna");
+            SceneManager.LoadScene("1.Sauna");
         }
         else if (nowMap.Equals(MAP_TYPE.Tub))
         {
-            SceneManager.LoadScene("Tub");
+            SceneManager.LoadScene("2.Tub");
         }
         else if(nowMap.Equals(MAP_TYPE.Bulgama))
         {
-            SceneManager.LoadScene("Bulgama");
+            SceneManager.LoadScene("2.Bulgama");
         }
         else if (nowMap.Equals(MAP_TYPE.MiniGame))
         {
-            SceneManager.LoadScene("MiniGame");
+            SceneManager.LoadScene("2.MiniGame");
         }
         else if (nowMap.Equals(MAP_TYPE.CollectingBook))
         {
-            SceneManager.LoadScene("CollectingBook");
+            SceneManager.LoadScene("2.CollectingBook");
         }
     }
 
