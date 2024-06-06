@@ -106,6 +106,8 @@ public class LogInManager : MonoBehaviour
                     logOutBtn.SetActive(true);
                     logInScreen.SetActive(false);
                     GameManager.Instance.id = m.memberNickName;
+                    DataManager.Instance.LoadGameData(GameManager.Instance.id);
+                    GameManager.Instance.ApplyGameData(DataManager.Instance.data);
                 }
                 break;
         }
@@ -141,7 +143,7 @@ public class LogInManager : MonoBehaviour
     {
         GameManager.Instance._controller._button.gameStart.onClick.RemoveAllListeners();
         if (isLoggedIn)
-            GameManager.Instance._controller._button.gameStart.onClick.AddListener(GameManager.Instance._controller._button.gameStart.GetComponent<Fade>().LoadingSceneLoad);
+            GameManager.Instance._controller._button.gameStart.onClick.AddListener(GameManager.Instance._controller._button.gameStart.GetComponent<FadeOut>().LoadingSceneLoad);
         else
             GameManager.Instance._controller._button.gameStart.onClick.AddListener(() => UpdateInfoText("Log In is required."));
     }

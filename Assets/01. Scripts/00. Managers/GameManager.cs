@@ -55,6 +55,11 @@ public class GameManager : MonoBehaviour
     void Start()
     {
         _item.OnStart();
+        if (!string.IsNullOrEmpty(id))
+        {
+            DataManager.Instance.LoadGameData(id);
+            ApplyGameData(DataManager.Instance.data);
+        }
     }
 
     void Update()
@@ -98,6 +103,23 @@ public class GameManager : MonoBehaviour
         #else
         Application.Quit();
         #endif
+    }
+
+    void OnApplicationQuit()
+    {
+        if (!string.IsNullOrEmpty(id))
+        {
+            GameData data = new GameData();
+            data.playerId = id;
+            data.itemInventory = _item.GetItemInventory();
+            DataManager.Instance.data = data;
+            DataManager.Instance.SaveGameData(id);
+        }
+    }
+
+    public void ApplyGameData(GameData data)
+    {
+        _item.SetItemInventory(data.itemInventory);
     }
 }
 

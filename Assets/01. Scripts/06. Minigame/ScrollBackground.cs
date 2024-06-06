@@ -13,9 +13,12 @@ public class ScrollBackground : MonoBehaviour
 
     // Update is called once per frame
     void Update() {
-        moveCheck -= backGroundSpeed * Time.deltaTime;
-        transform.position = new Vector3(moveCheck, transform.position.y, transform.position.z);
-        if (moveCheck < -8.69f)
-            moveCheck = 11f;
+        if(GameManager.Instance._minigame.minigameControl)
+        {
+            moveCheck -= backGroundSpeed * Time.deltaTime;
+            transform.position = new Vector3(moveCheck, transform.position.y, transform.position.z);
+            if (moveCheck < -8.69f)
+                moveCheck = 11f;
+        }
     }
 }
