@@ -4,7 +4,7 @@ using UnityEngine;
 using UnityEngine.SceneManagement;
 using UnityEngine.UI;
 
-public class SceneLoad : MonoBehaviour
+public class FadeIn : MonoBehaviour
 {
     public GameObject fadePanel;
     public GameObject character;

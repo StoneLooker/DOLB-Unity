@@ -6,7 +6,7 @@ using UnityEngine.Networking;
 using System.Text;
 using TMPro;
 
-public class IdUpdate : MonoBehaviour
+public class IdUpdateManager : MonoBehaviour
 {
     private string editUrl = "http://43.203.76.106:8080/update";
 

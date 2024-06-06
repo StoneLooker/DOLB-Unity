@@ -15,10 +15,10 @@ EditorBuildSettings:
     path: Assets/00. Scenes/Loading.unity
     guid: 95412c075d9604b4bbbb7d2fc37c4347
   - enabled: 1
-    path: Assets/00. Scenes/Sauna.unity
+    path: Assets/00. Scenes/Sauna_real.unity
     guid: 9fc0d4010bbf28b4594072e72b8655ab
   - enabled: 1
-    path: Assets/00. Scenes/Tub.unity
+    path: Assets/00. Scenes/Tub_Check.unity
     guid: bcace15a8c017034b923235f64347abc
   - enabled: 1
     path: Assets/00. Scenes/Tub1.unity
@@ -36,6 +36,6 @@ EditorBuildSettings:
     path: Assets/00. Scenes/CollectingBook.unity
     guid: 42d75c309e2988d409d2fd7be63a003c
   - enabled: 1
-    path: Assets/00. Scenes/Sauna_ssss.unity
+    path: Assets/00. Scenes/Sauna_ui.unity
     guid: b4ca25fe2e0e343daaafa2785dbe7481
   m_configObjects: {}
