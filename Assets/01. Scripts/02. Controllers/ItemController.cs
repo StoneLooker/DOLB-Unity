@@ -1,10 +1,18 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using TMPro;
 
 public class ItemController : MonoBehaviour
 {
     [SerializeField] GameObject brush;
+    [SerializeField] TMP_Text brushCountText;
+    [SerializeField] TMP_Text towelCountText;
+
+    private void Start()
+    {
+        UpdateBrushCount();
+    }
 
     public void PickBrush()
     {
@@ -15,15 +23,12 @@ public class ItemController : MonoBehaviour
         }
         else Debug.Log("No Brush");
     }
-    // Start is called before the first frame update
-    void Start()
+    
+    public void UpdateBrushCount()
     {
-        
-    }
-
-    // Update is called once per frame
-    void Update()
-    {
-        
+        int brushCount = GameManager.Item.GetItemNum(ITEM_TYPE.Brush);
+        int towelCount = GameManager.Item.GetItemNum(ITEM_TYPE.Towel);
+        brushCountText.text = brushCount.ToString();
+        towelCountText.text = towelCount.ToString();
     }
 }

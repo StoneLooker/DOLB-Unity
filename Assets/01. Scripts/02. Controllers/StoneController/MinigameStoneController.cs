@@ -30,10 +30,13 @@ public class MinigameStoneController : MonoBehaviour
 
     void Update()
     {
-        transform.Rotate(0,0, -Time.deltaTime * rotateSpeed);
+        if(GameManager.Instance._minigame.minigameControl)
+        {
+            transform.Rotate(0,0, -Time.deltaTime * rotateSpeed);
 
-        if(Input.GetMouseButton(0))
-            JumpStone();
+            if(Input.GetMouseButton(0))
+                JumpStone();
+        }
     }
 
     void JumpStone()

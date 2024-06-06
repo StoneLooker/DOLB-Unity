@@ -15,10 +15,14 @@ public class ItemManager
         itemInventory.Add(ITEM_TYPE.Towel, 1);
     }
 
-    // Update is called once per frame
-    void Update()
+    public Dictionary<ITEM_TYPE, int> GetItemInventory()
     {
-        
+        return itemInventory;
+    }
+
+    public void SetItemInventory(Dictionary<ITEM_TYPE, int> inventory)
+    {
+        itemInventory = inventory;
     }
 
     public int GetItemNum(ITEM_TYPE item)

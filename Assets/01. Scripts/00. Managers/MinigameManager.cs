@@ -24,6 +24,7 @@ public class MinigameManager : MonoBehaviour
     public Button backGameBtn;
 
     public bool isGameOver;
+    public bool minigameControl;
     public float gameTime = 10f;
     private float spawntimer;
     private float gametimer;
@@ -37,7 +38,7 @@ public class MinigameManager : MonoBehaviour
         objectPool = this.GetComponent<ObjectPool>();
         GameManager.Instance._minigame = this;
         
-        Time.timeScale = 0f;
+        minigameControl = false;
 
         startBtn.onClick.AddListener(StartGame);
         restartBtn.onClick.AddListener(RestartGame);
@@ -53,32 +54,34 @@ public class MinigameManager : MonoBehaviour
                 stoneLifeImages[i].enabled = false;
             }
         }
-
-        if(!isGameOver)
+        if(minigameControl)
         {
-            spawntimer += Time.deltaTime;
-            gametimer += Time.deltaTime;
-
-            MoveMiniStone();
-
-            if (spawntimer >= spawnInterval)
+            if(!isGameOver)
             {
-                SpawnObstacle();
-                spawntimer = 0;
-            }
+                spawntimer += Time.deltaTime;
+                gametimer += Time.deltaTime;
 
-            if (gametimer > gameTime)
-            {
-                isGameOver = true;
-                clearPanel.SetActive(true);
-                ITEM_TYPE randomItem = (ITEM_TYPE)Random.Range(0, System.Enum.GetValues(typeof(ITEM_TYPE)).Length);
-                Debug.Log(randomItem);
-                GameManager.Item.AcquireItem(randomItem);
-                Time.timeScale = 0f;
+                MoveMiniStone();
+
+                if (spawntimer >= spawnInterval)
+                {
+                    SpawnObstacle();
+                    spawntimer = 0;
+                }
+
+                if (gametimer > gameTime)
+                {
+                    isGameOver = true;
+                    clearPanel.SetActive(true);
+                    ITEM_TYPE randomItem = (ITEM_TYPE)Random.Range(0, System.Enum.GetValues(typeof(ITEM_TYPE)).Length);
+                    Debug.Log(randomItem);
+                    GameManager.Item.AcquireItem(randomItem);
+                    minigameControl = false;
+                }
+            }else{
+                endPanel.SetActive(true);
+                minigameControl = false;
             }
-        }else{
-            endPanel.SetActive(true);
-            Time.timeScale = 0f;
         }
     }
 
@@ -102,14 +105,13 @@ public class MinigameManager : MonoBehaviour
 
     private void SetData()
     {
-        Time.timeScale = 1;
+        minigameControl = true;
 
         checkLocation.SetActive(true);
 
         Vector2 startPos = new Vector2(0, locationUI.rectTransform.anchoredPosition.y);
         locationUI.rectTransform.anchoredPosition = startPos;
 
-        /*GameManager.Stone.WhenPlayerDecideGrowingNewStoneInBulgama(GameManager.Stone.stoneInfo["LimeStone"]);*/
         if(GameManager.Stone.growingStone.stoneStat.Equals(STONE_TYPE.LimeStone))
             stoneControllerScript.life = 3;
         else if(GameManager.Stone.growingStone.stoneStat.Equals(STONE_TYPE.Granite))
