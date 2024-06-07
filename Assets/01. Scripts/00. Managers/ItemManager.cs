@@ -10,9 +10,12 @@ public class ItemManager
     // Start is called before the first frame update
     public void OnStart()
     {
-        itemInventory = new Dictionary<ITEM_TYPE, int>();
-        itemInventory.Add(ITEM_TYPE.Brush, 1);
-        itemInventory.Add(ITEM_TYPE.Towel, 1);
+        if (itemInventory == null)
+            itemInventory = new Dictionary<ITEM_TYPE, int>();
+
+        // itemInventory = new Dictionary<ITEM_TYPE, int>();
+        // itemInventory.Add(ITEM_TYPE.Brush, 1);
+        // itemInventory.Add(ITEM_TYPE.Towel, 1);
     }
 
     public Dictionary<ITEM_TYPE, int> GetItemInventory()
@@ -22,6 +25,11 @@ public class ItemManager
 
     public void SetItemInventory(Dictionary<ITEM_TYPE, int> inventory)
     {
+        if (inventory == null)
+        {
+            Debug.LogError("Attempted to set item inventory to null!");
+            return;
+        }
         itemInventory = inventory;
     }
 

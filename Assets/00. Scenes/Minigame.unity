@@ -1039,7 +1039,7 @@ Transform:
   m_GameObject: {fileID: 363788305}
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 9.72, y: -1.73, z: 0}
+  m_LocalPosition: {x: 9.72, y: -3.33, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -1075,9 +1075,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 939bbe86b6dec428cab3c81ac483d8ab, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  prefab: {fileID: 3013235372948059337, guid: cbfa3324e1c7243078699acbbe7875e6, type: 3}
+  movingObstaclePrefab: {fileID: 3013235372948059337, guid: e61730f4ab3f843ce923a52da5a9281f, type: 3}
+  staticObstaclePrefab: {fileID: 3013235372948059337, guid: cbfa3324e1c7243078699acbbe7875e6, type: 3}
   parentTransform: {fileID: 25468443}
-  poolSize: 10
+  poolSize: 5
 --- !u!114 &374070240
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1095,6 +1096,7 @@ MonoBehaviour:
   spawnPoints:
   - {fileID: 363788306}
   - {fileID: 256781381}
+  obstacleTypes: 0000000001000000
   stoneLifeImage: {fileID: 2172646049660987660, guid: d5ce8e1efc43e494681d1a740f949d2a, type: 3}
   lifeTransform: {fileID: 1308024270}
   startPanel: {fileID: 1696907491}
@@ -1104,6 +1106,7 @@ MonoBehaviour:
   restartBtn: {fileID: 854783492}
   backGameBtn: {fileID: 1393974068}
   isGameOver: 0
+  minigameControl: 0
   gameTime: 20
   checkLocation: {fileID: 718385009}
   barUI: {fileID: 1858164139}

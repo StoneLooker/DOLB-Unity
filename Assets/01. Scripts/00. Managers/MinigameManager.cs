@@ -10,7 +10,9 @@ public class MinigameManager : MonoBehaviour
 
     public float spawnInterval = 2.0f;
     public Transform[] spawnPoints;
+    public ObstacleType[] obstacleTypes;
 
+    //life 
     public RawImage stoneLifeImage;
     private RawImage[] stoneLifeImages;
     public GameObject lifeTransform;
@@ -61,7 +63,7 @@ public class MinigameManager : MonoBehaviour
                 spawntimer += Time.deltaTime;
                 gametimer += Time.deltaTime;
 
-                MoveMiniStone();
+                CheckProgress();
 
                 if (spawntimer >= spawnInterval)
                 {
@@ -87,16 +89,27 @@ public class MinigameManager : MonoBehaviour
 
     private void SpawnObstacle()
     {
-        GameObject obstacle = objectPool.GetPooledObject();
+        // ObstacleType randomType = (ObstacleType)Random.Range(0, System.Enum.GetValues(typeof(ObstacleType)).Length);
+        // GameObject obstacle = objectPool.GetPooledObject(randomType);
+        // if (obstacle != null)
+        // {
+        //     Transform spawnPoint = spawnPoints[Random.Range(0, spawnPoints.Length)];
+        //     obstacle.transform.position = spawnPoint.position;
+        //     obstacle.SetActive(true);
+        // }
+
+        int randomIndex = Random.Range(0, spawnPoints.Length);
+        ObstacleType obstacleType = obstacleTypes[randomIndex];
+        GameObject obstacle = objectPool.GetPooledObject(obstacleType);
         if (obstacle != null)
         {
-            Transform spawnPoint = spawnPoints[Random.Range(0, spawnPoints.Length)];
+            Transform spawnPoint = spawnPoints[randomIndex];
             obstacle.transform.position = spawnPoint.position;
             obstacle.SetActive(true);
         }
     }
 
-    private void MoveMiniStone()
+    private void CheckProgress()
     {
         float progress = gametimer / gameTime;
         float xPosition = Mathf.Lerp(0, 890, progress);

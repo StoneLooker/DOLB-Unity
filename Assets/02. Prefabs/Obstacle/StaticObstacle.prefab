@@ -13,7 +13,7 @@ GameObject:
   - component: {fileID: 2368474417800990876}
   - component: {fileID: 4396565774692160259}
   m_Layer: 0
-  m_Name: Test
+  m_Name: StaticObstacle
   m_TagString: Obstacle
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0

@@ -18,7 +18,7 @@ public class IdUpdateManager : MonoBehaviour
 
     void Start()
     {
-        this.transform.GetComponent<Button>().onClick.AddListener(updateId);
+        GetComponentInChildren<Button>().onClick.AddListener(updateId);
     }
 
     public void updateId()
@@ -36,7 +36,9 @@ public class IdUpdateManager : MonoBehaviour
         Member m = getIDFromFields();
         string json = JsonUtility.ToJson(m);
 
-        editUrl = editUrl + "?memberNickName=" + m.memberNickName;
+        //editUrl = editUrl + "?memberNickName=" + m.memberNickName;
+
+        Debug.Log("들어옴");
 
         UnityWebRequest www = new UnityWebRequest(editUrl, "POST");
         byte[] jsonToSend = Encoding.UTF8.GetBytes(json);
@@ -53,11 +55,12 @@ public class IdUpdateManager : MonoBehaviour
                 break;
             case UnityWebRequest.Result.ProtocolError:
                 Debug.Log("HTTP Error: " + www.error + " Response: " + www.downloadHandler.text);
-                //if(www.downloadHandler.text == "")
-
+                if(www.downloadHandler.text == "member not found")
+                    Debug.Log("해당 유저를 찾을 수 없습니다.");
                 break;
             case UnityWebRequest.Result.Success:
                 //UpdateInfoText("Edit Successful.");
+                Debug.Log("성공");
                 editScreen.SetActive(false);
                 break;
         }

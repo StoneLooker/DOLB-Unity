@@ -6,15 +6,20 @@ public class PanelController : MonoBehaviour
 {
     public Animator panelAnimator;
     public GameObject item;
+    private bool check;
 
-    public void OpenPanel()
+    public void ControlPanel()
     {
-        panelAnimator.SetTrigger("Open");
-    }
-
-    public void ClosePanel()
-    {
-        panelAnimator.SetTrigger("Close");
+        if(!check)
+        {
+            panelAnimator.SetTrigger("Open");
+            check = true;
+        }
+        else
+        {
+            panelAnimator.SetTrigger("Close");
+            check = false;
+        }
     }
 
 

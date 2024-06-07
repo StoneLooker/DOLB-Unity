@@ -70,7 +70,6 @@ public class StoneController : MonoBehaviour
             
             transform.position = objPosition;
             //float speed = (objPosition - lastPosition).magnitude / Time.deltaTime;
-            Debug.Log("check");
             // if (rb.velocity.magnitude < 0.5f)
             // {
             //     transform.position = objPosition;

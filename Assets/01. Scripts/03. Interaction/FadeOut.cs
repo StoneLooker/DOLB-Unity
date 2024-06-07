@@ -26,6 +26,6 @@ public class FadeOut : MonoBehaviour
             image.color = new Color(0,0,0,fadeCount);
         }
 
-        GameManager.Instance.ChangeMap(MAP_TYPE.Sauna);
+        SceneManager.LoadScene("Loading");
     }
 }

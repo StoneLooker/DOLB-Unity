@@ -61,6 +61,7 @@ public class GameManager : MonoBehaviour
             DataManager.Instance.LoadGameData(id);
             ApplyGameData(DataManager.Instance.data);
         }
+        _item.SetItemInventory(DataManager.Instance.data.GetItemInventory());
     }
 
     void Update()
@@ -112,7 +113,19 @@ public class GameManager : MonoBehaviour
         {
             GameData data = new GameData();
             data.playerId = id;
-            data.itemInventory = _item.GetItemInventory();
+            data.SetItemInventory(_item.GetItemInventory());
+            DataManager.Instance.data = data;
+            DataManager.Instance.SaveGameData(id);
+        }
+    }
+
+    public void Save()
+    {
+        if (!string.IsNullOrEmpty(id))
+        {
+            GameData data = new GameData();
+            data.playerId = id;
+            data.SetItemInventory(_item.GetItemInventory());
             DataManager.Instance.data = data;
             DataManager.Instance.SaveGameData(id);
         }
@@ -120,7 +133,14 @@ public class GameManager : MonoBehaviour
 
     public void ApplyGameData(GameData data)
     {
-        _item.SetItemInventory(data.itemInventory);
+        Dictionary<ITEM_TYPE, int> inventory = data.GetItemInventory();
+
+        if (!inventory.ContainsKey(ITEM_TYPE.Brush))
+            inventory[ITEM_TYPE.Brush] = 1;
+        if (!inventory.ContainsKey(ITEM_TYPE.Towel))
+            inventory[ITEM_TYPE.Towel] = 1;
+        
+        _item.SetItemInventory(inventory);
     }
 }
 

@@ -1,5 +1,6 @@
 using System.IO;
 using UnityEngine;
+using Newtonsoft.Json;
 
 public class DataManager : MonoBehaviour
 {
@@ -31,8 +32,8 @@ public class DataManager : MonoBehaviour
         if (File.Exists(filePath))
         {
             string FromJsonData = File.ReadAllText(filePath);
-            data = JsonUtility.FromJson<GameData>(FromJsonData);
-            Debug.Log("불러오기 완료");
+            data = JsonConvert.DeserializeObject<GameData>(FromJsonData);
+            Debug.Log($"불러오기 완료: {FromJsonData}");
         }
         else
         {
@@ -42,9 +43,10 @@ public class DataManager : MonoBehaviour
 
     public void SaveGameData(string playerId)
     {
-        string ToJsonData = JsonUtility.ToJson(data, true);
+        string ToJsonData = JsonConvert.SerializeObject(data, Formatting.Indented);
         string filePath = Application.persistentDataPath + "/" + playerId + "_GameData.json";
 
         File.WriteAllText(filePath, ToJsonData);
+        Debug.Log($"저장 완료: {ToJsonData}");
     }
 }
