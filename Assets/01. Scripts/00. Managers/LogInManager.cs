@@ -42,6 +42,9 @@ public class LogInManager : MonoBehaviour
     IEnumerator SignUpRequest()
     {
         Member m = getMemberFromFields();
+
+        if (m == null) yield break;
+
         string json = JsonUtility.ToJson(m);
 
         Debug.Log(json);
@@ -64,7 +67,7 @@ public class LogInManager : MonoBehaviour
             case UnityWebRequest.Result.ProtocolError:
                 Debug.Log("HTTP Error: " + www.error + " Response: " + www.downloadHandler.text);
                 if(www.downloadHandler.text == "Save fail")
-                    UpdateInfoText("ID is already exists.");
+                    UpdateInfoText("ID already exists.");
                 break;
             case UnityWebRequest.Result.Success:
                 UpdateInfoText("Sign Up Successful.");
@@ -75,17 +78,26 @@ public class LogInManager : MonoBehaviour
     IEnumerator LogInRequest()
     {
         Member m = getMemberFromFields();
+
         string json = JsonUtility.ToJson(m);
 
-        logInUrl = logInUrl + "?memberNickName=" + m.memberNickName + "&memberPassword=" + m.memberPassword;
+        string requestUrl = logInUrl + "?memberNickName=" + m.memberNickName + "&memberPassword=" + m.memberPassword;
 
-        UnityWebRequest www = new UnityWebRequest(logInUrl, "POST");
+        Debug.Log(json);
+
+        UnityWebRequest www = new UnityWebRequest(requestUrl, "POST");
         byte[] jsonToSend = Encoding.UTF8.GetBytes(json);
         www.uploadHandler = new UploadHandlerRaw(jsonToSend);
         www.downloadHandler = new DownloadHandlerBuffer();
         www.SetRequestHeader("Content-Type", "application/json");
+
+        www.SetRequestHeader("Cache-Control", "no-cache");
+        www.SetRequestHeader("Pragma", "no-cache");
+
         
         yield return www.SendWebRequest();
+
+        Debug.Log(www.downloadHandler.text);
 
         switch(www.result){
             case UnityWebRequest.Result.ConnectionError:
@@ -96,16 +108,16 @@ public class LogInManager : MonoBehaviour
                 Debug.Log("HTTP Error: " + www.error + " Response: " + www.downloadHandler.text);
                 break;
             case UnityWebRequest.Result.Success:
-                Debug.Log(www.downloadHandler.text);
                 if(www.downloadHandler.text == "login fail")
-                    UpdateInfoText("User ID or Password incorrect.");
-                else if((www.downloadHandler.text == "login success")){
+                    UpdateInfoText("Incorrect user ID or Password.");
+                else{
                     isLoggedIn = true;
                     UpdateButtonListener();
                     logInBtn.SetActive(false);
                     logOutBtn.SetActive(true);
                     logInScreen.SetActive(false);
-                    GameManager.Instance.id = m.memberNickName;
+                    GameManager.Instance.nickname = m.memberNickName;
+                    GameManager.Instance.id = www.downloadHandler.text;
                     DataManager.Instance.LoadGameData(GameManager.Instance.id);
                     GameManager.Instance.ApplyGameData(DataManager.Instance.data);
                 }
@@ -157,7 +169,13 @@ public class LogInManager : MonoBehaviour
     private Member getMemberFromFields()
     {
         Member m = new Member();
-        m.memberNickName = idInput.text;
+        if(idInput.text.Length < 10)
+            m.memberNickName = idInput.text;
+        else
+        {   
+            UpdateInfoText("Nickname up to 10 characters.");
+            return null;
+        }
         m.memberPassword = passwordInput.text;
         return m;
     }

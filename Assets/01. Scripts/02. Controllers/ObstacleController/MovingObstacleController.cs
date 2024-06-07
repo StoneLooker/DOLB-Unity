@@ -12,17 +12,12 @@ public class MovingObstacleController : ObstacleController
         StartCoroutine(MoveUpAndDown());
     }
 
-    // private void Update()
-    // {
-    //     base.Update();
-    // }
-
     private IEnumerator MoveUpAndDown()
     {
-        float speed = 1.5f;
+        float speed = 3f;
         while (gameObject.activeInHierarchy)
         {
-            float newY = startPosition.y + Mathf.PingPong(Time.time * speed, 1.5f);
+            float newY = startPosition.y + Mathf.PingPong(Time.time * speed, 1.4f);
             transform.position = new Vector3(transform.position.x, newY, transform.position.z);
             yield return null;
         }

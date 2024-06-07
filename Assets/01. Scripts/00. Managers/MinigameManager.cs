@@ -12,25 +12,29 @@ public class MinigameManager : MonoBehaviour
     public Transform[] spawnPoints;
     public ObstacleType[] obstacleTypes;
 
-    //life 
+    //Life
     public RawImage stoneLifeImage;
     private RawImage[] stoneLifeImages;
     public GameObject lifeTransform;
     private int oldLife;
 
+    //UI Panel
     public GameObject startPanel;
     public GameObject endPanel;
     public GameObject clearPanel;
     public Button startBtn;
     public Button restartBtn;
     public Button backGameBtn;
+    public Button clearRestartBtn;
 
+    //Game state
     public bool isGameOver;
     public bool minigameControl;
     public float gameTime = 10f;
-    private float spawntimer;
-    private float gametimer;
+    private float spawnTimer;
+    private float gameTimer;
 
+    //Progress Bar
     public GameObject checkLocation;
     public Image barUI;
     public Image locationUI;
@@ -43,47 +47,49 @@ public class MinigameManager : MonoBehaviour
         minigameControl = false;
 
         startBtn.onClick.AddListener(StartGame);
-        restartBtn.onClick.AddListener(RestartGame);
+        restartBtn.onClick.AddListener(() => RestartGame(endPanel));
         backGameBtn.onClick.AddListener(GotoSauna);
+        clearRestartBtn.onClick.AddListener(() => RestartGame(clearPanel));
     }
 
     void Update()
     {
-        if(oldLife > stoneControllerScript.life) {
-            oldLife = stoneControllerScript.life;
-            if (oldLife < 0) oldLife = 0;
-            for (int i = oldLife; i < stoneLifeImages.Length; i++) {
-                stoneLifeImages[i].enabled = false;
-            }
-        }
+        UpdateLifeImages();
+
         if(minigameControl)
         {
             if(!isGameOver)
             {
-                spawntimer += Time.deltaTime;
-                gametimer += Time.deltaTime;
-
+                UpdateTimers();
                 CheckProgress();
 
-                if (spawntimer >= spawnInterval)
+                if (spawnTimer >= spawnInterval)
                 {
                     SpawnObstacle();
-                    spawntimer = 0;
+                    spawnTimer = 0;
                 }
 
-                if (gametimer > gameTime)
-                {
-                    isGameOver = true;
-                    clearPanel.SetActive(true);
-                    ITEM_TYPE randomItem = (ITEM_TYPE)Random.Range(0, System.Enum.GetValues(typeof(ITEM_TYPE)).Length);
-                    Debug.Log(randomItem);
-                    GameManager.Item.AcquireItem(randomItem);
-                    minigameControl = false;
-                }
-            }else{
-                endPanel.SetActive(true);
-                minigameControl = false;
-            }
+                if (gameTimer > gameTime)
+                    EndGame(true);
+            }else
+                EndGame(false);
+        }
+    }
+
+    private void UpdateTimers()
+    {
+        spawnTimer += Time.deltaTime;
+        gameTimer += Time.deltaTime;
+    }
+
+    private void UpdateLifeImages()
+    {
+        if (oldLife > stoneControllerScript.life)
+        {
+            oldLife = stoneControllerScript.life;
+            if (oldLife < 0) oldLife = 0;
+            for (int i = oldLife; i < stoneLifeImages.Length; i++)
+                stoneLifeImages[i].enabled = false;
         }
     }
 
@@ -111,7 +117,7 @@ public class MinigameManager : MonoBehaviour
 
     private void CheckProgress()
     {
-        float progress = gametimer / gameTime;
+        float progress = gameTimer / gameTime;
         float xPosition = Mathf.Lerp(0, 890, progress);
         locationUI.rectTransform.localPosition = new Vector2(xPosition, locationUI.rectTransform.localPosition.y);
     }
@@ -125,21 +131,39 @@ public class MinigameManager : MonoBehaviour
         Vector2 startPos = new Vector2(0, locationUI.rectTransform.anchoredPosition.y);
         locationUI.rectTransform.anchoredPosition = startPos;
 
-        if(GameManager.Stone.growingStone.stoneStat.Equals(STONE_TYPE.LimeStone))
+        Debug.Log("Current stoneStat: " + GameManager.Stone.growingStone.stoneStat);
+
+        if(GameManager.Stone.growingStone.stoneStat.Equals(STONE_TYPE.LimeStone)){
             stoneControllerScript.life = 3;
+            Debug.Log("ass");
+        }
         else if(GameManager.Stone.growingStone.stoneStat.Equals(STONE_TYPE.Granite))
             stoneControllerScript.life = 5;
 
-        stoneLifeImages = new RawImage[stoneControllerScript.life];
-        for(int i = 0; i < stoneControllerScript.life; i++) {
+        InitializeLifeImages(stoneControllerScript.life);
+        
+        oldLife = stoneControllerScript.life;
+        gameTimer = 0;
+    }
+
+    private void InitializeLifeImages(int lifeCount)
+    {
+        // if (stoneLifeImages != null)
+        // {
+        //     foreach (RawImage lifeImage in stoneLifeImages)
+        //     {
+        //         Destroy(lifeImage.gameObject);
+        //     }
+        // }
+        stoneLifeImages = new RawImage[lifeCount];
+        for (int i = 0; i < lifeCount; i++)
+        {
             stoneLifeImages[i] = Instantiate(stoneLifeImage);
             stoneLifeImages[i].transform.SetParent(lifeTransform.transform);
-            stoneLifeImages[i].rectTransform.localScale = new Vector3(2.1049f,2.1049f,2.1049f);
+            stoneLifeImages[i].rectTransform.localScale = new Vector3(2.1049f, 2.1049f, 2.1049f);
             stoneLifeImages[i].rectTransform.localPosition = new Vector3(-238 + (210 * i), 1193, 0);
+            // stoneLifeImages[i].enabled = true;
         }
-
-        oldLife = stoneControllerScript.life;
-        gametimer = 0;
     }
 
     private void StartGame()
@@ -148,11 +172,28 @@ public class MinigameManager : MonoBehaviour
         startPanel.SetActive(false);
     }
 
-    private void RestartGame()
+    private void RestartGame(GameObject obj)
     {
         SetData();
         isGameOver = false;
-        endPanel.SetActive(false);
+        obj.SetActive(false);
+    }
+
+    private void EndGame(bool isCleared)
+    {
+        isGameOver = true;
+        if (isCleared)
+        {
+            clearPanel.SetActive(true);
+            ITEM_TYPE randomItem = (ITEM_TYPE)Random.Range(0, System.Enum.GetValues(typeof(ITEM_TYPE)).Length);
+            Debug.Log(randomItem);
+            GameManager.Item.AcquireItem(randomItem);
+        }
+        else
+        {
+            endPanel.SetActive(true);
+        }
+        minigameControl = false;
     }
 
     private void GotoSauna()

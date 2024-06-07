@@ -14,6 +14,7 @@ public class IdUpdateManager : MonoBehaviour
     public TMP_Text idText;
 
     public GameObject editScreen;
+    public GameObject infoScreen;
     
 
     void Start()
@@ -23,7 +24,7 @@ public class IdUpdateManager : MonoBehaviour
 
     public void updateId()
     {
-        idText.text = GameManager.Instance.id;
+        idText.text = GameManager.Instance.nickname;
     }
 
     public void Edit()
@@ -34,9 +35,12 @@ public class IdUpdateManager : MonoBehaviour
     IEnumerator EditRequest()
     {
         Member m = getIDFromFields();
+
+        if (m == null) yield break;
+
         string json = JsonUtility.ToJson(m);
 
-        //editUrl = editUrl + "?memberNickName=" + m.memberNickName;
+        editUrl = editUrl + "?memberNickName=" + GameManager.Instance.nickname + "&newNickName=" + m.memberNickName;
 
         Debug.Log("들어옴");
 
@@ -61,15 +65,31 @@ public class IdUpdateManager : MonoBehaviour
             case UnityWebRequest.Result.Success:
                 //UpdateInfoText("Edit Successful.");
                 Debug.Log("성공");
+                GameManager.Instance.nickname = m.memberNickName;
+                updateId();
                 editScreen.SetActive(false);
                 break;
         }
     }
 
+    private void UpdateInfoText(string str)
+    {
+        infoScreen.SetActive(true);
+        infoScreen.transform.GetChild(0).GetComponent<TMP_Text>().text = str;
+    }
+
     private Member getIDFromFields()
     {
         Member m = new Member();
-        m.memberNickName = idInput.text;
+
+        if(idInput.text.Length < 10)
+            m.memberNickName = idInput.text;
+        else
+        {   
+            UpdateInfoText("Nickname up to 10 characters.");
+            return null;
+        }
+
         return m;
     }
 }

@@ -15,13 +15,9 @@ public class MinigameStoneController : MonoBehaviour
     void Start()
     {
         rigid = this.GetComponent<Rigidbody2D>();
-        
-        //GameManager.Input.keyAction -= JumpStone;
-        //GameManager.Input.keyAction += JumpStone;
 
         spriteRender = GetComponent<SpriteRenderer>();
 
-       /* GameManager.Stone.WhenPlayerDecideGrowingNewStoneInBulgama(GameManager.Stone.stoneInfo["LimeStone"]);*/
         if(GameManager.Stone.growingStone.stoneStat.Equals(STONE_TYPE.LimeStone))
             life = 3;
         else if(GameManager.Stone.growingStone.stoneStat.Equals(STONE_TYPE.Granite))
