@@ -22,10 +22,10 @@ public class CollectingBookManager : MonoBehaviour
     {
     }
 
-  /*  public void AddStone()
+    public void AddStone(int id, string name)
     {
-        StartCoroutine(AddStoneRequest());
-    }*/
+        StartCoroutine(AddStoneRequest(id, name));
+    }
 
     public void GetStone()
     {
@@ -80,9 +80,12 @@ public class CollectingBookManager : MonoBehaviour
         return stones;
     }
 
-    /*IEnumerator AddStoneRequest()
+    IEnumerator AddStoneRequest(int Id, string name)
     {
-        CollectingBook cb = getStoneFromFields();
+        CollectingBook cb = new CollectingBook();
+        cb.stoneNumber = Id;
+        cb.memberNickName = GameManager.Instance.id;
+        cb.stoneName = name;
         string json = JsonUtility.ToJson(cb);
 
         UnityWebRequest www = new UnityWebRequest(addStoneUrl, "POST");
@@ -108,7 +111,7 @@ public class CollectingBookManager : MonoBehaviour
         }
     }
 
-    CollectingBook getStoneFromFields()
+    /*CollectingBook getStoneFromFields()
     {
         string stoneName = stoneNameInputField.text;
         int stoneNumber = int.Parse(stoneNumberInputField.text);

@@ -60,6 +60,7 @@ public class StoneManager : MonoBehaviour
     public void GrowingFinished()
     {
         collectingBook.Add(growingStone);
+        GameManager.Instance._book.AddStone(growingStone.id, growingStone.nickName);
         growingStone = null;
     }
 
@@ -76,7 +77,7 @@ public enum STONE_TYPE
 [Serializable]
 public abstract class Stone
 {
-    int id;
+    public int id;
     public StoneStat stoneStat;
     public string nickName;
     public IStoneState state;
