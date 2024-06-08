@@ -43,9 +43,9 @@ public class SearchingUserManager : MonoBehaviour
         {
             var index = Instantiate(userInfoPrefab, new Vector3(0, yValue, 0), Quaternion.identity);
             index.transform.SetParent(GameObject.Find("Content").transform);
-            index.transform.GetComponent<Button>().onClick.RemoveAllListeners();
-            index.transform.GetComponent<Button>().onClick.AddListener(() => GameManager.Instance._book.LookOtherUserBook(element.memberNickName));
             index.transform.GetChild(0).GetComponent<TextMeshProUGUI>().text = element.memberNickName;
+            index.transform.GetChild(2).GetComponent<Button>().onClick.RemoveAllListeners();
+            index.transform.GetChild(2).GetComponent<Button>().onClick.AddListener(() => GameManager.Instance._book.LookOtherUserBook(element.memberNickName));
             //.SetText(element.memberNickName);
             yValue -= 200;
         }

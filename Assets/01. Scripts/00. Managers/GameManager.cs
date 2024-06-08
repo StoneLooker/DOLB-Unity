@@ -16,6 +16,7 @@ public class GameManager : MonoBehaviour
     public MinigameManager _minigame;
     public LogInManager _logIn;
     public CollectingBookManager _book;
+    public SearchingUserManager _search;
 
     public string id;
     public string nickname;
@@ -32,7 +33,7 @@ public class GameManager : MonoBehaviour
     public static StoneManager Stone { get { return Instance._stone; } }
     public static ItemManager Item { get { return Instance._item; } }
 
-    public MAP_TYPE nowMap { get; private set; }
+    public MAP_TYPE nowMap { get; set; }
 
     void Awake()
     {
