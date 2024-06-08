@@ -6,7 +6,7 @@ public class ObstacleController : MonoBehaviour
 {
     public float objectSpeed = 5.0f;
 
-    void Update()
+    public void Update()
     {
         objectSpeed += 0.1f * Time.deltaTime;
 

@@ -37,6 +37,6 @@ public class FadeIn : MonoBehaviour
     {
         character.SetActive(true);
         yield return new WaitForSeconds(5f);
-        SceneManager.LoadScene("Sauna");
+        GameManager.Instance.ChangeMap(MAP_TYPE.Sauna);
     }
 }

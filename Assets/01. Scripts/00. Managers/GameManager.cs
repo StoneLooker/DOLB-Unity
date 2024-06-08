@@ -19,6 +19,10 @@ public class GameManager : MonoBehaviour
     public SearchingUserManager _search;
 
     public string id;
+    public string nickname;
+    private bool minigameEnter = true;
+
+    public bool MinigameEnter { get { return minigameEnter; } private set { minigameEnter = value; }}
 
     private InputManager _input;
     private ItemManager _item;
@@ -45,6 +49,8 @@ public class GameManager : MonoBehaviour
         _input = new InputManager();
         _item = new ItemManager();
 
+        SceneManager.sceneLoaded += OnSceneLoaded;
+
         #endregion
         /*_stone.OnAwake();*/
         if(SceneManager.GetActiveScene().name.Equals("MainTitle")) nowMap = MAP_TYPE.MainTitle;
@@ -63,6 +69,7 @@ public class GameManager : MonoBehaviour
             DataManager.Instance.LoadGameData(id);
             ApplyGameData(DataManager.Instance.data);
         }
+        _item.SetItemInventory(DataManager.Instance.data.GetItemInventory());
     }
 
     void Update()
@@ -99,6 +106,19 @@ public class GameManager : MonoBehaviour
         }
     }
 
+    public IEnumerator MinigameReEntryCooldown()
+    {
+        minigameEnter = false;
+        yield return new WaitForSeconds(10f);
+        minigameEnter = true;
+    }
+
+    void OnSceneLoaded(Scene scene, LoadSceneMode mode)
+    {
+        if (scene.name == "Sauna")
+            StartCoroutine(MinigameReEntryCooldown());
+    }
+
     public void GameQuit()
     {
         #if UNITY_EDITOR
@@ -114,7 +134,19 @@ public class GameManager : MonoBehaviour
         {
             GameData data = new GameData();
             data.playerId = id;
-            data.itemInventory = _item.GetItemInventory();
+            data.SetItemInventory(_item.GetItemInventory());
+            DataManager.Instance.data = data;
+            DataManager.Instance.SaveGameData(id);
+        }
+    }
+
+    public void Save()
+    {
+        if (!string.IsNullOrEmpty(id))
+        {
+            GameData data = new GameData();
+            data.playerId = id;
+            data.SetItemInventory(_item.GetItemInventory());
             DataManager.Instance.data = data;
             DataManager.Instance.SaveGameData(id);
         }
@@ -122,7 +154,14 @@ public class GameManager : MonoBehaviour
 
     public void ApplyGameData(GameData data)
     {
-        _item.SetItemInventory(data.itemInventory);
+        Dictionary<ITEM_TYPE, int> inventory = data.GetItemInventory();
+
+        if (!inventory.ContainsKey(ITEM_TYPE.Brush))
+            inventory[ITEM_TYPE.Brush] = 1;
+        if (!inventory.ContainsKey(ITEM_TYPE.Towel))
+            inventory[ITEM_TYPE.Towel] = 1;
+        
+        _item.SetItemInventory(inventory);
     }
 }
 

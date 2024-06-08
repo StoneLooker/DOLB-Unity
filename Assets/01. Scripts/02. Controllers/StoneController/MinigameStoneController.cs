@@ -6,8 +6,11 @@ public class MinigameStoneController : MonoBehaviour
 {
     private float rotateSpeed = 300f;
     private float jumpForce = 5f;
+    public Vector3 startPos;
+
     private Rigidbody2D rigid;
     private SpriteRenderer spriteRender;
+
     private bool isGrounded = true;
 
     public int life;
@@ -15,13 +18,10 @@ public class MinigameStoneController : MonoBehaviour
     void Start()
     {
         rigid = this.GetComponent<Rigidbody2D>();
-        
-        //GameManager.Input.keyAction -= JumpStone;
-        //GameManager.Input.keyAction += JumpStone;
-
         spriteRender = GetComponent<SpriteRenderer>();
 
-       /* GameManager.Stone.WhenPlayerDecideGrowingNewStoneInBulgama(GameManager.Stone.stoneInfo["LimeStone"]);*/
+        startPos = this.transform.position;
+
         if(GameManager.Stone.growingStone.stoneStat.Equals(STONE_TYPE.LimeStone))
             life = 3;
         else if(GameManager.Stone.growingStone.stoneStat.Equals(STONE_TYPE.Granite))

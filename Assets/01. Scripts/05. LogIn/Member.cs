@@ -6,6 +6,7 @@ using System;
 [Serializable]
 public class Member
 {
+    public long id;
     public string memberNickName;
     public string memberPassword;
 }
