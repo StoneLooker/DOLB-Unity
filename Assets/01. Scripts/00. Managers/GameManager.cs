@@ -19,6 +19,9 @@ public class GameManager : MonoBehaviour
 
     public string id;
     public string nickname;
+    private bool minigameEnter = true;
+
+    public bool MinigameEnter { get { return minigameEnter; } private set { minigameEnter = value; }}
 
     private InputManager _input;
     private ItemManager _item;
@@ -44,6 +47,8 @@ public class GameManager : MonoBehaviour
 
         _input = new InputManager();
         _item = new ItemManager();
+
+        SceneManager.sceneLoaded += OnSceneLoaded;
 
         #endregion
         /*_stone.OnAwake();*/
@@ -98,6 +103,19 @@ public class GameManager : MonoBehaviour
         {
             SceneManager.LoadScene("CollectingBook");
         }
+    }
+
+    public IEnumerator MinigameReEntryCooldown()
+    {
+        minigameEnter = false;
+        yield return new WaitForSeconds(10f);
+        minigameEnter = true;
+    }
+
+    void OnSceneLoaded(Scene scene, LoadSceneMode mode)
+    {
+        if (scene.name == "Sauna")
+            StartCoroutine(MinigameReEntryCooldown());
     }
 
     public void GameQuit()

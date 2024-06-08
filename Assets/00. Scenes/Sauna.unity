@@ -7149,6 +7149,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   map: 3
+  infoScreen: {fileID: 0}
 --- !u!212 &1288733209
 SpriteRenderer:
   m_ObjectHideFlags: 0
@@ -8396,7 +8397,7 @@ Transform:
   serializedVersion: 2
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
   m_LocalPosition: {x: 1.3, y: -1.68, z: 0}
-  m_LocalScale: {x: 0.44315, y: 0.44315, z: 0.44315}
+  m_LocalScale: {x: 0.44315, y: 0.44315, z: 0}
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 1260014620}
@@ -8449,6 +8450,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   map: 4
+  infoScreen: {fileID: 994566019}
 --- !u!212 &1462442862
 SpriteRenderer:
   m_ObjectHideFlags: 0
@@ -8647,6 +8649,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   map: 0
+  infoScreen: {fileID: 0}
 --- !u!212 &1511053592
 SpriteRenderer:
   m_ObjectHideFlags: 0
@@ -10651,6 +10654,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   map: 0
+  infoScreen: {fileID: 0}
 --- !u!212 &1973201900
 SpriteRenderer:
   m_ObjectHideFlags: 0

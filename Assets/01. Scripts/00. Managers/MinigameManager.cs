@@ -5,7 +5,8 @@ using UnityEngine;
 
 public class MinigameManager : MonoBehaviour
 {
-    public MinigameStoneController stoneControllerScript;
+    public GameObject stone;
+    private MinigameStoneController stoneControllerScript;
     private ObjectPool objectPool;
 
     public float spawnInterval = 2.0f;
@@ -25,7 +26,6 @@ public class MinigameManager : MonoBehaviour
     public Button startBtn;
     public Button restartBtn;
     public Button backGameBtn;
-    public Button clearRestartBtn;
 
     //Game state
     public bool isGameOver;
@@ -41,15 +41,15 @@ public class MinigameManager : MonoBehaviour
 
     void Start()
     {
+        stoneControllerScript = stone.GetComponent<MinigameStoneController>();
         objectPool = this.GetComponent<ObjectPool>();
         GameManager.Instance._minigame = this;
         
         minigameControl = false;
 
         startBtn.onClick.AddListener(StartGame);
-        restartBtn.onClick.AddListener(() => RestartGame(endPanel));
+        restartBtn.onClick.AddListener(RestartGame);
         backGameBtn.onClick.AddListener(GotoSauna);
-        clearRestartBtn.onClick.AddListener(() => RestartGame(clearPanel));
     }
 
     void Update()
@@ -95,15 +95,6 @@ public class MinigameManager : MonoBehaviour
 
     private void SpawnObstacle()
     {
-        // ObstacleType randomType = (ObstacleType)Random.Range(0, System.Enum.GetValues(typeof(ObstacleType)).Length);
-        // GameObject obstacle = objectPool.GetPooledObject(randomType);
-        // if (obstacle != null)
-        // {
-        //     Transform spawnPoint = spawnPoints[Random.Range(0, spawnPoints.Length)];
-        //     obstacle.transform.position = spawnPoint.position;
-        //     obstacle.SetActive(true);
-        // }
-
         int randomIndex = Random.Range(0, spawnPoints.Length);
         ObstacleType obstacleType = obstacleTypes[randomIndex];
         GameObject obstacle = objectPool.GetPooledObject(obstacleType);
@@ -124,37 +115,27 @@ public class MinigameManager : MonoBehaviour
 
     private void SetData()
     {
+        stone.transform.position = stoneControllerScript.startPos;
+
         minigameControl = true;
 
         checkLocation.SetActive(true);
-
         Vector2 startPos = new Vector2(0, locationUI.rectTransform.anchoredPosition.y);
         locationUI.rectTransform.anchoredPosition = startPos;
 
-        Debug.Log("Current stoneStat: " + GameManager.Stone.growingStone.stoneStat);
-
-        if(GameManager.Stone.growingStone.stoneStat.Equals(STONE_TYPE.LimeStone)){
+        if(GameManager.Stone.growingStone.stoneStat.StoneType.Equals(STONE_TYPE.LimeStone))
             stoneControllerScript.life = 3;
-            Debug.Log("ass");
-        }
-        else if(GameManager.Stone.growingStone.stoneStat.Equals(STONE_TYPE.Granite))
+        else if(GameManager.Stone.growingStone.stoneStat.StoneType.Equals(STONE_TYPE.Granite))
             stoneControllerScript.life = 5;
 
         InitializeLifeImages(stoneControllerScript.life);
-        
         oldLife = stoneControllerScript.life;
+        
         gameTimer = 0;
     }
 
     private void InitializeLifeImages(int lifeCount)
     {
-        // if (stoneLifeImages != null)
-        // {
-        //     foreach (RawImage lifeImage in stoneLifeImages)
-        //     {
-        //         Destroy(lifeImage.gameObject);
-        //     }
-        // }
         stoneLifeImages = new RawImage[lifeCount];
         for (int i = 0; i < lifeCount; i++)
         {
@@ -162,7 +143,6 @@ public class MinigameManager : MonoBehaviour
             stoneLifeImages[i].transform.SetParent(lifeTransform.transform);
             stoneLifeImages[i].rectTransform.localScale = new Vector3(2.1049f, 2.1049f, 2.1049f);
             stoneLifeImages[i].rectTransform.localPosition = new Vector3(-238 + (210 * i), 1193, 0);
-            // stoneLifeImages[i].enabled = true;
         }
     }
 
@@ -172,11 +152,11 @@ public class MinigameManager : MonoBehaviour
         startPanel.SetActive(false);
     }
 
-    private void RestartGame(GameObject obj)
+    private void RestartGame()
     {
         SetData();
         isGameOver = false;
-        obj.SetActive(false);
+        endPanel.SetActive(false);
     }
 
     private void EndGame(bool isCleared)

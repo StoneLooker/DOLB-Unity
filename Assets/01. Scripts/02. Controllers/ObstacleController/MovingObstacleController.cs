@@ -14,10 +14,10 @@ public class MovingObstacleController : ObstacleController
 
     private IEnumerator MoveUpAndDown()
     {
-        float speed = 3f;
+        float speed = 1.5f;
         while (gameObject.activeInHierarchy)
         {
-            float newY = startPosition.y + Mathf.PingPong(Time.time * speed, 1.4f);
+            float newY = startPosition.y + Mathf.PingPong(Time.time * speed, 1f);
             transform.position = new Vector3(transform.position.x, newY, transform.position.z);
             yield return null;
         }
