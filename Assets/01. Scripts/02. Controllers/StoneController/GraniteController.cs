@@ -4,22 +4,22 @@ using System.Collections.Generic;
 using Unity.VisualScripting;
 using UnityEngine;
 
-public class LimeStoneController : StoneController
+public class GraniteController : StoneController
 {
     [SerializeField]
-    public new LimeStone stone;
+    public new Granite stone;
 
-    public LimeStoneController(Stone stone)
+    public GraniteController(Stone stone)
     {
-        this.stone = (LimeStone)stone;
+        this.stone = (Granite)stone;
     }
     
     new void Start()
     {
-        base.InitializeStone();
-        if (this.GetComponent<SpriteRenderer>() == null) this.AddComponent<SpriteRenderer>();
-        this.GetComponent<SpriteRenderer>().sprite = GameManager.Stone.limeStoneData.stoneStat.Image;
-        stone = (LimeStone)GameManager.Stone.MakeStone(STONE_TYPE.LimeStone);
+        if(this.GetComponent<SpriteRenderer>() == null) this.AddComponent<SpriteRenderer>();
+        this.GetComponent<SpriteRenderer>().sprite = GameManager.Stone.GraniteData.stoneStat.Image;
+        stone = (Granite)GameManager.Stone.MakeStone(STONE_TYPE.Granite);
+        base.Start();
     }
 
     void Set(string nN)
@@ -47,7 +47,7 @@ public class LimeStoneController : StoneController
         base.MouseUp();
         if(GameManager.Instance.nowMap.Equals(MAP_TYPE.Bulgama))
         {
-            GameManager.Stone.WhenPlayerDecideGrowingNewStoneInBulgama(stone);
+            this.Set("ss?");
             Debug.Log("Choose Stone!");
             this.gameObject.SetActive(false);
             GameManager.Instance.ChangeMap(MAP_TYPE.Sauna);
@@ -56,7 +56,7 @@ public class LimeStoneController : StoneController
 }
 
 [Serializable]
-public class LimeStone : Stone
+public class Granite : Stone
 {
 
     public override void Washing()
@@ -89,9 +89,9 @@ public class LimeStone : Stone
         }
     }
 
-    public LimeStone(string nickName) : base(nickName)
+    public Granite(string nickName) : base(nickName)
     {
-        this.stoneStat = GameManager.Stone.limeStoneData.stoneStat;
+        this.stoneStat = GameManager.Stone.GraniteData.stoneStat;
         HP = 100F;
         loveGage = 0F;
         nextEvolutionPercentage = 100F;

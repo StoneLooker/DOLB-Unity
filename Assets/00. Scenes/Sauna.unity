@@ -228,8 +228,9 @@ RectTransform:
   m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 0, y: 0, z: 0}
   m_ConstrainProportionsScale: 0
-  m_Children: []
-  m_Father: {fileID: 785289274}
+  m_Children:
+  - {fileID: 1194028088}
+  m_Father: {fileID: 1810492433}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0}
   m_AnchorMax: {x: 0, y: 0}
@@ -294,7 +295,7 @@ Canvas:
   m_OverridePixelPerfect: 0
   m_SortingBucketNormalizedSize: 0
   m_VertexColorAlwaysGammaSpace: 0
-  m_AdditionalShaderChannelsFlag: 0
+  m_AdditionalShaderChannelsFlag: 25
   m_UpdateRectTransformForStandalone: 0
   m_SortingLayerID: 0
   m_SortingOrder: 0
@@ -1404,7 +1405,6 @@ RectTransform:
   - {fileID: 1220234020}
   - {fileID: 146039684}
   - {fileID: 1805097752}
-  - {fileID: 36570468}
   - {fileID: 1677164041}
   - {fileID: 342204959}
   - {fileID: 141880053}
@@ -1878,6 +1878,10 @@ MonoBehaviour:
   _controller: {fileID: 1649862667}
   _minigame: {fileID: 0}
   _logIn: {fileID: 0}
+  _book: {fileID: 0}
+  _search: {fileID: 0}
+  id: 
+  nickname: 
   _stone: {fileID: 814477055}
 --- !u!4 &814477054
 Transform:
@@ -1907,11 +1911,13 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   limeStoneData:
+    id: 0
     stoneStat: {fileID: 11400000, guid: bfcf2cc3dc3ee81409068a6298c91abe, type: 2}
     nickName: Original
     HP: 100
     loveGage: 0
     nextEvolutionPercentage: 100
+    stoneInfo: 
   stoneNum: 0
 --- !u!1 &831495014
 GameObject:
@@ -2956,6 +2962,85 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1174521285}
   m_CullTransparentMesh: 1
+--- !u!1 &1194028085
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 1194028088}
+  - component: {fileID: 1194028087}
+  - component: {fileID: 1194028086}
+  m_Layer: 0
+  m_Name: Text (Legacy)
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!114 &1194028086
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1194028085}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 5f7201a12d95ffc409449d95f23cf332, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_Material: {fileID: 0}
+  m_Color: {r: 0.19607843, g: 0.19607843, b: 0.19607843, a: 1}
+  m_RaycastTarget: 1
+  m_RaycastPadding: {x: 0, y: 0, z: 0, w: 0}
+  m_Maskable: 1
+  m_OnCullStateChanged:
+    m_PersistentCalls:
+      m_Calls: []
+  m_FontData:
+    m_Font: {fileID: 10102, guid: 0000000000000000e000000000000000, type: 0}
+    m_FontSize: 100
+    m_FontStyle: 0
+    m_BestFit: 0
+    m_MinSize: 1
+    m_MaxSize: 100
+    m_Alignment: 0
+    m_AlignByGeometry: 0
+    m_RichText: 1
+    m_HorizontalOverflow: 0
+    m_VerticalOverflow: 0
+    m_LineSpacing: 1
+  m_Text: TTTT
+--- !u!222 &1194028087
+CanvasRenderer:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1194028085}
+  m_CullTransparentMesh: 1
+--- !u!224 &1194028088
+RectTransform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1194028085}
+  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 36570468}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+  m_AnchorMin: {x: 0.5, y: 0.5}
+  m_AnchorMax: {x: 0.5, y: 0.5}
+  m_AnchoredPosition: {x: -331.21426, y: -730.9404}
+  m_SizeDelta: {x: 777.5715, y: 985.1731}
+  m_Pivot: {x: 0.5, y: 0.5}
 --- !u!1 &1213625491
 GameObject:
   m_ObjectHideFlags: 0
@@ -3389,6 +3474,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   map: 3
+  infoScreen: {fileID: 0}
 --- !u!212 &1288733209
 SpriteRenderer:
   m_ObjectHideFlags: 0
@@ -3865,7 +3951,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: fb479f089cce3474ea7dd89f973cace9, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  map: 0
+  map: 6
+  infoScreen: {fileID: 0}
 --- !u!212 &1511053592
 SpriteRenderer:
   m_ObjectHideFlags: 0
@@ -4219,6 +4306,7 @@ MonoBehaviour:
   quit: {fileID: 0}
   enableSetting: {fileID: 1805097755}
   enableCollectingBook: {fileID: 146039687}
+  enableProfileList: {fileID: 0}
   moveToSauna: {fileID: 1793005062}
   moveToBulgama: {fileID: 1086779503}
   PickBrush: {fileID: 0}
@@ -4493,7 +4581,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: fb479f089cce3474ea7dd89f973cace9, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  map: 4
+  map: 7
+  infoScreen: {fileID: 0}
 --- !u!212 &1736228506
 SpriteRenderer:
   m_ObjectHideFlags: 0
@@ -4984,7 +5073,7 @@ GameObject:
   - component: {fileID: 1809437916}
   - component: {fileID: 1809437915}
   - component: {fileID: 1809437918}
-  - component: {fileID: 1809437917}
+  - component: {fileID: 1809437919}
   m_Layer: 0
   m_Name: GrowingStone
   m_TagString: Stone
@@ -5019,8 +5108,35 @@ Transform:
   m_Children: []
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!58 &1809437917
-CircleCollider2D:
+--- !u!50 &1809437918
+Rigidbody2D:
+  serializedVersion: 4
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1809437914}
+  m_BodyType: 0
+  m_Simulated: 1
+  m_UseFullKinematicContacts: 0
+  m_UseAutoMass: 0
+  m_Mass: 1
+  m_LinearDrag: 0
+  m_AngularDrag: 0.05
+  m_GravityScale: 0
+  m_Material: {fileID: 0}
+  m_IncludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_ExcludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_Interpolate: 0
+  m_SleepingMode: 1
+  m_CollisionDetection: 0
+  m_Constraints: 0
+--- !u!70 &1809437919
+CapsuleCollider2D:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
@@ -5051,36 +5167,55 @@ CircleCollider2D:
   m_IsTrigger: 0
   m_UsedByEffector: 0
   m_UsedByComposite: 0
-  m_Offset: {x: -4.0149765, y: 0}
-  serializedVersion: 2
-  m_Radius: 4.514969
---- !u!50 &1809437918
-Rigidbody2D:
-  serializedVersion: 4
+  m_Offset: {x: -0.17788531, y: -0.028168838}
+  m_Size: {x: 15.644303, y: 9.802247}
+  m_Direction: 1
+--- !u!1 &1810492431
+GameObject:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1809437914}
-  m_BodyType: 0
-  m_Simulated: 1
-  m_UseFullKinematicContacts: 0
-  m_UseAutoMass: 0
-  m_Mass: 1
-  m_LinearDrag: 0
-  m_AngularDrag: 0.05
-  m_GravityScale: 0
-  m_Material: {fileID: 0}
-  m_IncludeLayers:
-    serializedVersion: 2
-    m_Bits: 0
-  m_ExcludeLayers:
-    serializedVersion: 2
-    m_Bits: 0
-  m_Interpolate: 0
-  m_SleepingMode: 1
-  m_CollisionDetection: 0
-  m_Constraints: 0
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 1810492433}
+  - component: {fileID: 1810492432}
+  m_Layer: 0
+  m_Name: ShowStoneInfo
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!114 &1810492432
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1810492431}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 72009fd4780eb0046bf9dbc7c0059e6e, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  objectNameText: {fileID: 1194028086}
+--- !u!4 &1810492433
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1810492431}
+  serializedVersion: 2
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 874.9932, y: 1401.1278, z: 29.55127}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children:
+  - {fileID: 36570468}
+  m_Father: {fileID: 0}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &1973201897
 GameObject:
   m_ObjectHideFlags: 0
@@ -5109,7 +5244,7 @@ Transform:
   m_GameObject: {fileID: 1973201897}
   serializedVersion: 2
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: 1.29, y: 2.88, z: 0}
+  m_LocalPosition: {x: 2.08, y: 3.1, z: 0}
   m_LocalScale: {x: 0.41664, y: 0.41664, z: 0.41664}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -5127,7 +5262,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: fb479f089cce3474ea7dd89f973cace9, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  map: 0
+  map: 4
+  infoScreen: {fileID: 0}
 --- !u!212 &1973201900
 SpriteRenderer:
   m_ObjectHideFlags: 0
@@ -5305,3 +5441,4 @@ SceneRoots:
   - {fileID: 814477054}
   - {fileID: 1649862668}
   - {fileID: 1809437916}
+  - {fileID: 1810492433}

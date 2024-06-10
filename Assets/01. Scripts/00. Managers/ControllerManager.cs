@@ -48,19 +48,13 @@ public class ControllerManager : MonoBehaviour
         {
             _ui.main.SetActive(true);
             _ui.collectingBook.SetActive(false);
-            _ui.ProfileList.SetActive(false);
 
             _button.moveToSauna.onClick.RemoveAllListeners();
             _button.moveToBulgama.onClick.RemoveAllListeners();
-            _button.enableProfileList.onClick.RemoveAllListeners();
             _button.enableCollectingBook.onClick.RemoveAllListeners();
 
             _button.moveToSauna.onClick.AddListener(() => _camera.MoveMainCamera(new Vector3(0F, 0F, -10F)));
             _button.moveToBulgama.onClick.AddListener(() => GameManager.Instance.ChangeMap(MAP_TYPE.Bulgama));
-
-            _button.enableProfileList.onClick.AddListener(() => GameManager.Instance._search.StartShowUserList());
-            _button.enableProfileList.onClick.AddListener(() => _ui.SwitchUI(_ui.ProfileList));
-
             _button.enableCollectingBook.onClick.AddListener(() => GameManager.Instance.ChangeMap(MAP_TYPE.CollectingBook));
         }
         else if (map.Equals(MAP_TYPE.Tub))

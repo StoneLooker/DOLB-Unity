@@ -104,6 +104,14 @@ public class GameManager : MonoBehaviour
         {
             SceneManager.LoadScene("CollectingBook");
         }
+        else if (nowMap.Equals(MAP_TYPE.HotSoup))
+        {
+            SceneManager.LoadScene("2.HotSoup");
+        }
+        else if (nowMap.Equals(MAP_TYPE.ColdSoup))
+        {
+            SceneManager.LoadScene("2.ColdSoup");
+        }
     }
 
     public IEnumerator MinigameReEntryCooldown()
@@ -167,7 +175,7 @@ public class GameManager : MonoBehaviour
 
 public enum MAP_TYPE
 {
-    MainTitle, Sauna, Bulgama, Tub, MiniGame, CollectingBook
+    MainTitle, Sauna, Bulgama, Tub, MiniGame, CollectingBook, HotSoup, ColdSoup
 }
 
 public enum STATE_TYPE

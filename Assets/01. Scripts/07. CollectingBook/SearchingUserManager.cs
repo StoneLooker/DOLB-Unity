@@ -24,9 +24,8 @@ public class SearchingUserManager : MonoBehaviour
 {
     private string searchUserUrl = "http://43.203.76.106:8080/search";
 
-    public TMP_InputField searchUserInputField;
 
-    public List<User> users;
+    List<User> users;
 
     public GameObject userInfoPrefab;
 

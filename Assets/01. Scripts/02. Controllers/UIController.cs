@@ -7,7 +7,6 @@ public class UIController : MonoBehaviour
     [Header("Scene-Sauna")]
     [SerializeField] public GameObject main;
     [SerializeField] public GameObject collectingBook;
-    [SerializeField] public GameObject ProfileList;
 
     private void Awake()
     {

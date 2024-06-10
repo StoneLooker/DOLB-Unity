@@ -8,6 +8,7 @@ using UnityEngine.XR;
 public class StoneManager : MonoBehaviour 
 {
     [SerializeField] public LimeStone limeStoneData;
+    [SerializeField] public Granite GraniteData;
 
     [SerializeField] public Stone growingStone;
 
@@ -81,6 +82,12 @@ public abstract class Stone
     public StoneStat stoneStat;
     public string nickName;
     public IStoneState state;
+
+    public float HP = 100F;
+    public float loveGage = 0F;
+    public float nextEvolutionPercentage = 100F;
+
+    public string stoneInfo;
 
     public Stone(string nickName)
     {
