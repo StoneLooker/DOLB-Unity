@@ -2,6 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using TMPro;
+using UnityEngine.SceneManagement;
 
 public class ItemController : MonoBehaviour
 {
@@ -11,7 +12,8 @@ public class ItemController : MonoBehaviour
 
     private void Start()
     {
-        UpdateBrushCount();
+        if(SceneManager.GetActiveScene().name == "Sauna")
+            UpdateBrushCount();
     }
 
     public void PickBrush()

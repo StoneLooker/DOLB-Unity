@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using Unity.VisualScripting;
 using UnityEngine;
 
-public class Brush : MonoBehaviour
+public class Item : MonoBehaviour
 {
     public ItemStat brushStat;
 
