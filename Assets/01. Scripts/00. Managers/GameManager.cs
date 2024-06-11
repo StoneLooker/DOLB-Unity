@@ -106,11 +106,11 @@ public class GameManager : MonoBehaviour
         }
         else if (nowMap.Equals(MAP_TYPE.HotSoup))
         {
-            SceneManager.LoadScene("2.HotSoup");
+            SceneManager.LoadScene("HotSoup");
         }
         else if (nowMap.Equals(MAP_TYPE.ColdSoup))
         {
-            SceneManager.LoadScene("2.ColdSoup");
+            SceneManager.LoadScene("ColdSoup");
         }
     }
 
