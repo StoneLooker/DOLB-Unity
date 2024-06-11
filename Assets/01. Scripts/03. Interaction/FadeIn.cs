@@ -3,12 +3,24 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.SceneManagement;
 using UnityEngine.UI;
+using TMPro;
 
 public class FadeIn : MonoBehaviour
 {
     public GameObject fadePanel;
     public GameObject character;
+    public GameObject canvas;
+    public TMP_Text msg;
     Image image;
+
+    private string[] messages = new string[]
+    {
+        "Welcome to the Sauna!",
+        "Relax and enjoy your time!",
+        "Items can be obtained through a walk!",
+        "Search your friend's collecting book!",
+        "Roll the stone!"
+    };
 
     void Awake()
     {
@@ -27,10 +39,17 @@ public class FadeIn : MonoBehaviour
             yield return new WaitForSeconds(0.015f);
             image.color = new Color(0,0,0,fadeCount);
         }
+        
         if(SceneManager.GetActiveScene().name != "Loading")
             fadePanel.SetActive(false);
         else
+        {
+            canvas.SetActive(true);
+            int randomIndex = Random.Range(0, messages.Length);
+            msg.text = messages[randomIndex];
+            msg.gameObject.SetActive(true);
             StartCoroutine(Loading());
+        }
     }
 
     IEnumerator Loading()
