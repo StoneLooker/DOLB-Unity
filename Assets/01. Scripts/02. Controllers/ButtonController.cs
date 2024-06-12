@@ -16,6 +16,7 @@ public class ButtonController : MonoBehaviour
     [Header("Scene-Sauna")]
     public Button enableSetting;
     public Button enableCollectingBook;
+    public Button enableSearchFriends;
     public Button enableProfileList;
     public Button moveToSauna;
     public Button moveToBulgama;

@@ -1026,7 +1026,7 @@ GameObject:
   - component: {fileID: 2009366100}
   - component: {fileID: 2009366099}
   - component: {fileID: 2009366098}
-  - component: {fileID: 2009366097}
+  - component: {fileID: 2009366104}
   m_Layer: 0
   m_Name: Controllers
   m_TagString: Untagged
@@ -1034,19 +1034,6 @@ GameObject:
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
   m_IsActive: 1
---- !u!114 &2009366097
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 2009366096}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 4b3220f0123f8154bbc1b94305be7f3e, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  stoneFrame: {fileID: 6848267118719703100, guid: ab12fbf8c35ace94082d83cae2e53180, type: 3}
 --- !u!114 &2009366098
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1089,7 +1076,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   main: {fileID: 0}
-  collectingBook: {fileID: 0}
+  SearchFriends: {fileID: 0}
 --- !u!114 &2009366101
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1125,6 +1112,7 @@ MonoBehaviour:
   quit: {fileID: 0}
   enableSetting: {fileID: 0}
   enableCollectingBook: {fileID: 0}
+  enableSearchFriends: {fileID: 0}
   enableProfileList: {fileID: 0}
   moveToSauna: {fileID: 0}
   moveToBulgama: {fileID: 0}
@@ -1144,6 +1132,21 @@ Transform:
   m_Children: []
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &2009366104
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2009366096}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 82c03bf5985108b418a0f49e73ef666b, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  targetObject: {fileID: 807843574}
+  duration: 5
+  type: 1
 --- !u!1660057539 &9223372036854775807
 SceneRoots:
   m_ObjectHideFlags: 0

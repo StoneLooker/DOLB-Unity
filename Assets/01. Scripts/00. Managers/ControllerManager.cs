@@ -1,3 +1,4 @@
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
@@ -13,6 +14,14 @@ public class ControllerManager : MonoBehaviour
     {
         GameManager.Instance._controller = null;
         GameManager.Instance._controller = this;
+        if(_ui != null)
+        {
+            if (GameManager.Stone.growingStone != null)
+            {
+                _ui.SetHPSlider(GameManager.Stone.growingStone.HP, GameManager.Stone.growingStone.loveGage);
+            }
+            else _ui.SetHPSlider(100, 0);      
+        }
         SetController(GameManager.Instance.nowMap);
     }
 
@@ -47,7 +56,7 @@ public class ControllerManager : MonoBehaviour
         else if (map.Equals(MAP_TYPE.Sauna))
         {
             _ui.main.SetActive(true);
-            _ui.collectingBook.SetActive(false);
+            _ui.SearchFriends.SetActive(false);
 
             _button.moveToSauna.onClick.RemoveAllListeners();
             _button.moveToBulgama.onClick.RemoveAllListeners();
@@ -55,7 +64,9 @@ public class ControllerManager : MonoBehaviour
 
             _button.moveToSauna.onClick.AddListener(() => _camera.MoveMainCamera(new Vector3(0F, 0F, -10F)));
             _button.moveToBulgama.onClick.AddListener(() => GameManager.Instance.ChangeMap(MAP_TYPE.Bulgama));
-            _button.enableCollectingBook.onClick.AddListener(() => GameManager.Instance.ChangeMap(MAP_TYPE.CollectingBook));
+            _button.enableCollectingBook.onClick.AddListener(() => GameManager.Instance._book.LookMyBook());
+            _button.enableSearchFriends.onClick.AddListener(GameManager.Instance._search.StartShowUserList);
+            _button.enableSearchFriends.onClick.AddListener(() => _ui.SwitchUI(_ui.SearchFriends));
         }
         else if (map.Equals(MAP_TYPE.Tub))
         {

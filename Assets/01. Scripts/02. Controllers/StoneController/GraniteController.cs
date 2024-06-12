@@ -6,8 +6,6 @@ using UnityEngine;
 
 public class GraniteController : StoneController
 {
-    [SerializeField]
-    public new Granite stone;
 
     public GraniteController(Stone stone)
     {
@@ -16,9 +14,9 @@ public class GraniteController : StoneController
     
     new void Start()
     {
-        if(this.GetComponent<SpriteRenderer>() == null) this.AddComponent<SpriteRenderer>();
-        this.GetComponent<SpriteRenderer>().sprite = GameManager.Stone.GraniteData.stoneStat.Image;
         stone = (Granite)GameManager.Stone.MakeStone(STONE_TYPE.Granite);
+        if (this.GetComponent<SpriteRenderer>() == null) this.AddComponent<SpriteRenderer>();
+        this.GetComponent<SpriteRenderer>().sprite = GameManager.Stone.GraniteData.stoneStat.Image;
         base.Start();
     }
 
@@ -58,6 +56,10 @@ public class GraniteController : StoneController
 [Serializable]
 public class Granite : Stone
 {
+    public Granite(string nickName, float HP, float loveGage, float evolution, string stoneinfo) : base(nickName, HP, loveGage, evolution, stoneinfo)
+    {
+        this.stoneStat = GameManager.Stone.GraniteData.stoneStat;
+    }
 
     public override void Washing()
     {
@@ -89,11 +91,5 @@ public class Granite : Stone
         }
     }
 
-    public Granite(string nickName) : base(nickName)
-    {
-        this.stoneStat = GameManager.Stone.GraniteData.stoneStat;
-        HP = 100F;
-        loveGage = 0F;
-        nextEvolutionPercentage = 100F;
-    }
+    
 }

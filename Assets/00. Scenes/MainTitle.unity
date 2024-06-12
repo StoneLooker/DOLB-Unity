@@ -900,6 +900,7 @@ MonoBehaviour:
   quit: {fileID: 1731345381}
   enableSetting: {fileID: 0}
   enableCollectingBook: {fileID: 0}
+  enableSearchFriends: {fileID: 0}
   enableProfileList: {fileID: 0}
   moveToSauna: {fileID: 0}
   moveToBulgama: {fileID: 0}
@@ -5751,8 +5752,8 @@ MonoBehaviour:
   _controller: {fileID: 399682735}
   _minigame: {fileID: 0}
   _logIn: {fileID: 1985663870}
-  _book: {fileID: 0}
-  _search: {fileID: 0}
+  _book: {fileID: 1985663872}
+  _search: {fileID: 1985663873}
   id: 
   nickname: 
   _stone: {fileID: 1985663871}

@@ -26,6 +26,34 @@ public class StoneController : MonoBehaviour
         InitializeStone();
     }
 
+    public string GetInfo()
+    {
+        if (stone != null)
+            switch (GameManager.Instance.nowMap)
+            {
+                case MAP_TYPE.Sauna:
+                    return
+                        stone.nickName + "(" + stone.stoneStat.StoneType.ToString() + ")" + "\r\n" +
+                        "HP: " + stone.HP + "\r\n" +
+                        "Love: " + stone.loveGage + "\r\n" +
+                        "Evolution: " + stone.nextEvolutionPercentage + "\r\n" +
+                        "Info: " + stone.stoneInfo;
+                case MAP_TYPE.CollectingBook:
+                    return
+                        stone.nickName + "(" + stone.stoneStat.StoneType.ToString() + ")" + "\r\n" +
+                        "Info: " + stone.stoneInfo;
+                case MAP_TYPE.Bulgama:
+                    return
+                        stone.nickName + "(" + stone.stoneStat.StoneType.ToString() + ")" + "\r\n" +
+                        "Info: " + stone.stoneInfo;
+                default:
+                    return "Error: invalid map";
+            }
+
+        else
+            return "Error: No stone data";
+    }
+
     public void InitializeStone()
     {
         originPosition = transform.position;

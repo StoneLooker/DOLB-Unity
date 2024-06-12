@@ -37,6 +37,12 @@ public class CollectingBookManager : MonoBehaviour
         StartCoroutine(SpawnStones());
     }
 
+    public void LookMyBook()
+    {
+        GameManager.Instance._book.memberNickName = GameManager.Instance.nickname;
+        GameManager.Instance.ChangeMap(MAP_TYPE.CollectingBook);
+    }
+
     public void LookOtherUserBook(string nickName)
     {
         GameManager.Instance._book.memberNickName = nickName;
@@ -45,13 +51,12 @@ public class CollectingBookManager : MonoBehaviour
 
     public IEnumerator SpawnStones()
     {
-        if(memberNickName == null) memberNickName = GameManager.Instance.id;
+        if(memberNickName == null) memberNickName = GameManager.Instance.nickname;
         yield return StartCoroutine(GetStoneRequest());
-        Debug.Log("1");
-        float yValue = 10;
+        float yValue = 6;
+        if (books == null) Debug.Log("Error: no book founded, " + memberNickName);
         foreach (CollectingBook element in books)
         {
-            Debug.Log("2");
             if (element.stoneName == "LimeStone")
             {
                 Debug.Log(GameManager.Stone.collectingBook);

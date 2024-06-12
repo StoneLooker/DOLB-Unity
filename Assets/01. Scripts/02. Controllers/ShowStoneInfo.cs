@@ -23,12 +23,7 @@ public class ShowStoneInfo : MonoBehaviour
             if ((StoneController)hitObject.GetComponent<StoneController>() != null)
             {
                StoneController hitStone = (StoneController)hitObject.GetComponent<StoneController>();
-               objectNameText.text = 
-                    "TYPE: " + hitStone.stone.nickName + "\r\n" /*+
-                    "HP: " + hitStone.stone.HP + "\r\n" +
-                    "Love:" + hitStone.stone.loveGage + "\r\n" +
-                    "Evloution: " + hitStone.stone.nextEvolutionPercentage + "\r\n" +
-                    "INFO: " + hitStone.stone.stoneInfo + "\r\n"*/;      
+                objectNameText.text = hitStone.GetInfo();
                 objectNameText.gameObject.SetActive(true);
                 objectNameText.transform.position = Input.mousePosition;  // 마우스 위치 기준으로 텍스트 위치 조정
             } else {

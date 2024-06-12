@@ -20,7 +20,11 @@ public class StoneManager : MonoBehaviour
     {
         if(stoneType.Equals(STONE_TYPE.LimeStone))
         {
-            return new LimeStone("Empty");
+            return new LimeStone("LimeStone", limeStoneData.HP, limeStoneData.loveGage, limeStoneData.nextEvolutionPercentage, limeStoneData.stoneInfo) ;
+        }
+        else if (stoneType.Equals(STONE_TYPE.Granite))
+        {
+            return new Granite("Granite", GraniteData.HP, GraniteData.loveGage, GraniteData.nextEvolutionPercentage, GraniteData.stoneInfo);
         }
         return null;
     }
@@ -89,9 +93,13 @@ public abstract class Stone
 
     public string stoneInfo;
 
-    public Stone(string nickName)
+    public Stone(string nickName, float HP, float loveGage, float evolution, string stoneinfo)
     {
         this.nickName = nickName;
+        this.HP = HP;
+        this.loveGage = loveGage;
+        this.nextEvolutionPercentage = evolution;
+        this.stoneInfo = stoneinfo;
     }
 
     public void SetNickName(String nickName)

@@ -38,7 +38,7 @@ RenderSettings:
   m_ReflectionIntensity: 1
   m_CustomReflection: {fileID: 0}
   m_Sun: {fileID: 0}
-  m_IndirectSpecularColor: {r: 0.18028353, g: 0.22571383, b: 0.30692253, a: 1}
+  m_IndirectSpecularColor: {r: 0.18028378, g: 0.22571412, b: 0.30692285, a: 1}
   m_UseRadianceAmbientProbe: 0
 --- !u!157 &3
 LightmapSettings:
@@ -154,104 +154,6 @@ Transform:
   m_Children: []
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!1001 &283505431
-PrefabInstance:
-  m_ObjectHideFlags: 0
-  serializedVersion: 2
-  m_Modification:
-    serializedVersion: 3
-    m_TransformParent: {fileID: 1474098318}
-    m_Modifications:
-    - target: {fileID: 4124520171056139043, guid: 1aeb43c1126bb4545b3aef3b18d37d21, type: 3}
-      propertyPath: stone.HP
-      value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 4124520171056139043, guid: 1aeb43c1126bb4545b3aef3b18d37d21, type: 3}
-      propertyPath: stone.loveGage
-      value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 4124520171056139043, guid: 1aeb43c1126bb4545b3aef3b18d37d21, type: 3}
-      propertyPath: stone.nickName
-      value: H
-      objectReference: {fileID: 0}
-    - target: {fileID: 4124520171056139043, guid: 1aeb43c1126bb4545b3aef3b18d37d21, type: 3}
-      propertyPath: stone.stoneInfo
-      value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 4124520171056139043, guid: 1aeb43c1126bb4545b3aef3b18d37d21, type: 3}
-      propertyPath: stone.nextEvolutionPercentage
-      value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 5308067763753571611, guid: 1aeb43c1126bb4545b3aef3b18d37d21, type: 3}
-      propertyPath: m_LocalScale.x
-      value: 0.1
-      objectReference: {fileID: 0}
-    - target: {fileID: 5308067763753571611, guid: 1aeb43c1126bb4545b3aef3b18d37d21, type: 3}
-      propertyPath: m_LocalScale.y
-      value: 0.1
-      objectReference: {fileID: 0}
-    - target: {fileID: 5308067763753571611, guid: 1aeb43c1126bb4545b3aef3b18d37d21, type: 3}
-      propertyPath: m_LocalScale.z
-      value: 0.1
-      objectReference: {fileID: 0}
-    - target: {fileID: 5308067763753571611, guid: 1aeb43c1126bb4545b3aef3b18d37d21, type: 3}
-      propertyPath: m_LocalPosition.x
-      value: 0.8
-      objectReference: {fileID: 0}
-    - target: {fileID: 5308067763753571611, guid: 1aeb43c1126bb4545b3aef3b18d37d21, type: 3}
-      propertyPath: m_LocalPosition.y
-      value: 0.6
-      objectReference: {fileID: 0}
-    - target: {fileID: 5308067763753571611, guid: 1aeb43c1126bb4545b3aef3b18d37d21, type: 3}
-      propertyPath: m_LocalPosition.z
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 5308067763753571611, guid: 1aeb43c1126bb4545b3aef3b18d37d21, type: 3}
-      propertyPath: m_LocalRotation.w
-      value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 5308067763753571611, guid: 1aeb43c1126bb4545b3aef3b18d37d21, type: 3}
-      propertyPath: m_LocalRotation.x
-      value: -0
-      objectReference: {fileID: 0}
-    - target: {fileID: 5308067763753571611, guid: 1aeb43c1126bb4545b3aef3b18d37d21, type: 3}
-      propertyPath: m_LocalRotation.y
-      value: -0
-      objectReference: {fileID: 0}
-    - target: {fileID: 5308067763753571611, guid: 1aeb43c1126bb4545b3aef3b18d37d21, type: 3}
-      propertyPath: m_LocalRotation.z
-      value: -0
-      objectReference: {fileID: 0}
-    - target: {fileID: 5308067763753571611, guid: 1aeb43c1126bb4545b3aef3b18d37d21, type: 3}
-      propertyPath: m_LocalEulerAnglesHint.x
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 5308067763753571611, guid: 1aeb43c1126bb4545b3aef3b18d37d21, type: 3}
-      propertyPath: m_LocalEulerAnglesHint.y
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 5308067763753571611, guid: 1aeb43c1126bb4545b3aef3b18d37d21, type: 3}
-      propertyPath: m_LocalEulerAnglesHint.z
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 6848267118719703100, guid: 1aeb43c1126bb4545b3aef3b18d37d21, type: 3}
-      propertyPath: m_Name
-      value: LimeStone
-      objectReference: {fileID: 0}
-    - target: {fileID: 8773094325507074616, guid: 1aeb43c1126bb4545b3aef3b18d37d21, type: 3}
-      propertyPath: m_GravityScale
-      value: 1
-      objectReference: {fileID: 0}
-    m_RemovedComponents: []
-    m_RemovedGameObjects: []
-    m_AddedGameObjects: []
-    m_AddedComponents: []
-  m_SourcePrefab: {fileID: 100100000, guid: 1aeb43c1126bb4545b3aef3b18d37d21, type: 3}
---- !u!4 &283505432 stripped
-Transform:
-  m_CorrespondingSourceObject: {fileID: 5308067763753571611, guid: 1aeb43c1126bb4545b3aef3b18d37d21, type: 3}
-  m_PrefabInstance: {fileID: 283505431}
-  m_PrefabAsset: {fileID: 0}
 --- !u!1 &618352571
 GameObject:
   m_ObjectHideFlags: 0
@@ -339,6 +241,166 @@ Transform:
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 0, y: 1, z: -10}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 0}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!1 &637334552
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 637334558}
+  - component: {fileID: 637334557}
+  - component: {fileID: 637334556}
+  - component: {fileID: 637334555}
+  - component: {fileID: 637334554}
+  - component: {fileID: 637334553}
+  m_Layer: 0
+  m_Name: Managers
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!114 &637334553
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 637334552}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 846768a39bc0de04881cb69207678e9b, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  stoneFrame: {fileID: 6848267118719703100, guid: ab12fbf8c35ace94082d83cae2e53180, type: 3}
+--- !u!114 &637334554
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 637334552}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 573db5fdece52984e86e5ddd36ca73f8, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  userInfoPrefab: {fileID: 7034370196131875109, guid: b55e31f7e63af944080611507a2b76d9, type: 3}
+--- !u!114 &637334555
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 637334552}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 09bcd769a961ef749b940cc44778168c, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  limeStoneData:
+    id: 0
+    stoneStat: {fileID: 11400000, guid: bfcf2cc3dc3ee81409068a6298c91abe, type: 2}
+    nickName: LimeStone
+    HP: 100
+    loveGage: 0
+    nextEvolutionPercentage: 100
+    stoneInfo: Cute^^
+  GraniteData:
+    id: 0
+    stoneStat: {fileID: 11400000, guid: a0425d8c28c447746b7edd21c4712e5f, type: 2}
+    nickName: Granite
+    HP: 200
+    loveGage: 0
+    nextEvolutionPercentage: 500
+    stoneInfo: Strong^^
+  stoneNum: 1
+--- !u!114 &637334556
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 637334552}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 14e14df5c2acd4cdb83c12b0bfb50c92, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  idInput: {fileID: 0}
+  passwordInput: {fileID: 0}
+  infoScreen: {fileID: 0}
+  logInScreen: {fileID: 0}
+  logInBtn: {fileID: 0}
+  logOutBtn: {fileID: 0}
+--- !u!114 &637334557
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 637334552}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: d40309768c764dc429c6793973ab5ca1, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _controller: {fileID: 0}
+  _minigame: {fileID: 0}
+  _logIn: {fileID: 637334556}
+  _book: {fileID: 637334553}
+  _search: {fileID: 637334554}
+  id: 
+  nickname: 
+  _stone: {fileID: 637334555}
+--- !u!4 &637334558
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 637334552}
+  serializedVersion: 2
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 1, z: -10}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 0}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!1 &744999379
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 744999380}
+  m_Layer: 0
+  m_Name: ============= (1)
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &744999380
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 744999379}
+  serializedVersion: 2
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: -1.5090908, y: 0.98901904, z: 0.00604109}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -1045,6 +1107,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 1474098318}
+  - component: {fileID: 1474098319}
   m_Layer: 0
   m_Name: Bulgama
   m_TagString: Untagged
@@ -1064,10 +1127,25 @@ Transform:
   m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
-  m_Children:
-  - {fileID: 283505432}
+  m_Children: []
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &1474098319
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1474098317}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: de225d9f04fbbfc408bf92277875ca5c, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  EmptyStone: {fileID: 6848267118719703100, guid: ab12fbf8c35ace94082d83cae2e53180, type: 3}
+  numberOfStonesToSpawn: 10
+  spawnAreaMin: {x: -0.5, y: 5}
+  spawnAreaMax: {x: 1.5, y: 7}
 --- !u!1 &1619484901
 GameObject:
   m_ObjectHideFlags: 0
@@ -1130,7 +1208,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   main: {fileID: 0}
-  collectingBook: {fileID: 0}
+  SearchFriends: {fileID: 0}
 --- !u!114 &1619484906
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1151,6 +1229,7 @@ MonoBehaviour:
   quit: {fileID: 0}
   enableSetting: {fileID: 0}
   enableCollectingBook: {fileID: 0}
+  enableSearchFriends: {fileID: 0}
   enableProfileList: {fileID: 0}
   moveToSauna: {fileID: 0}
   moveToBulgama: {fileID: 0}
@@ -1201,6 +1280,67 @@ Transform:
   m_Children: []
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!1001 &153756904504929591
+PrefabInstance:
+  m_ObjectHideFlags: 0
+  serializedVersion: 2
+  m_Modification:
+    serializedVersion: 3
+    m_TransformParent: {fileID: 0}
+    m_Modifications:
+    - target: {fileID: 4011143210552515752, guid: 92e9782565886af4c86524222fc61fdf, type: 3}
+      propertyPath: m_LocalPosition.x
+      value: 874.9932
+      objectReference: {fileID: 0}
+    - target: {fileID: 4011143210552515752, guid: 92e9782565886af4c86524222fc61fdf, type: 3}
+      propertyPath: m_LocalPosition.y
+      value: 1401.1278
+      objectReference: {fileID: 0}
+    - target: {fileID: 4011143210552515752, guid: 92e9782565886af4c86524222fc61fdf, type: 3}
+      propertyPath: m_LocalPosition.z
+      value: 29.55127
+      objectReference: {fileID: 0}
+    - target: {fileID: 4011143210552515752, guid: 92e9782565886af4c86524222fc61fdf, type: 3}
+      propertyPath: m_LocalRotation.w
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 4011143210552515752, guid: 92e9782565886af4c86524222fc61fdf, type: 3}
+      propertyPath: m_LocalRotation.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4011143210552515752, guid: 92e9782565886af4c86524222fc61fdf, type: 3}
+      propertyPath: m_LocalRotation.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4011143210552515752, guid: 92e9782565886af4c86524222fc61fdf, type: 3}
+      propertyPath: m_LocalRotation.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4011143210552515752, guid: 92e9782565886af4c86524222fc61fdf, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4011143210552515752, guid: 92e9782565886af4c86524222fc61fdf, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4011143210552515752, guid: 92e9782565886af4c86524222fc61fdf, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 7657637169972946547, guid: 92e9782565886af4c86524222fc61fdf, type: 3}
+      propertyPath: m_Name
+      value: ShowStoneInfo
+      objectReference: {fileID: 0}
+    - target: {fileID: 7657637169972946547, guid: 92e9782565886af4c86524222fc61fdf, type: 3}
+      propertyPath: m_IsActive
+      value: 1
+      objectReference: {fileID: 0}
+    m_RemovedComponents: []
+    m_RemovedGameObjects: []
+    m_AddedGameObjects: []
+    m_AddedComponents: []
+  m_SourcePrefab: {fileID: 100100000, guid: 92e9782565886af4c86524222fc61fdf, type: 3}
 --- !u!1660057539 &9223372036854775807
 SceneRoots:
   m_ObjectHideFlags: 0
@@ -1211,6 +1351,9 @@ SceneRoots:
   - {fileID: 1474098318}
   - {fileID: 1075048325}
   - {fileID: 915882270}
+  - {fileID: 744999380}
+  - {fileID: 153756904504929591}
   - {fileID: 1832876098}
   - {fileID: 904360428}
   - {fileID: 1619484907}
+  - {fileID: 637334558}
