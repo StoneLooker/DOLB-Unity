@@ -64,6 +64,13 @@ public class CollectingBookManager : MonoBehaviour
                 st.AddComponent<LimeStoneController>();
                 yValue += 1;
             }
+            else if (element.stoneName == "Granite")
+            {
+                Debug.Log(GameManager.Stone.collectingBook);
+                GameObject st = Instantiate(stoneFrame, new Vector3(0, yValue, 0), new Quaternion(0, 0, 0, 0));
+                st.AddComponent<GraniteController>();
+                yValue += 1;
+            }
         }
     }
 
@@ -89,7 +96,7 @@ public class CollectingBookManager : MonoBehaviour
     {
         CollectingBook cb = new CollectingBook();
         cb.stoneNumber = Id;
-        cb.memberNickName = GameManager.Instance.id;
+        cb.memberNickName = GameManager.Instance.nickname;
         cb.stoneName = name;
         string json = JsonUtility.ToJson(cb);
 

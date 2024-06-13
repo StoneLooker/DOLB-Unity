@@ -6,57 +6,71 @@ using UnityEngine;
 
 public class GraniteController : StoneController
 {
+    // Use Awake or Start for initialization, not constructors
+    private void Awake()
+    {
+        // Ensure the base class initialization happens first
+        base.InitializeStone();
 
-    public GraniteController(Stone stone)
-    {
-        this.stone = (Granite)stone;
-    }
-    
-    new void Start()
-    {
+        // Initialize the stone
         stone = (Granite)GameManager.Stone.MakeStone(STONE_TYPE.Granite);
-        if (this.GetComponent<SpriteRenderer>() == null) this.AddComponent<SpriteRenderer>();
-        this.GetComponent<SpriteRenderer>().sprite = GameManager.Stone.GraniteData.stoneStat.Image;
-        base.Start();
+
+        // Check if SpriteRenderer component is attached, add if missing
+        if (GetComponent<SpriteRenderer>() == null)
+        {
+            gameObject.AddComponent<SpriteRenderer>();
+        }
+
+        // Set the sprite image
+        GetComponent<SpriteRenderer>().sprite = GameManager.Stone.GraniteData.stoneStat.Image;
     }
 
-    void Set(string nN)
+    private void Set(string nN)
     {
         stone.SetNickName(nN);
         GameManager.Stone.growingStone = stone;
     }
 
-    new void OnMouseDown()
+    private new void OnMouseDown()
     {
         base.MouseDown();
-        stone.UpdateLoveGage(20F);
+        if (GameManager.Instance.nowMap == MAP_TYPE.Sauna)
+        {
+            stone.UpdateLoveGage(20F);
+        }
     }
 
-    void OnCollisionStay(Collision collision)
+    private void OnCollisionStay(Collision collision)
     {
-        if(collision.collider.CompareTag("Danger"))
+        if (collision.collider.CompareTag("Danger"))
         {
             stone.UpdateHP(-10F);
         }
     }
 
-    new void OnMouseUp()
+    private new void OnMouseUp()
     {
         base.MouseUp();
-        if(GameManager.Instance.nowMap.Equals(MAP_TYPE.Bulgama))
+        if (GameManager.Instance.nowMap.Equals(MAP_TYPE.Bulgama))
         {
-            this.Set("ss?");
+            GameManager.Stone.WhenPlayerDecideGrowingNewStoneInBulgama(stone);
             Debug.Log("Choose Stone!");
-            this.gameObject.SetActive(false);
+            gameObject.SetActive(false);
             GameManager.Instance.ChangeMap(MAP_TYPE.Sauna);
         }
+    }
+
+    private new void Update()
+    {
+        base.Update();
+        GetInfo();
     }
 }
 
 [Serializable]
 public class Granite : Stone
 {
-    public Granite(string nickName, float HP, float loveGage, float evolution, string stoneinfo) : base(nickName, HP, loveGage, evolution, stoneinfo)
+    public Granite(string nickName, float maxHp, float maxLoveGage, float maxEvolutionGage, string stoneinfo) : base(nickName, maxHp, maxLoveGage, maxEvolutionGage, stoneinfo)
     {
         this.stoneStat = GameManager.Stone.GraniteData.stoneStat;
     }
@@ -69,27 +83,38 @@ public class Granite : Stone
     public override void UpdateHP(float HP)
     {
         this.HP += HP;
-        this.nextEvolutionPercentage -= HP;
+        if (HP < 0) UpdateLoveGage(HP);
         CheckEvolution();
     }
 
     public override void UpdateLoveGage(float loveGage)
     {
         this.loveGage += loveGage;
-        this.nextEvolutionPercentage -= loveGage;
-        Debug.Log(this.nextEvolutionPercentage);
+        this.evolutionGage += loveGage;
+
+        if (this.loveGage > maxLoveGage) this.loveGage = maxLoveGage;
+        if (this.evolutionGage > maxEvolutionGage) evolutionGage = maxEvolutionGage;
+        Debug.Log(this.evolutionGage);
+        if (GameManager.Instance._controller._ui.LoveGageSlider != null)
+            GameManager.Instance._controller._ui.CallUpdateSlider(SLIDER_TYPE.LoveGage, this.loveGage);
+        if (GameManager.Instance._controller._ui.EvolutionGageSlider != null)
+            GameManager.Instance._controller._ui.CallUpdateSlider(SLIDER_TYPE.Evolution, this.evolutionGage);
+        else Debug.Log("No Hp Slider in GraniteController");
         CheckEvolution();
     }
 
     public override void CheckEvolution()
     {
-        if(nextEvolutionPercentage <= 0F)
+        if (evolutionGage == maxEvolutionGage)
         {
-            Debug.Log("Evloution complete");
-            GameManager.Stone.GrowingFinished();
-            Debug.Log(GameManager.Stone.collectingBook);
+            if (loveGage == maxLoveGage)
+            {
+                Debug.Log("Evolution complete");
+                GameManager.Stone.GrowingFinished();
+                GameManager.Instance.ChangeMap(MAP_TYPE.Sauna);
+            }
         }
     }
 
-    
+
 }

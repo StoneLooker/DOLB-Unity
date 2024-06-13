@@ -5806,17 +5806,23 @@ MonoBehaviour:
     id: 0
     stoneStat: {fileID: 11400000, guid: bfcf2cc3dc3ee81409068a6298c91abe, type: 2}
     nickName: LimeStone
+    maxHp: 100
+    maxLoveGage: 100
+    maxEvolutionGage: 100
     HP: 100
     loveGage: 0
-    nextEvolutionPercentage: 100
+    evolutionGage: 0
     stoneInfo: Cute^^
   GraniteData:
-    id: 0
+    id: 1
     stoneStat: {fileID: 11400000, guid: a0425d8c28c447746b7edd21c4712e5f, type: 2}
     nickName: Granite
+    maxHp: 200
+    maxLoveGage: 200
+    maxEvolutionGage: 300
     HP: 200
     loveGage: 0
-    nextEvolutionPercentage: 500
+    evolutionGage: 0
     stoneInfo: Strong^^
   stoneNum: 1
 --- !u!114 &1985663872

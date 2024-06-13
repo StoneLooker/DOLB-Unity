@@ -8,7 +8,10 @@ public class UIController : MonoBehaviour
     [Header("Scene-Sauna")]
     [SerializeField] public GameObject main;
     [SerializeField] public GameObject SearchFriends;
-    [SerializeField] public Slider HpSlider;
+    [SerializeField] public GameObject Setting;
+    
+    [SerializeField] public Slider LoveGageSlider;
+    [SerializeField] public Slider EvolutionGageSlider;
 
     private void Awake()
     {
@@ -16,6 +19,25 @@ public class UIController : MonoBehaviour
 
     void Start()
     {
+        if(LoveGageSlider != null)
+        {
+            if (GameManager.Stone.growingStone == null)
+                SetSlider(LoveGageSlider, 0, 0);
+            else
+            {
+                SetSlider(LoveGageSlider, GameManager.Stone.growingStone.maxLoveGage, GameManager.Stone.growingStone.loveGage);
+            }
+        }
+
+        if (EvolutionGageSlider != null)
+        {
+            if (GameManager.Stone.growingStone == null)
+                SetSlider(EvolutionGageSlider, 0, 0);
+            else
+            {
+                SetSlider(EvolutionGageSlider, GameManager.Stone.growingStone.maxEvolutionGage, GameManager.Stone.growingStone.evolutionGage);
+            }
+        }
     }
 
     public void EnableUI(GameObject ui)
@@ -33,27 +55,53 @@ public class UIController : MonoBehaviour
         ui.SetActive(!ui.activeSelf);
     }
 
-    public void SetHPSlider(float maxValue, float initValue)
+    public void CallSetSlider(SLIDER_TYPE sliderType, float maxValue, float initValue)
     {
-        if(HpSlider == null)
+        switch(sliderType)
         {
-            Debug.LogError("Empty HP Slider");
+            case SLIDER_TYPE.LoveGage:
+                this.SetSlider(this.LoveGageSlider, maxValue, initValue); break;
+            case SLIDER_TYPE.Evolution:
+                this.SetSlider(this.EvolutionGageSlider, maxValue, initValue); break;
+        }
+    }
+
+    private void SetSlider(Slider slider, float maxValue, float initValue)
+    {
+        if(slider == null)
+        {
+            Debug.LogError("Empty slider: " + slider);
             return;
         }
         
-        this.HpSlider.maxValue = maxValue;
-        this.HpSlider.value = initValue;
-       
-    }    
+        slider.maxValue = maxValue;
+        slider.value = initValue;       
+    }
 
-    public void UpdatHPSlider(float targetValue)
+    public void CallUpdateSlider(SLIDER_TYPE sliderType, float targetValue)
     {
-        if (HpSlider == null)
+        switch (sliderType)
         {
-            Debug.LogError("Empty HP Slider");
+            case SLIDER_TYPE.LoveGage:
+                this.UpdatSlider(this.LoveGageSlider, targetValue); break;
+            case SLIDER_TYPE.Evolution:
+                this.UpdatSlider(this.EvolutionGageSlider, targetValue); break;
+        }
+    }
+
+    private void UpdatSlider(Slider slider, float targetValue)
+    {
+        if (slider == null)
+        {
+            Debug.LogError("Empty slider: " + slider);
             return;
         }
 
-        this.HpSlider.value = targetValue;
+        slider.value = targetValue;
     }
+}
+
+public enum SLIDER_TYPE
+{
+    LoveGage, Evolution
 }

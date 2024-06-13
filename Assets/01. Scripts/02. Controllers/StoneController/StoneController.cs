@@ -35,16 +35,20 @@ public class StoneController : MonoBehaviour
                     return
                         stone.nickName + "(" + stone.stoneStat.StoneType.ToString() + ")" + "\r\n" +
                         "HP: " + stone.HP + "\r\n" +
-                        "Love: " + stone.loveGage + "\r\n" +
-                        "Evolution: " + stone.nextEvolutionPercentage + "\r\n" +
+                        //"Love: " + stone.loveGage + "\r\n" +
+                        //"Evolution: " + stone.evolutionGage + "\r\n" +
                         "Info: " + stone.stoneInfo;
                 case MAP_TYPE.CollectingBook:
                     return
                         stone.nickName + "(" + stone.stoneStat.StoneType.ToString() + ")" + "\r\n" +
+                        "maxLove: " + stone.maxLoveGage + "\r\n" +
+                        "maxEvolution: " + stone.maxEvolutionGage + "\r\n" +
                         "Info: " + stone.stoneInfo;
                 case MAP_TYPE.Bulgama:
                     return
                         stone.nickName + "(" + stone.stoneStat.StoneType.ToString() + ")" + "\r\n" +
+                        "maxLove: " + stone.maxLoveGage + "\r\n" +
+                        "maxEvolution: " + stone.maxEvolutionGage + "\r\n" +
                         "Info: " + stone.stoneInfo;
                 default:
                     return "Error: invalid map";

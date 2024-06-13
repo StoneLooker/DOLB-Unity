@@ -28,6 +28,8 @@ public class SoupController : MonoBehaviour
         }
 
         // 10초 후에 색 변경을 시작합니다.
+
+        Invoke("UpdateStone", 2.5f);
         Invoke("StartColorChange", 2f);
     }
 
@@ -53,7 +55,20 @@ public class SoupController : MonoBehaviour
     {
         if(GameManager.Stone.growingStone != null)
         {
-            GameManager.Stone.growingStone.UpdateLoveGage(15);
+            Stone gStone = GameManager.Stone.growingStone;
+            switch(gStone.stoneStat.StoneType)
+            {
+                case STONE_TYPE.LimeStone:
+                    if (type == SOUP_TYPE.Cold) gStone.UpdateLoveGage(15);
+                    else if (type  == SOUP_TYPE.Hot) gStone.UpdateLoveGage(10);
+                    break;
+                case STONE_TYPE.Granite:
+                    if (type == SOUP_TYPE.Cold) gStone.UpdateLoveGage(10);
+                    else if (type == SOUP_TYPE.Hot) gStone.UpdateLoveGage(15);
+                    break;
+                default:
+                    break;
+            }
         }
     }
 }

@@ -28,10 +28,16 @@ public class SearchingUserManager : MonoBehaviour
     List<User> users;
 
     public GameObject userInfoPrefab;
+    bool SearchComplete = false;
 
     public void StartShowUserList()
     {
-       StartCoroutine(ShowUserList());
+        if (SearchComplete) Debug.Log("Already Searchged");
+        else
+        {
+            StartCoroutine(ShowUserList());
+            SearchComplete = true;
+        }
     }
     public IEnumerator ShowUserList()
     {
@@ -53,11 +59,11 @@ public class SearchingUserManager : MonoBehaviour
     public List<User> JsonToList(string jsonString)
     {
         jsonString = "{\"users\":" + jsonString + "}";
-        Debug.Log(jsonString);
+        //Debug.Log(jsonString);
 
         UserList userList = JsonUtility.FromJson<UserList>(jsonString);
 
-        Debug.Log(userList.users);
+        //Debug.Log(userList.users);
         // Convert the array to a list if needed
         List<User> users = new List<User>(userList.users);
 

@@ -70,7 +70,7 @@ public class LimeStoneController : StoneController
 [Serializable]
 public class LimeStone : Stone
 {
-    public LimeStone(string nickName, float HP, float loveGage, float evolution, string stoneinfo) : base(nickName, HP, loveGage, evolution, stoneinfo)
+    public LimeStone(string nickName, float maxHp, float maxLoveGage, float maxEvolutionGage, string stoneinfo) : base(nickName, maxHp, maxLoveGage, maxEvolutionGage, stoneinfo)
     {
         this.stoneStat = GameManager.Stone.limeStoneData.stoneStat;
     }
@@ -83,26 +83,36 @@ public class LimeStone : Stone
     public override void UpdateHP(float HP)
     {
         this.HP += HP;
-        this.nextEvolutionPercentage -= HP;
+        if(HP < 0) UpdateLoveGage(HP);
         CheckEvolution();
     }
 
     public override void UpdateLoveGage(float loveGage)
     {
         this.loveGage += loveGage;
-        this.nextEvolutionPercentage -= loveGage;
-        Debug.Log(this.nextEvolutionPercentage);
-        if(GameManager.Instance._controller._ui != null) GameManager.Instance._controller._ui.UpdatHPSlider(this.loveGage);
+        this.evolutionGage += loveGage;
+
+        if(this.loveGage > maxLoveGage) this.loveGage = maxLoveGage;
+        if(evolutionGage > maxEvolutionGage) evolutionGage = maxEvolutionGage;
+        Debug.Log(this.evolutionGage);
+        if (GameManager.Instance._controller._ui.LoveGageSlider != null) 
+            GameManager.Instance._controller._ui.CallUpdateSlider(SLIDER_TYPE.LoveGage, this.loveGage);
+        if (GameManager.Instance._controller._ui.EvolutionGageSlider != null)
+            GameManager.Instance._controller._ui.CallUpdateSlider(SLIDER_TYPE.Evolution, this.evolutionGage);
+        else Debug.Log("No Hp Slider in LimeStoneController");
         CheckEvolution();
     }
 
     public override void CheckEvolution()
     {
-        if (nextEvolutionPercentage <= 0F)
+        if (evolutionGage == maxEvolutionGage)
         {
-            Debug.Log("Evolution complete");
-            GameManager.Stone.GrowingFinished();
-            Debug.Log(GameManager.Stone.collectingBook);
+            if(loveGage == maxLoveGage)
+            {
+                Debug.Log("Evolution complete");
+                GameManager.Stone.GrowingFinished();
+                GameManager.Instance.ChangeMap(MAP_TYPE.Sauna);
+            }
         }
     }
 

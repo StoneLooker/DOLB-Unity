@@ -18,15 +18,21 @@ public class GrowingStone : MonoBehaviour
         }
         if(GameManager.Stone.growingStone != null)
         {
-            if (GameManager.Stone.growingStone.stoneStat.StoneType.Equals(STONE_TYPE.LimeStone))
+            switch (GameManager.Stone.growingStone.stoneStat.StoneType)
             {
-                this.AddComponent<LimeStoneController>();
-                controller = this.GetComponent<LimeStoneController>();
-                controller.stone = GameManager.Stone.growingStone;
-            }
-            else
-            {
-                Debug.Log(GameManager.Stone.growingStone);
+                case STONE_TYPE.LimeStone:
+                    this.AddComponent<LimeStoneController>();
+                    controller = this.GetComponent<LimeStoneController>();
+                    controller.stone = GameManager.Stone.growingStone;
+                    break;
+                case STONE_TYPE.Granite:
+                    this.AddComponent<GraniteController>();
+                    controller = this.GetComponent<GraniteController>();
+                    controller.stone = GameManager.Stone.growingStone;
+                    break;
+                default:
+                    Debug.Log(GameManager.Stone.growingStone);
+                    break;
             }
         }
         else

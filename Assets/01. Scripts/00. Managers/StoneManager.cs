@@ -20,11 +20,11 @@ public class StoneManager : MonoBehaviour
     {
         if(stoneType.Equals(STONE_TYPE.LimeStone))
         {
-            return new LimeStone("LimeStone", limeStoneData.HP, limeStoneData.loveGage, limeStoneData.nextEvolutionPercentage, limeStoneData.stoneInfo) ;
+            return new LimeStone("LimeStone", limeStoneData.maxHp, limeStoneData.maxLoveGage, limeStoneData.maxEvolutionGage, limeStoneData.stoneInfo) ;
         }
         else if (stoneType.Equals(STONE_TYPE.Granite))
         {
-            return new Granite("Granite", GraniteData.HP, GraniteData.loveGage, GraniteData.nextEvolutionPercentage, GraniteData.stoneInfo);
+            return new Granite("Granite", GraniteData.maxHp, GraniteData.maxLoveGage, GraniteData.maxEvolutionGage, GraniteData.stoneInfo);
         }
         return null;
     }
@@ -87,18 +87,24 @@ public abstract class Stone
     public string nickName;
     public IStoneState state;
 
-    public float HP = 100F;
-    public float loveGage = 0F;
-    public float nextEvolutionPercentage = 100F;
+    public float maxHp = 100F;
+    public float maxLoveGage = 100F;
+    public float maxEvolutionGage = 100F;
 
-    public string stoneInfo;
+    [HideInInspector] public float HP = 100F;
+    [HideInInspector] public float loveGage = 0F;
+    [HideInInspector] public float evolutionGage = 0F;
 
-    public Stone(string nickName, float HP, float loveGage, float evolution, string stoneinfo)
+    [TextArea] public string stoneInfo;
+
+    public Stone(string nickName, float maxHp, float maxLoveGage, float maxEvolutionGage, string stoneinfo)
     {
         this.nickName = nickName;
-        this.HP = HP;
-        this.loveGage = loveGage;
-        this.nextEvolutionPercentage = evolution;
+        this.HP = maxHp;
+        this.maxLoveGage = maxLoveGage;
+        this.maxEvolutionGage = maxEvolutionGage;
+        this.loveGage = 0;
+        this.evolutionGage = 0;
         this.stoneInfo = stoneinfo;
     }
 
@@ -127,7 +133,7 @@ public abstract class Stone
 
 public enum StateType
 {
-    NotPet, Normal, Dead, Forgotten
+    NotPet, Normal, Dead, Forgotten, Mossy, Sweat
 }
 
 public interface IStoneState
