@@ -5,8 +5,20 @@ using UnityEngine.UI;
 
 public class AudioManager : MonoBehaviour
 {
-
+    public static AudioManager instance;
     [SerializeField] Slider volumeSlider;
+
+
+    private void Awake()
+    {
+        if(instance == null)
+        {
+            instance = this;
+            DontDestroyOnLoad(gameObject);
+        }
+        else
+            Destroy(gameObject);
+    }
 
     void Start()
     {
