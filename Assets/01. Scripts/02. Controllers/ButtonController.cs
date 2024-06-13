@@ -20,7 +20,6 @@ public class ButtonController : MonoBehaviour
     public Button enableProfileList;
     public Button moveToSauna;
     public Button moveToBulgama;
-    public Button moveToMainTitle;
     public Button exit;
 
     [Header("Scene-Tub")]
