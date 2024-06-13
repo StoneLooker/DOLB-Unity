@@ -53,13 +53,11 @@ public class ControllerManager : MonoBehaviour
 
             _button.moveToSauna.onClick.RemoveAllListeners();
             _button.moveToBulgama.onClick.RemoveAllListeners();
-            _button.moveToMainTitle.onClick.RemoveAllListeners();
             _button.enableCollectingBook.onClick.RemoveAllListeners();
             _button.enableSetting.onClick.RemoveAllListeners();
 
             _button.moveToSauna.onClick.AddListener(() => _camera.MoveMainCamera(new Vector3(0F, 0F, -10F)));
             _button.moveToBulgama.onClick.AddListener(() => GameManager.Instance.ChangeMap(MAP_TYPE.Bulgama));
-            _button.moveToMainTitle.onClick.AddListener(() => GameManager.Instance.ChangeMap(MAP_TYPE.MainTitle));
 
             _button.enableCollectingBook.onClick.AddListener(() => GameManager.Instance._book.LookMyBook());
 
