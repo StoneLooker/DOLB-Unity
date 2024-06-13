@@ -6,19 +6,38 @@ using UnityEngine.UI;
 public class AudioManager : MonoBehaviour
 {
 
+    public static AudioManager instance;
     [SerializeField] Slider volumeSlider;
+
+    private void Awake()
+    {
+        if(instance == null)
+        {
+            instance = this;
+            DontDestroyOnLoad(gameObject);
+        }
+
+        else
+        {
+            Destroy(gameObject);
+            return;
+        }
+    }
 
     void Start()
     {
         if(PlayerPrefs.HasKey("musicVolume"))
         {
-            PlayerPrefs.SetFloat("musicVolume",1);
-            Load();
+            float savedVolume = PlayerPrefs.GetFloat("musicVolume"); 
+            volumeSlider.value = savedVolume;  
+            AudioListener.volume = savedVolume; 
         }
 
         else
         {
-            Load();
+             volumeSlider.value = 1f; 
+            AudioListener.volume = 1f; 
+            Save(); 
         }
 
     }
@@ -28,11 +47,6 @@ public class AudioManager : MonoBehaviour
         AudioListener.volume = volumeSlider.value;
         Save();
     
-    }
-
-    private void Load()
-    {
-
     }
 
     private void Save()
