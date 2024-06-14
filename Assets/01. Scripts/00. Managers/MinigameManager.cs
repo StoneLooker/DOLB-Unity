@@ -5,21 +5,23 @@ using UnityEngine;
 
 public class MinigameManager : MonoBehaviour
 {
+    //Reference to the stone GameObject and its controller script
     public GameObject stone;
     private MinigameStoneController stoneControllerScript;
     private ObjectPool objectPool;
 
+    //Obstacle spawning parameters
     public float spawnInterval = 2.0f;
     public Transform[] spawnPoints;
     public ObstacleType[] obstacleTypes;
 
-    //Life
+    //Life management
     public RawImage stoneLifeImage;
     private RawImage[] stoneLifeImages;
     public GameObject lifeTransform;
     private int oldLife;
 
-    //UI Panel
+    //UI Panels and buttons
     public GameObject startPanel;
     public GameObject endPanel;
     public GameObject clearPanel;
@@ -27,20 +29,21 @@ public class MinigameManager : MonoBehaviour
     public Button restartBtn;
     public Button backGameBtn;
 
-    //Game state
+    //Game state variables
     public bool isGameOver;
     public bool minigameControl;
     public float gameTime = 10f;
     private float spawnTimer;
     private float gameTimer;
 
-    //Progress Bar
+    //Progress bar UI elements
     public GameObject checkLocation;
     public Image barUI;
     public Image locationUI;
 
     void Start()
     {
+        //Initialize components and set up button listeners
         stoneControllerScript = stone.GetComponent<MinigameStoneController>();
         objectPool = this.GetComponent<ObjectPool>();
         GameManager.Instance._minigame = this;
@@ -54,6 +57,7 @@ public class MinigameManager : MonoBehaviour
 
     void Update()
     {
+        //Update life images and handle game state
         UpdateLifeImages();
 
         if(minigameControl)
@@ -76,12 +80,14 @@ public class MinigameManager : MonoBehaviour
         }
     }
 
+    //Update spawn and game timers
     private void UpdateTimers()
     {
         spawnTimer += Time.deltaTime;
         gameTimer += Time.deltaTime;
     }
 
+    //Update life images based on stone's life
     private void UpdateLifeImages()
     {
         if (oldLife > stoneControllerScript.life)
@@ -93,6 +99,7 @@ public class MinigameManager : MonoBehaviour
         }
     }
 
+    //Spawn an obstacle at a random spawn point
     private void SpawnObstacle()
     {
         int randomIndex = Random.Range(0, spawnPoints.Length);
@@ -106,6 +113,7 @@ public class MinigameManager : MonoBehaviour
         }
     }
 
+    //Update the progress bar
     private void CheckProgress()
     {
         float progress = gameTimer / gameTime;
@@ -113,6 +121,7 @@ public class MinigameManager : MonoBehaviour
         locationUI.rectTransform.localPosition = new Vector2(xPosition, locationUI.rectTransform.localPosition.y);
     }
 
+    //Set up the game data
     private void SetData()
     {
         stone.transform.position = stoneControllerScript.startPos;
@@ -134,6 +143,7 @@ public class MinigameManager : MonoBehaviour
         gameTimer = 0;
     }
 
+    //Initialize life images
     private void InitializeLifeImages(int lifeCount)
     {
         stoneLifeImages = new RawImage[lifeCount];

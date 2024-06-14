@@ -4,19 +4,24 @@ using Unity.VisualScripting;
 using UnityEngine;
 using UnityEngine.EventSystems;
 
+//Controller for handling the behavior of a stone object
 public class StoneController : MonoBehaviour
 {
+    //Reference to the Stone object
     public Stone stone;
 
+    //Flags for various states
     public bool isInZone;
     private bool isDrop;
     private bool isShoot;
     public bool speedDrop;
 
+    //Positions for drag and drop
     private Vector3 originPosition;
     private Vector3 lastPosition;
     private Vector3 dragStartPosition;
 
+    //Timing and physics
     private float startTime;
     private Rigidbody2D rb;
 
@@ -26,6 +31,7 @@ public class StoneController : MonoBehaviour
         InitializeStone();
     }
 
+    //Get information about the stone based on the current map
     public string GetInfo()
     {
         if (stone != null)
@@ -58,6 +64,7 @@ public class StoneController : MonoBehaviour
             return "Error: No stone data";
     }
 
+    //Initialize the stone's position and state
     public void InitializeStone()
     {
         originPosition = transform.position;
@@ -70,6 +77,7 @@ public class StoneController : MonoBehaviour
         rb.isKinematic = false;
     }
 
+    //Set the stone object
     public void SetStone(Stone stone)
     {
         this.stone = stone;
@@ -79,6 +87,7 @@ public class StoneController : MonoBehaviour
     {
         if (isShoot)
         {
+            // Rotate the stone and gradually reduce its velocity
             transform.Rotate(0, 0, Time.deltaTime * 200);
             rb.velocity *= Mathf.Pow(0.15f, Time.deltaTime);
             if (rb.velocity.magnitude < 0.01f)
@@ -111,18 +120,6 @@ public class StoneController : MonoBehaviour
             Vector3 objPosition = GameManager.Input.mousePosUnity;
             
             transform.position = objPosition;
-            //float speed = (objPosition - lastPosition).magnitude / Time.deltaTime;
-            // if (rb.velocity.magnitude < 0.5f)
-            // {
-            //     transform.position = objPosition;
-            //     Debug.Log(rb.velocity);
-            // }
-            // else
-            // {
-            //     speedDrop = true;
-            //     StartCoroutine(Delay());
-            // }
-            //lastPosition = transform.position;
         }
     }
 
@@ -140,11 +137,6 @@ public class StoneController : MonoBehaviour
         Vector3 velocity = (endPosition - dragStartPosition) / duration;
         
         rb.velocity = velocity;
-
-        // if (float.IsInfinity(velocity.x) || float.IsInfinity(velocity.y) || float.IsNaN(velocity.x) || float.IsNaN(velocity.y))
-        //     rb.velocity = Vector2.zero;
-        // else
-        //     rb.velocity = velocity;
 
         isDrop = true;
         isShoot = true;
@@ -168,11 +160,5 @@ public class StoneController : MonoBehaviour
                 transform.position = originPosition;
             }
         }
-    }
-
-    public IEnumerator Delay()
-    {
-        yield return new WaitForSeconds(2f);
-        speedDrop = false;
     }
 }
