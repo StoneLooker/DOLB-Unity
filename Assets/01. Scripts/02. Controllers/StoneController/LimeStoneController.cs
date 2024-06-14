@@ -6,61 +6,74 @@ using UnityEngine;
 
 public class LimeStoneController : StoneController
 {
-    [SerializeField]
-    public new LimeStone stone;
+    // Use Awake or Start for initialization, not constructors
+    private void Awake()
+    {
+        // Ensure the base class initialization happens first
+        base.InitializeStone();
 
-    public LimeStoneController(Stone stone)
-    {
-        this.stone = (LimeStone)stone;
-    }
-    
-    new void Start()
-    {
-        if(this.GetComponent<SpriteRenderer>() == null) this.AddComponent<SpriteRenderer>();
-        this.GetComponent<SpriteRenderer>().sprite = GameManager.Stone.limeStoneData.stoneStat.Image;
+        // Initialize the stone
         stone = (LimeStone)GameManager.Stone.MakeStone(STONE_TYPE.LimeStone);
-        base.Start();
+
+        // Check if SpriteRenderer component is attached, add if missing
+        if (GetComponent<SpriteRenderer>() == null)
+        {
+            gameObject.AddComponent<SpriteRenderer>();
+        }
+
+        // Set the sprite image
+        GetComponent<SpriteRenderer>().sprite = GameManager.Stone.limeStoneData.stoneStat.Image;
     }
 
-    new void Set(string nN)
+    private void Set(string nN)
     {
         stone.SetNickName(nN);
         GameManager.Stone.growingStone = stone;
     }
 
-    new void OnMouseDown()
+    private new void OnMouseDown()
     {
-        base.OnMouseDown();
-        stone.UpdateLoveGage(20F);
+        base.MouseDown();
+        if(GameManager.Instance.nowMap == MAP_TYPE.Sauna)
+        {
+            stone.UpdateLoveGage(20F);
+        }
     }
 
-    new void OnCollisionStay(Collision collision)
+    private void OnCollisionStay(Collision collision)
     {
-        if(collision.collider.CompareTag("Danger"))
+        if (collision.collider.CompareTag("Danger"))
         {
             stone.UpdateHP(-10F);
         }
     }
 
-    new void OnMouseUp()
+    private new void OnMouseUp()
     {
-        base.OnMouseUp();
-        if(GameManager.Instance.nowMap.Equals(MAP_TYPE.Bulgama))
+        base.MouseUp();
+        if (GameManager.Instance.nowMap.Equals(MAP_TYPE.Bulgama))
         {
-            this.Set("ss?");
+            GameManager.Stone.WhenPlayerDecideGrowingNewStoneInBulgama(stone);
             Debug.Log("Choose Stone!");
-            this.gameObject.SetActive(false);
+            gameObject.SetActive(false);
             GameManager.Instance.ChangeMap(MAP_TYPE.Sauna);
         }
+    }
+
+    private new void Update()
+    {
+        base.Update();
+        GetInfo();
     }
 }
 
 [Serializable]
 public class LimeStone : Stone
 {
-    public float HP = 100F;
-    public float loveGage = 0F;
-    public float nextEvolutionPercentage = 100F;
+    public LimeStone(string nickName, float maxHp, float maxLoveGage, float maxEvolutionGage, string stoneinfo) : base(nickName, maxHp, maxLoveGage, maxEvolutionGage, stoneinfo)
+    {
+        this.stoneStat = GameManager.Stone.limeStoneData.stoneStat;
+    }
 
     public override void Washing()
     {
@@ -70,31 +83,38 @@ public class LimeStone : Stone
     public override void UpdateHP(float HP)
     {
         this.HP += HP;
-        this.nextEvolutionPercentage -= HP;
+        if(HP < 0) UpdateLoveGage(HP);
         CheckEvolution();
     }
 
     public override void UpdateLoveGage(float loveGage)
     {
         this.loveGage += loveGage;
-        this.nextEvolutionPercentage -= loveGage;
-        Debug.Log(this.nextEvolutionPercentage);
+        this.evolutionGage += loveGage;
+
+        if(this.loveGage > maxLoveGage) this.loveGage = maxLoveGage;
+        if(evolutionGage > maxEvolutionGage) evolutionGage = maxEvolutionGage;
+        Debug.Log(this.evolutionGage);
+        if (GameManager.Instance._controller._ui.LoveGageSlider != null) 
+            GameManager.Instance._controller._ui.CallUpdateSlider(SLIDER_TYPE.LoveGage, this.loveGage);
+        if (GameManager.Instance._controller._ui.EvolutionGageSlider != null)
+            GameManager.Instance._controller._ui.CallUpdateSlider(SLIDER_TYPE.Evolution, this.evolutionGage);
+        else Debug.Log("No Hp Slider in LimeStoneController");
         CheckEvolution();
     }
 
     public override void CheckEvolution()
     {
-        if(nextEvolutionPercentage <= 0F)
+        if (evolutionGage == maxEvolutionGage)
         {
-            Debug.Log("Evloution complete");
+            if(loveGage == maxLoveGage)
+            {
+                Debug.Log("Evolution complete");
+                GameManager.Stone.GrowingFinished();
+                GameManager.Instance.ChangeMap(MAP_TYPE.Sauna);
+            }
         }
     }
 
-    public LimeStone(string nickName) : base(nickName)
-    {
-        this.stoneStat = GameManager.Stone.limeStoneData.stoneStat;
-        HP = 100F;
-        loveGage = 0F;
-        nextEvolutionPercentage = 100F;
-    }
+   
 }
