@@ -5,25 +5,26 @@ using UnityEngine.UI;
 using UnityEngine.Networking;
 using System.Text;
 using TMPro;
+using UnityEditor;
 
 public class CollectingBookManager : MonoBehaviour
 {
     private string addStoneUrl = "http://43.203.76.106:8080/collectingbook/add";
     private string getStoneUrl = "http://43.203.76.106:8080/collectingbook";
-   
 
-    public TMP_InputField stoneNameInputField;
-    public TMP_InputField stoneNumberInputField;
+    [SerializeField] GameObject stoneFrame;
+
+    public List<CollectingBook> books { get; private set; }
+
     private string memberNickName;
 
     void Start()
     {
-        memberNickName = GameManager.Instance.id; 
     }
 
-    public void AddStone()
+    public void AddStone(int id, string name)
     {
-        StartCoroutine(AddStoneRequest());
+        StartCoroutine(AddStoneRequest(id, name));
     }
 
     public void GetStone()
@@ -31,11 +32,72 @@ public class CollectingBookManager : MonoBehaviour
         StartCoroutine(GetStoneRequest());
     }
 
-  
-
-    IEnumerator AddStoneRequest()
+    public void StartSpawnStones()
     {
-        CollectingBook cb = getStoneFromFields();
+        StartCoroutine(SpawnStones());
+    }
+
+    public void LookMyBook()
+    {
+        GameManager.Instance._book.memberNickName = GameManager.Instance.nickname;
+        GameManager.Instance.ChangeMap(MAP_TYPE.CollectingBook);
+    }
+
+    public void LookOtherUserBook(string nickName)
+    {
+        GameManager.Instance._book.memberNickName = nickName;
+        GameManager.Instance.ChangeMap(MAP_TYPE.CollectingBook);
+    }
+
+    public IEnumerator SpawnStones()
+    {
+        if(memberNickName == null) memberNickName = GameManager.Instance.nickname;
+        yield return StartCoroutine(GetStoneRequest());
+        float yValue = 6;
+        if (books == null) Debug.Log("Error: no book founded, " + memberNickName);
+        foreach (CollectingBook element in books)
+        {
+            if (element.stoneName == "LimeStone")
+            {
+                Debug.Log(GameManager.Stone.collectingBook);
+                GameObject st = Instantiate(stoneFrame, new Vector3(0, yValue, 0), new Quaternion(0, 0, 0, 0));
+                st.AddComponent<LimeStoneController>();
+                yValue += 1;
+            }
+            else if (element.stoneName == "Granite")
+            {
+                Debug.Log(GameManager.Stone.collectingBook);
+                GameObject st = Instantiate(stoneFrame, new Vector3(0, yValue, 0), new Quaternion(0, 0, 0, 0));
+                st.AddComponent<GraniteController>();
+                yValue += 1;
+            }
+        }
+    }
+
+    public List<CollectingBook> JsonToList(string jsonString)
+    {
+        jsonString = "{\"stones\":" + jsonString + "}";
+
+        CollectingBookList book = JsonUtility.FromJson<CollectingBookList>(jsonString);
+
+        // Convert the array to a list if needed
+        List<CollectingBook> stones = new List<CollectingBook>(book.stones);
+
+        // Now you can use the 'stones' list
+        foreach (var stone in stones)
+        {
+            Debug.Log("Name: " + stone.stoneName + ", Number: " + stone.stoneNumber);
+        }
+
+        return stones;
+    }
+
+    IEnumerator AddStoneRequest(int Id, string name)
+    {
+        CollectingBook cb = new CollectingBook();
+        cb.stoneNumber = Id;
+        cb.memberNickName = GameManager.Instance.nickname;
+        cb.stoneName = name;
         string json = JsonUtility.ToJson(cb);
 
         UnityWebRequest www = new UnityWebRequest(addStoneUrl, "POST");
@@ -61,7 +123,7 @@ public class CollectingBookManager : MonoBehaviour
         }
     }
 
-    CollectingBook getStoneFromFields()
+    /*CollectingBook getStoneFromFields()
     {
         string stoneName = stoneNameInputField.text;
         int stoneNumber = int.Parse(stoneNumberInputField.text);
@@ -72,7 +134,7 @@ public class CollectingBookManager : MonoBehaviour
             stoneNumber = stoneNumber,
             memberNickName = GameManager.Instance.id
         };
-    }
+    }*/
 
     IEnumerator GetStoneRequest()
     {
@@ -91,8 +153,10 @@ public class CollectingBookManager : MonoBehaviour
                 break;
             case UnityWebRequest.Result.Success:
                 Debug.Log("Success: " + www.downloadHandler.text);
+                books = JsonToList(www.downloadHandler.text);
                 break;
         }
+        yield return null;
     }
 
 

@@ -18,56 +18,25 @@ public class GrowingStone : MonoBehaviour
         }
         if(GameManager.Stone.growingStone != null)
         {
-            if (GameManager.Stone.growingStone.stoneStat.StoneType.Equals(STONE_TYPE.LimeStone))
+            switch (GameManager.Stone.growingStone.stoneStat.StoneType)
             {
-                this.AddComponent<LimeStoneController>();
-                controller = this.GetComponent<LimeStoneController>();
-                controller.stone = GameManager.Stone.growingStone;
+                case STONE_TYPE.LimeStone:
+                    this.AddComponent<LimeStoneController>();
+                    controller = this.GetComponent<LimeStoneController>();
+                    controller.stone = GameManager.Stone.growingStone;
+                    break;
+                case STONE_TYPE.Granite:
+                    this.AddComponent<GraniteController>();
+                    controller = this.GetComponent<GraniteController>();
+                    controller.stone = GameManager.Stone.growingStone;
+                    break;
+                default:
+                    Debug.Log(GameManager.Stone.growingStone);
+                    break;
             }
-            else
-            {
-                Debug.Log(GameManager.Stone.growingStone);
-            }
-            controller.Start();
         }
         else
         {
         }
-    }
-
-    // Update is called once per frame
-    void Update()
-    {
-        controller.Update();
-    }
-
-    private void OnMouseDown()
-    {
-        controller.OnMouseDown();
-    }
-
-    private void OnMouseDrag()
-    {
-        controller.OnMouseDrag();
-    }
-
-    private void OnMouseUp()
-    {
-        controller.OnMouseUp();
-    }
-
-    private void OnTriggerStay2D(Collider2D collision)
-    {
-        controller.OnTriggerStay2D(collision);
-    }
-
-    public void OnCollisionStay(Collision collision)
-    {
-        controller.OnCollisionStay(collision);
-    }
-
-    public void Set(string nN)
-    {
-        controller.Set(nN);
     }
 }

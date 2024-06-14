@@ -9,10 +9,10 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 5308067763753571611}
-  - component: {fileID: 2239936757947600696}
   - component: {fileID: 8773094325507074616}
   - component: {fileID: 4124520171056139043}
   - component: {fileID: 4560444483627454161}
+  - component: {fileID: 1827127642665862930}
   m_Layer: 0
   m_Name: LimeStone
   m_TagString: Stone
@@ -35,41 +35,6 @@ Transform:
   m_Children: []
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!58 &2239936757947600696
-CircleCollider2D:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 6848267118719703100}
-  m_Enabled: 1
-  m_Density: 1
-  m_Material: {fileID: 0}
-  m_IncludeLayers:
-    serializedVersion: 2
-    m_Bits: 0
-  m_ExcludeLayers:
-    serializedVersion: 2
-    m_Bits: 0
-  m_LayerOverridePriority: 0
-  m_ForceSendLayers:
-    serializedVersion: 2
-    m_Bits: 4294967295
-  m_ForceReceiveLayers:
-    serializedVersion: 2
-    m_Bits: 4294967295
-  m_ContactCaptureLayers:
-    serializedVersion: 2
-    m_Bits: 4294967295
-  m_CallbackLayers:
-    serializedVersion: 2
-    m_Bits: 4294967295
-  m_IsTrigger: 0
-  m_UsedByEffector: 0
-  m_UsedByComposite: 0
-  m_Offset: {x: 0.23396008, y: 0.064445235}
-  serializedVersion: 2
-  m_Radius: 6.7916503
 --- !u!50 &8773094325507074616
 Rigidbody2D:
   serializedVersion: 4
@@ -112,11 +77,13 @@ MonoBehaviour:
   isInZone: 0
   speedDrop: 0
   stone:
+    id: 0
     stoneStat: {fileID: 11400000, guid: bfcf2cc3dc3ee81409068a6298c91abe, type: 2}
-    sprite: {fileID: 21300000, guid: e0acf98efb95eec49b44152eb0d929c8, type: 3}
+    nickName: 
     HP: 0
     loveGage: 0
     nextEvolutionPercentage: 0
+    stoneInfo: 
 --- !u!212 &4560444483627454161
 SpriteRenderer:
   m_ObjectHideFlags: 0
@@ -169,3 +136,38 @@ SpriteRenderer:
   m_WasSpriteAssigned: 1
   m_MaskInteraction: 0
   m_SpriteSortPoint: 0
+--- !u!70 &1827127642665862930
+CapsuleCollider2D:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6848267118719703100}
+  m_Enabled: 1
+  m_Density: 1
+  m_Material: {fileID: 0}
+  m_IncludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_ExcludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_LayerOverridePriority: 0
+  m_ForceSendLayers:
+    serializedVersion: 2
+    m_Bits: 4294967295
+  m_ForceReceiveLayers:
+    serializedVersion: 2
+    m_Bits: 4294967295
+  m_ContactCaptureLayers:
+    serializedVersion: 2
+    m_Bits: 4294967295
+  m_CallbackLayers:
+    serializedVersion: 2
+    m_Bits: 4294967295
+  m_IsTrigger: 0
+  m_UsedByEffector: 0
+  m_UsedByComposite: 0
+  m_Offset: {x: -0.17788531, y: -0.028168838}
+  m_Size: {x: 15.644303, y: 9.802247}
+  m_Direction: 1
