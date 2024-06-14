@@ -10,3 +10,8 @@ public class CollectingBook
     public int stoneNumber;
     public string memberNickName;
 }
+
+public class CollectingBookList
+{
+    public List<CollectingBook> stones;
+}
