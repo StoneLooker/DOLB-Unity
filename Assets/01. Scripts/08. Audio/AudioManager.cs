@@ -17,10 +17,13 @@ public class AudioManager : MonoBehaviour
             instance = this;
             DontDestroyOnLoad(gameObject);
         }
+
         else
         {
             // If an instance already exists, destroy this game object to enforce the singleton pattern
             Destroy(gameObject);
+            return;
+
         }
     }
 
@@ -29,14 +32,18 @@ public class AudioManager : MonoBehaviour
         // Check if the PlayerPrefs contains a key for "musicVolume"
         if(PlayerPrefs.HasKey("musicVolume"))
         {
-            // Set the default volume value to 1
-            PlayerPrefs.SetFloat("musicVolume",1);
-            Load();
+            
+            float savedVolume = PlayerPrefs.GetFloat("musicVolume"); 
+            volumeSlider.value = savedVolume;  
+            AudioListener.volume = savedVolume; 
         }
 
         else
         {
-            Load();
+            // Set the default volume value to 1
+            volumeSlider.value = 1f; 
+            AudioListener.volume = 1f; 
+            Save(); 
         }
 
     }
@@ -49,10 +56,6 @@ public class AudioManager : MonoBehaviour
         Save();
     }
 
-    private void Load()
-    {
-
-    }
 
     // Method to save the current volume value to PlayerPrefs
     private void Save()
