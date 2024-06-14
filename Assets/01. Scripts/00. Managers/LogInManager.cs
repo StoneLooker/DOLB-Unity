@@ -8,20 +8,24 @@ using System.Text;
 
 public class LogInManager : MonoBehaviour
 {
+    // URLs for sign-up, log-in, and log-out requests
     private string signUpUrl = "http://43.203.76.106:8080/save";
     private string logInUrl = "http://43.203.76.106:8080/login";
     private string logOutUrl = "http://43.203.76.106:8080/logout";
 
+    // Input fields for ID and password
     public TMP_InputField idInput;
     public TMP_InputField passwordInput;
 
+    // Screens for displaying information and logging in
     public GameObject infoScreen;
     public GameObject logInScreen;
 
+    // Buttons for log in and log out
     public GameObject logInBtn;
     public GameObject logOutBtn;
     
-
+    // Boolean to track log-in status
     private bool isLoggedIn = false;
 
     public void SignUp()
@@ -39,6 +43,7 @@ public class LogInManager : MonoBehaviour
         StartCoroutine(LogOutRequest());
     }
 
+    // Coroutine to handle sign-up request
     IEnumerator SignUpRequest()
     {
         Member m = getMemberFromFields();
@@ -75,6 +80,7 @@ public class LogInManager : MonoBehaviour
         }
     }
 
+    // Coroutine to handle log-in request
     IEnumerator LogInRequest()
     {
         Member m = getMemberFromFields();
@@ -125,6 +131,7 @@ public class LogInManager : MonoBehaviour
         }
     }
 
+    // Coroutine to handle log-out request
     IEnumerator LogOutRequest()
     {
         UnityWebRequest www = UnityWebRequest.Get(logOutUrl);
@@ -151,6 +158,7 @@ public class LogInManager : MonoBehaviour
         }
     }
 
+    // Method to update button listeners based on log-in status
     public void UpdateButtonListener()
     {
         GameManager.Instance._controller._button.gameStart.onClick.RemoveAllListeners();
@@ -160,15 +168,19 @@ public class LogInManager : MonoBehaviour
             GameManager.Instance._controller._button.gameStart.onClick.AddListener(() => UpdateInfoText("Log In is required."));
     }
 
+    // Method to update the information text on the info screen
     private void UpdateInfoText(string str)
     {
         infoScreen.SetActive(true);
         infoScreen.transform.GetChild(0).GetComponent<TMP_Text>().text = str;
     }
 
+    // Method to get member information from input fields
     private Member getMemberFromFields()
     {
         Member m = new Member();
+
+        // Validate the input length
         if(idInput.text.Length < 10)
             m.memberNickName = idInput.text;
         else
