@@ -96,7 +96,7 @@ public class SearchingUserManager : MonoBehaviour
     // Coroutine to handle the search user request
     IEnumerator SearchUserRequest()
     {
-        //request
+        // request
         string memberNickName = getMemberNickNameFromField();
         string url = $"{searchUserUrl}?memberNickName={memberNickName}";
         UnityWebRequest www = UnityWebRequest.Get(url);

@@ -9,7 +9,7 @@ using UnityEditor;
 
 public class CollectingBookManager : MonoBehaviour
 {
-    //Define url
+    // Define url
     private string addStoneUrl = "http://43.203.76.106:8080/collectingbook/add";
     private string getStoneUrl = "http://43.203.76.106:8080/collectingbook";
 
