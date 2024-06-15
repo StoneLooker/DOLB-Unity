@@ -24,6 +24,7 @@ public class ButtonController : MonoBehaviour
 
     [Header("Scene-Tub")]
     public Button PickBrush;
+    public Button PickTowel;
 
     // Start is called before the first frame update
     private void Awake()

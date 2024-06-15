@@ -73,6 +73,10 @@ public class ControllerManager : MonoBehaviour
             _button.PickBrush.onClick.RemoveAllListeners();
 
             _button.PickBrush.onClick.AddListener(() => _item.PickBrush());
+
+            _button.PickTowel.onClick.RemoveAllListeners();
+
+            _button.PickTowel.onClick.AddListener(() => _item.PickTowel());
         }
         else if (map.Equals(MAP_TYPE.Tub))
         {

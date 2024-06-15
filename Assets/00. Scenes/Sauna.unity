@@ -38,7 +38,7 @@ RenderSettings:
   m_ReflectionIntensity: 1
   m_CustomReflection: {fileID: 0}
   m_Sun: {fileID: 705507994}
-  m_IndirectSpecularColor: {r: 0.18028353, g: 0.22571383, b: 0.30692253, a: 1}
+  m_IndirectSpecularColor: {r: 0.18028378, g: 0.22571412, b: 0.30692285, a: 1}
   m_UseRadianceAmbientProbe: 0
 --- !u!157 &3
 LightmapSettings:
@@ -8167,6 +8167,7 @@ MonoBehaviour:
   moveToBulgama: {fileID: 1086779503}
   exit: {fileID: 1115699076}
   PickBrush: {fileID: 0}
+  PickTowel: {fileID: 0}
 --- !u!114 &1649862667
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -8211,6 +8212,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   brush: {fileID: 0}
+  towel: {fileID: 0}
   brushCountText: {fileID: 1775408613}
   towelCountText: {fileID: 1895449713}
 --- !u!1 &1670584199
@@ -9162,6 +9164,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 7a74434f3d72b9044b85731eba2733b1, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  moss: {fileID: 4293348134729229996, guid: a9bce8364ce3f474b9f0caddd5938f05, type: 3}
+  spriteRenderer: {fileID: 0}
+  interval: 10
 --- !u!4 &1809437916
 Transform:
   m_ObjectHideFlags: 0
