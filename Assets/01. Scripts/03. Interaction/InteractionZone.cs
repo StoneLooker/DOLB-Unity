@@ -4,10 +4,15 @@ using UnityEngine;
 using UnityEngine.SceneManagement;
 using TMPro;
 
+//Handles interactions within a specific zone in the game
 public class InteractionZone : MonoBehaviour
 {
     private SpriteRenderer spriteRenderer;
+
+     // Type of map associated with this interaction zone
     [SerializeField] public MAP_TYPE map;
+
+    // Reference to the info screen UI element
     public GameObject infoScreen;
 
     private void Start()
@@ -15,10 +20,12 @@ public class InteractionZone : MonoBehaviour
         spriteRenderer = GetComponent<SpriteRenderer>();
     }
 
+    //Method to open the map associated with this interaction zone
     public void OpenMap()
     {
         if(map == MAP_TYPE.MiniGame)
         {
+            //Check if the player can enter the minigame
             if(GameManager.Instance.MinigameEnter)
             {
                 transform.parent.gameObject.SetActive(false);
@@ -51,7 +58,8 @@ public class InteractionZone : MonoBehaviour
             other.GetComponent<StoneController>().isInZone = false;
         }
     }
-
+    
+    //Method to update the text on the info screen
     private void UpdateInfoText(string str)
     {
         infoScreen.SetActive(true);

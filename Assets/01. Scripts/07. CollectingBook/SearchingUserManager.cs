@@ -22,6 +22,7 @@ public class UserList
 
 public class SearchingUserManager : MonoBehaviour
 {
+    //Define url
     private string searchUserUrl = "http://43.203.76.106:8080/search";
 
 
@@ -76,6 +77,7 @@ public class SearchingUserManager : MonoBehaviour
         return users;
     }
 
+    // Start the request to search for a user
     public void SearchUser()
     {
         StartCoroutine(SearchUserRequest());
@@ -91,13 +93,16 @@ public class SearchingUserManager : MonoBehaviour
         return "";
     }
 
+    // Coroutine to handle the search user request
     IEnumerator SearchUserRequest()
     {
+        // request
         string memberNickName = getMemberNickNameFromField();
         string url = $"{searchUserUrl}?memberNickName={memberNickName}";
         UnityWebRequest www = UnityWebRequest.Get(url);
         yield return www.SendWebRequest();
 
+        // Handle the request result
         switch (www.result)
         {
             case UnityWebRequest.Result.ConnectionError:

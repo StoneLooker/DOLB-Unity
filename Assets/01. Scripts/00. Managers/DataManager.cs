@@ -12,6 +12,7 @@ public class DataManager : MonoBehaviour
     {
         get
         {
+            // If there is no instance, create one
             if (!instance)
             {
                 container = new GameObject();
@@ -25,28 +26,36 @@ public class DataManager : MonoBehaviour
 
     public GameData data = new GameData();
 
+    // Method to load game data from a file
     public void LoadGameData(string playerId)
     {
+        // Construct the file path based on the player ID
         string filePath = Application.persistentDataPath + "/" + playerId + "_GameData.json";
 
+        // Check if the file exists
         if (File.Exists(filePath))
         {
+            // Read the data from the file and deserialize it
             string FromJsonData = File.ReadAllText(filePath);
             data = JsonConvert.DeserializeObject<GameData>(FromJsonData);
-            Debug.Log($"불러오기 완료: {FromJsonData}");
+            Debug.Log($"Load complete: {FromJsonData}");
         }
         else
         {
-            Debug.Log("저장된 데이터가 없습니다.");
+            Debug.Log("No saved data found.");
         }
     }
 
+    // Method to save game data to a file
     public void SaveGameData(string playerId)
     {
+        // Serialize the data to JSON format
         string ToJsonData = JsonConvert.SerializeObject(data, Formatting.Indented);
+        // Construct the file path based on the player ID
         string filePath = Application.persistentDataPath + "/" + playerId + "_GameData.json";
 
+        // Write the JSON data to the file
         File.WriteAllText(filePath, ToJsonData);
-        Debug.Log($"저장 완료: {ToJsonData}");
+        Debug.Log($"Save complete: {ToJsonData}");
     }
 }
